@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import App from './routes/App'
+import App from './App'
 import CreateReview from './routes/CreateReview'
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
