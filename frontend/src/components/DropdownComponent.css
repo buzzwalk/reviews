@@ -1,0 +1,23 @@
+#addreview {
+    padding: 2%;
+    background-color: #F4D03F;
+    display: inline-block;
+}
+
+#divone {
+    text-align: center;
+}
+
+.name {
+    text-align: center;
+    /* padding: 3%; */
+}
+
+select {
+    padding: .5%;
+    margin: 1%;
+}
+
+option {
+    text-align: center;
+}

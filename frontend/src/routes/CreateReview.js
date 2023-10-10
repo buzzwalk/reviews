@@ -3,7 +3,7 @@ import DropdownComponent from '../components/DropdownComponent'
 const CreateReview = () => {
   return (
     <>
-      <p>this is the page to create reviews</p>
+      <p>Create a Review!</p>
       <DropdownComponent>
       </DropdownComponent>
     </>
