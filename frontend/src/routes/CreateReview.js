@@ -3,7 +3,7 @@ import CommentComponent from '../components/CommentComponent';
 const CreateReview = () => {
   return (
     <>
-      <p>CommentComponent</p>
+      <p></p>
       <CommentComponent>
       </CommentComponent>
     </>
