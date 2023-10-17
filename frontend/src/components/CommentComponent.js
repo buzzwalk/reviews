@@ -7,7 +7,6 @@ export default function CommentComponent() {
             <div className='troll'>
                 <h1 className = "header"> BUZZPORT COMMENTS </h1> 
             </div>
-            
 
             <div className = "division">
                 <form>
@@ -16,6 +15,7 @@ export default function CommentComponent() {
                     <button className = "submit"> Submit </button>
                 </form>    
             </div>
+
 
             <div className = "division">
                 <img className = "logo" src = {logo} />
