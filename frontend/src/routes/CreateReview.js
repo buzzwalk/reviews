@@ -1,14 +1,14 @@
-
 import React, { useState } from 'react';
 import ApartmentReview from '../components/ApartmentReview';
 import DiningReview from '../components/DiningReview';
 import ClassReview from '../components/ClassReview';
+import CommentComponent from '../components/CommentComponent';
 
 import { ChakraProvider, Box, Text, ButtonGroup, Button } from '@chakra-ui/react';
 
 
 const CreateReview = () => {
-  const [selectedReviewType, setSelectedReviewType] = useState(null);
+  const [selectedReviewType, setSelectedReviewType] = useState('class');
   return (
     <ChakraProvider>
       <Box p={4}>
@@ -39,6 +39,7 @@ const CreateReview = () => {
         {selectedReviewType === 'dining' && <DiningReview />}
         {selectedReviewType === 'class' && <ClassReview />}
       </Box>
+      <CommentComponent />
     </ChakraProvider>
   )
 }
