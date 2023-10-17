@@ -2,6 +2,7 @@
     padding: 2%;
     background-color: #F4D03F;
     display: inline-block;
+    border-radius: 10px;
 }
 
 #divone {
@@ -11,11 +12,14 @@
 .name {
     text-align: center;
     /* padding: 3%; */
+    font-weight: bold;
+    font-size: 105%;
 }
 
 select {
     padding: .5%;
     margin: 1%;
+    border-radius: 10px;
 }
 
 option {

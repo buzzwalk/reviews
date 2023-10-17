@@ -12,9 +12,11 @@ const DropdownComponent = () => {
                 <label className="name" htmlFor="department">Department</label>
                 <select name="department" id="departments">
                     <option value="computing">College of Computing</option>
-                    <option value="artsandsciences">College of Arts and Sciences</option>
+                    <option value="sciences">College of Sciences</option>
                     <option value="engineering">College of Engineering</option>
                     <option value="business">College of Business</option>
+                    <option value="design">College of Design</option>
+                    <option value="liberalarts">Ivan Allen College of Liberal Arts</option>
                 </select>
                 <br></br>
 
