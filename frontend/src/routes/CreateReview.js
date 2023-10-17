@@ -1,6 +1,14 @@
 import React from 'react'
+import CommentComponent from '../components/CommentComponent';
 const CreateReview = () => {
-  return <p>this is the page to create reviews</p>
+  return (
+    <>
+      <p>CommentComponent</p>
+      <CommentComponent>
+      </CommentComponent>
+    </>
+  
+  );
 }
 
 export default CreateReview
