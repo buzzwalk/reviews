@@ -1,21 +1,21 @@
 import "../style/ReviewOverview.css"
 import Navbar from "./navbar.js"
-import data from "../sampleProfData"
 import { useEffect } from "react"
 import PreviewCard from "./PreviewCard"
-export default function ReviewOverview({name}) {
+import data from "../sampleClassData"
+export default function ClassesReviewOverview() {
 
     function getPreviewCards(){
         const dataArr = data.data;
         return dataArr.map((e) =>
-        <PreviewCard name={e.name} college={e.college} rating={e.rating}/>
+        <PreviewCard name={e.name} subheading={e.fullname} rating={e.rating}/>
         )
     }
     return(
         <>
         <Navbar />   
         <div className="reviewoverview">
-            <h1>{name}</h1>
+            <h1>Classes</h1>
             <div className="main">
                 
                 <div className="filters">
