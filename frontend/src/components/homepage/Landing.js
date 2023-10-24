@@ -7,9 +7,15 @@ export default function Landing() {
                 GT Reviews
             </h1>
             <div id="searchbar">
-            <SearchBar />
+                <SearchBar />
             </div>
-           
+            <div className="linksWrapper">
+                <a href='/classes'>Classes</a>
+                <a href='/proffessors'>Professors</a>
+                <a href='/apartments'>Apartments</a>
+                <a href='/dininghalls'>Dining halls</a>
+            </div>
+            
         </div>
         
     )

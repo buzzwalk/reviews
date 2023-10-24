@@ -10,6 +10,8 @@ import Landing from './components/homepage/Landing'
 import ReviewOverview from './components/ProffessorsReviewOverview'
 import ProffessorsReviewOverview from './components/ProffessorsReviewOverview'
 import ClassesReviewOverview from './components/ClassesReviewOverview'
+import ApartmentReviewOverview from './components/ApartmentReviewOverview'
+import DiningReviewOverview from './components/DiningReviewOverview'
 
 const router = createBrowserRouter([
   {
@@ -34,11 +36,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/apartments",
-    element: <ReviewOverview name="Apartments" data={profData}/>
+    element: <ApartmentReviewOverview />
   },
   {
     path: "/dininghalls",
-    element: <ReviewOverview name="DiningHalls" data={profData}/>
+    element: <DiningReviewOverview />
   }
 ])
 
