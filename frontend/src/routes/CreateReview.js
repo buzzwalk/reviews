@@ -4,18 +4,72 @@ import DiningReview from '../components/DiningReview';
 import ClassReview from '../components/ClassReview';
 import CommentComponent from '../components/CommentComponent';
 
-import { ChakraProvider, Box, Text, ButtonGroup, Button } from '@chakra-ui/react';
+import { ChakraProvider, Box, Heading, ButtonGroup, Button } from '@chakra-ui/react';
 
+import Header from '../components/Header'
+
+const classInformation = {
+  classes: {
+    "Computer Science": {
+      "CS 1332 - Data Structures & Algorithms": [
+        "Faulker",
+        "HB"
+      ],
+      "CS 2110 - Computer Organization & Programming": [
+        "Conte",
+        "Gupta"
+      ],
+    },
+    "Computer Engineering": {
+      "ECE 2031 - Digital Design Laboratory": [
+        "Thomas Collins"
+      ]
+    }
+  },
+  ratingText: [
+    {
+      header: "Overall",
+      small: "I liked this class"
+    },
+    {
+      header: "Easiness",
+      small: "This class was easy"
+    }
+  ],
+  tags: [
+    "Tolerates Tardiness",
+    "Issues PTEs",
+    "Participation Matters",
+    "Snazzy Dresser"
+  ]
+}
 
 const CreateReview = () => {
   const [selectedReviewType, setSelectedReviewType] = useState('class');
   return (
     <ChakraProvider>
-      <Box p={4}>
-        <Text fontSize="xl" mb={4}>
-          This is the page to create reviews
-        </Text>
-        <ButtonGroup>
+      <Header />
+      <Box p={4} style={{
+        display: "flex",
+        flexDirection: "column",
+        width: "80%",
+        margin: "auto",
+        gap: "1em"
+      }}>
+        <Heading style={{
+          margin: "auto"
+      }}>
+          Add review
+        </Heading>
+        <ButtonGroup style={{
+          margin: "auto"
+        }}>
+          <Button
+            onClick={() => setSelectedReviewType('class')}
+            colorScheme={selectedReviewType === 'class' ? 'teal' : 'gray'}           
+          >
+            Class
+          </Button>
           <Button
             onClick={() => setSelectedReviewType('apartment')}
             colorScheme={selectedReviewType === 'apartment' ? 'teal' : 'gray'}          
@@ -28,18 +82,12 @@ const CreateReview = () => {
           >
             Dining
           </Button>
-          <Button
-            onClick={() => setSelectedReviewType('class')}
-            colorScheme={selectedReviewType === 'class' ? 'teal' : 'gray'}           
-          >
-            Class
-          </Button>
         </ButtonGroup>
         {selectedReviewType === 'apartment' && <ApartmentReview />}
         {selectedReviewType === 'dining' && <DiningReview />}
         {selectedReviewType === 'class' && <ClassReview />}
       </Box>
-      <CommentComponent />
+      {/* <CommentComponent /> */}
     </ChakraProvider>
   )
 }

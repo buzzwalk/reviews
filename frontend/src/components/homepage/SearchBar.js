@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { InputGroup, InputRightElement, Input } from "@chakra-ui/react";
 import { Search2Icon as SearchIcon } from "@chakra-ui/icons";
 
-export default function SearchBar() {
+export default function SearchBar({ handler }) {
     const [ value, setValue ] = useState("");
 
     return (
-        <form action="/" method="POST">
+        <form onSubmit={handler}>
             <InputGroup size="md">
                 <Input
                     color="black" 
