@@ -7,14 +7,14 @@ export default function PreviewCard(props) {
                 
                     <div className="TextWrapper">
                         <h2>{props.name}</h2>
-                        <h3>{props.college}</h3>
+                        <h3>{props.subheading}</h3>
                     </div>
                     <div className="ScoreWrapper">
                         <img src={star}/>
                         <p>{props.rating}</p>
                     </div>
                 
-                
+                C:\Users\Nicholas\Desktop\buzzwalk\reviews\frontend\src\sampleClassdata,js
             </div>
         </a>
     )

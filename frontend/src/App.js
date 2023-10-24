@@ -43,11 +43,11 @@ const App = () => {
             justifyContent: "space-around",
           }}>
             <Box>
-              <p>Classes</p>
+              <a href='/classes'>Classes</a>
             </Box>
 
             <Box>
-              <p>Professors</p>
+              <a href='/proffessors'>Professors</a>
             </Box>
 
             <Box>
