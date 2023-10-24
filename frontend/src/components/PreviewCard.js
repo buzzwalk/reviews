@@ -14,7 +14,6 @@ export default function PreviewCard(props) {
                         <p>{props.rating}</p>
                     </div>
                 
-                C:\Users\Nicholas\Desktop\buzzwalk\reviews\frontend\src\sampleClassdata,js
             </div>
         </a>
     )
