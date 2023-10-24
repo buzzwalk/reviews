@@ -9,7 +9,7 @@ const App = () => {
     <ChakraProvider>
       <header className='App-header'>
         <Link to='/review'>Add review</Link>
-        <SearchBar />
+        {/* <SearchBar /> */}
       </header>
     </ChakraProvider>
   )

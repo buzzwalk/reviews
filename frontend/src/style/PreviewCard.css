@@ -1,0 +1,34 @@
+.PreviewCard {
+    border: 1px solid #54585A;
+    background-color: #333333;
+    border-radius: 10px;
+    width: 450px;
+    height: 250px;
+    display:flex;
+    justify-content: space-between;
+    margin:7px;
+}
+.PreviewCard h2 {
+    color: white;
+    margin-left: 35px;
+    margin-top: 35px;
+    font-size: 24px;
+    font-family: 'Inter', sans-serif;
+}
+.PreviewCard h3 {
+    color: #959595;
+    margin-left: 35px;
+}
+.PreviewCard .ScoreWrapper {
+    margin-top: 35px;
+    margin-right: 35px;
+    display:flex;
+}
+.PreviewCard .ScoreWrapper p {
+    color: white
+}
+.PreviewCard img {
+    width: 25px;
+    height: 25px;
+    margin-right: 10px
+}
