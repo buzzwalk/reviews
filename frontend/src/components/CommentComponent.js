@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Textbox.css"
-import logo from "./Gt-seal.png"
+import logo from "../images/Gt-seal.png"
 import { useState } from "react"
 function CommentComponent() {
     const [formData, setFormData] = useState("")

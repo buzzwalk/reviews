@@ -1,0 +1,20 @@
+#test {
+    background-color: #54481E;
+}
+#signup {
+    background-color: #B9B08F;
+    width:7vw;
+    border-radius: 50px;
+    color: #54481E;
+}
+#login {
+    border: 1px solid #54585A;
+    width:7vw;
+    border-radius: 50px;
+    color:white;
+}
+button {
+    float:right;
+    margin-left: 1vw;
+    
+}

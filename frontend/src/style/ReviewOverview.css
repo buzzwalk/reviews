@@ -1,0 +1,46 @@
+body {
+    margin: 1vw;
+    overflow-x: hidden;
+    background-color: #1E1E1E;
+    
+}
+
+.main {
+    display:flex;
+    
+}
+.reviewoverview .filters {
+    border: 1px solid #959595;
+    width: 250px;
+    height: 80vh;
+    display:flex;
+    flex-direction: column;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+.filters p {
+    font-family: 'Inter', sans-serif;
+    color:white;
+    margin-left:1vw;
+}
+.filters h3{
+    font-family: 'Inter', sans-serif;
+    font-size: 2rem;
+    color:white;
+    margin-left:1vw;
+    margin-top: 1vh;
+}
+
+h1{
+    font-family: 'Newsreader', serif;
+    color: #B9B08F;
+    font-size: 4rem;
+    margin: 0;
+    margin-bottom: 2.35vh;
+}
+.previews {
+    margin-top: -7px;
+    margin-left: 15px;
+    display:flex;
+    flex-wrap: wrap;
+}
