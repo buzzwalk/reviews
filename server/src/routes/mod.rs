@@ -1,7 +1,7 @@
 // Routes
 // TODO: refactor to use reqwest::Client using axum::extract::State
 
-use axum::{response::Json, http::StatusCode};
+use axum::{http::StatusCode, response::Json};
 use serde_json::{json, Value};
 
 pub async fn get_course_gpa(Json(payload): Json<Value>) -> (StatusCode, Json<Value>) {
@@ -63,4 +63,3 @@ pub async fn get_professor_or_course(Json(payload): Json<Value>) -> (StatusCode,
     }
     (status_code, Json(response))
 }
-
