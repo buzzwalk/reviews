@@ -3,12 +3,12 @@ export default {
         {
             name: "West Village",
             address: "532 8th St NW, Atlanta, GA 30332",
-            rating: 3.2,
+            rating: 1.2,
         },
         {
             name: "North Avenue",
             address: "120 North Avenue NW, Atlanta, GA 30332",
-            rating: 4.0,
+            rating: 2.0,
         },
         {
             name: "Brittain",
