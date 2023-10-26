@@ -13,8 +13,7 @@ function CommentComponent() {
     function handleSubmit(e) {
         e.preventDefault();
 
-        const docRef = doc(db, "DiningHalls", "Willage", "Reviews", "Comment");
-        setDoc(docRef, {
+        const docRef = setDoc(doc(db, "DiningHalls", "Willage", "Reviews", "Comment"), {
             comment: formData.comment
         })
             .then(() => {
