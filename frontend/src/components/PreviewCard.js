@@ -2,7 +2,7 @@ import "../style/PreviewCard.css"
 import star from "../images/Star.png"
 export default function PreviewCard(props) {
     return (
-        <a href={"/" + props.name.replace(/\s/g, '')}>
+        // <a href={"/" + props.name.replace(/\s/g, '')}>
             <div className="PreviewCard">
                 
                     <div className="TextWrapper">
@@ -15,6 +15,6 @@ export default function PreviewCard(props) {
                     </div>
                 
             </div>
-        </a>
+        // </a>
     )
 }
