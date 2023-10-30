@@ -1,37 +1,16 @@
 import { useState, useEffect } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import db from "../firebase";
-import Navbar from "./navbar.js";
-import PreviewCard from "./PreviewCard";
+import Navbar from "./navbar";
+import { getPreviewCards, fetchData } from "./helpers";
 
-const dormsRef = collection(db, "DiningHalls");
+const diningHallsRef = collection(db, "DiningHalls");
 
 export default function DiningHallReviewOverview() {
     const [previewCards, setPreviewCards] = useState([]);
-
-    function getPreviewCards(){
-        return previewCards.map((card) => (
-            <PreviewCard
-                name={card.name}
-                subheading={card.address}
-                rating={card.overallRating}
-            />
-        ))
-    }
-
+    
     useEffect(() => {
-        const fetchDiningHalls = async () => {
-            const querySnapshot = await getDocs(dormsRef);
-            const diningHallReviews = querySnapshot.docs.map((doc) => ({
-                name: doc.data().name,
-                address: doc.data().address,
-                overallRating: doc.data().overallRating,
-            }));
-            
-            setPreviewCards(diningHallReviews);
-        };
-
-        fetchDiningHalls();
+        fetchData(diningHallsRef, setPreviewCards);
     }, []);
 
     return (
@@ -45,7 +24,7 @@ export default function DiningHallReviewOverview() {
                         <p>filters here</p>
                     </div>
                     <div className="previews">
-                        {getPreviewCards()}
+                        {getPreviewCards(previewCards)}
                     </div>
                 </div>
             </div>

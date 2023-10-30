@@ -46,7 +46,7 @@ const App = () => {
             </Box>
 
             <Box>
-              <a href='/proffessors'>Professors</a>
+              <a href='/professors'>Professors</a>
             </Box>
 
             <Box>
