@@ -1,34 +1,55 @@
-import "../style/ReviewOverview.css"
-import Navbar from "./navbar.js"
-import { useEffect } from "react"
-import PreviewCard from "./PreviewCard"
-import data from "../sampleProfData"
-export default function ApartmentReviewOverview() {
+import "../style/ReviewOverview.css";
+import Navbar from "./navbar.js";
+import { useState, useEffect } from "react";
+import PreviewCard from "./PreviewCard";
+import { collection, getDocs } from "firebase/firestore";
+import db from "../firebase";
 
-    function getPreviewCards(){
-        const dataArr = data.data;
-        return dataArr.map((e) =>
-            <PreviewCard name={e.name} subheading={e.college} rating={e.rating}/>
-        )
+export default function ApartmentReviewOverview() {
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    async function queryData() {
+      const query = collection(db, "Dorms");
+      const querySnapshot = await getDocs(query);
+      const reviewsData = [];
+      querySnapshot.forEach((doc) => {
+        reviewsData.push({
+          name: doc.data().name,
+          subheading: doc.data().address,
+          rating: doc.data().overallRating,
+        });
+      });
+      console.log(reviewsData)
+      setReviews(reviewsData);
     }
-    return(
-        <>
-        <Navbar />   
-        <div className="reviewoverview">
-            <h1>Apartments</h1>
-            <div className="main">
-                
-                <div className="filters">
-                    <h3>Filters</h3>
-                    <p>filters here</p>
-                </div>
-                <div className="previews">
-                    {getPreviewCards()}  
-                </div>
-            </div>
-            
+
+    queryData();
+  }, []);
+
+  function getPreviewCards() {
+    return reviews.map((review) => (
+      <PreviewCard
+        name={review.name}
+        subheading={review.subheading}
+        rating={review.rating}
+      />
+    ));
+  }
+
+  return (
+    <>
+      <Navbar />
+      <div className="reviewoverview">
+        <h1>Apartments</h1>
+        <div className="main">
+          <div className="filters">
+            <h3>Filters</h3>
+            <p>filters here</p>
+          </div>
+          <div className="previews">{getPreviewCards()}</div>
         </div>
-        </>
-        
-    )
+      </div>
+    </>
+  );
 }
