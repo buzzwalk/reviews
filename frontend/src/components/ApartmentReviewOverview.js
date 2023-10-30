@@ -3,32 +3,30 @@ import Navbar from "./navbar.js"
 import { useEffect } from "react"
 import PreviewCard from "./PreviewCard"
 import data from "../sampleProfData"
+import ApartmentFilter from "./ApartmentFilter"
 export default function ApartmentReviewOverview() {
 
-    function getPreviewCards(){
+    function getPreviewCards() {
         const dataArr = data.data;
         return dataArr.map((e) =>
-            <PreviewCard name={e.name} subheading={e.college} rating={e.rating}/>
-        )
+            <PreviewCard key={e.name} name={e.name} subheading={e.college} rating={e.rating}/>
+        );
     }
-    return(
+    
+    return (
         <>
-        <Navbar />   
-        <div className="reviewoverview">
-            <h1>Apartments</h1>
-            <div className="main">
+            <Navbar />   
+            <div className="reviewoverview">
+                <h1>Apartments</h1>
+                <div className="main">
+                    <ApartmentFilter />
+                    <div className="previews">
+                        {getPreviewCards()}  
+                    </div>
+                </div>
                 
-                <div className="filters">
-                    <h3>Filters</h3>
-                    <p>filters here</p>
-                </div>
-                <div className="previews">
-                    {getPreviewCards()}  
-                </div>
             </div>
-            
-        </div>
         </>
         
-    )
+    );
 }
