@@ -24,18 +24,18 @@ export default function ClassProfessorFilter({ setDepartment, setRatingCategory,
             <FormControl>
                 <FormLabel>Department</FormLabel>
                 <Select placeholder="Department" onChange={(e) => handleDepartmentChange(e)}>
-                    <option value="Computer Science">Computer Science</option>
-                    <option value="Other">Need to get other departments for dropdown</option>
+                    <option value="computerScience">Computer Science</option>
+                    <option value="other">Need to get other departments for dropdown</option>
                 </Select>
             </FormControl>
             <FormControl>
                 <FormLabel>Rating Category</FormLabel>
                 <Select placeholder="Rating Category" onChange={(e) => handleRatingCategoryChange(e)}>
-                    <option value="Overall">Overall</option>
-                    <option value="Easiness">Easiness</option>
-                    <option value="Clarity">Clarity</option>
-                    <option value="Workload">Workload</option>
-                    <option value="Helpfulness">Helpfulness</option>
+                    <option value="overall">Overall</option>
+                    <option value="easiness">Easiness</option>
+                    <option value="clarity">Clarity</option>
+                    <option value="workload">Workload</option>
+                    <option value="helpfulness">Helpfulness</option>
                 </Select>
             </FormControl>
             <FormControl>
@@ -54,7 +54,7 @@ export default function ClassProfessorFilter({ setDepartment, setRatingCategory,
 }
 
 ClassProfessorFilter.propTypes = {
-    name: PropTypes.func,
-    route: PropTypes.func,
-    imgSrc: PropTypes.func
+    setDepartment: PropTypes.func,
+    setRatingCategory: PropTypes.func,
+    setRatingRange: PropTypes.func
 }

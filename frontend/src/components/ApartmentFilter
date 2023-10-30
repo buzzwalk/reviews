@@ -1,0 +1,149 @@
+import React from "react";
+import PropTypes from "prop-types";
+
+import { Card, CardBody, Select, RangeSlider, RangeSliderFilledTrack, RangeSliderTrack, 
+    RangeSliderThumb, FormControl, FormLabel, Heading, Checkbox, CheckboxGroup } from "@chakra-ui/react";
+
+export default function ApartmentFilter({ setRatingCategory, setRatingRange, setBeds, setBaths, setPriceRange, setAmenities }) {
+
+    function handleRatingCategoryChange(event) {
+        setRatingCategory(event.value);
+    }
+
+    function handleRatingRangeChange(event) {
+        setDepartment(event.value);
+    }
+
+    function handleBedsChange(event) {
+        setBeds(event.value);
+    }
+
+    function handleBathsChange(event) {
+        setBaths(event.value);
+    }
+
+    function handlePriceRangeChange(event) {
+        setPriceRange(event.value);
+    }
+
+    function handleAmenitiesChange(event) {
+        setAmenities(event.value)
+    }
+
+    return (
+        <div>
+            <Heading as="h2" size="lg" noOfLines={1}>Filters</Heading>
+            <FormControl>
+                <FormLabel>Rating Category</FormLabel>
+                <Select placeholder="Rating Category" onChange={(e) => handleRatingCategoryChange(e)}>
+                    <option value="overall">Overall</option>
+                    <option value="quietness">Quietness</option>
+                    <option value="upkeep">Upkeep</option>
+                    <option value="landlord">Landlord</option>
+                    <option value="spaciousness">Spaciousness</option>
+                </Select>
+            </FormControl>
+            <FormControl>
+                <FormLabel>Rating Range</FormLabel>
+                <RangeSlider 
+                    defaultValue={[0, 5]} 
+                    min={0} 
+                    max={5} 
+                    step={1} 
+                    colorScheme="pink"  
+                    onChange={(e) => handleRatingRangeChange(e)}
+                >
+                    <RangeSliderTrack bg='red.100'>
+                        <RangeSliderFilledTrack bg='tomato' />
+                    </RangeSliderTrack>
+                    <RangeSliderThumb boxSize={6} index={0} />
+                    <RangeSliderThumb boxSize={6} index={1} />
+                </RangeSlider>
+            </FormControl>
+            <FormControl>
+                <FormLabel>Beds</FormLabel>
+                <RangeSlider 
+                    defaultValue={[0, 5]} 
+                    min={0} 
+                    max={10} 
+                    step={1} 
+                    colorScheme="pink" 
+                    onChange={(e) => handleBedsChange(e)}
+                >
+                    <RangeSliderTrack bg='red.100'>
+                        <RangeSliderFilledTrack bg='tomato' />
+                    </RangeSliderTrack>
+                    <RangeSliderThumb boxSize={6} index={0} />
+                    <RangeSliderThumb boxSize={6} index={1} />
+                </RangeSlider>
+            </FormControl>
+            <FormControl>
+                <FormLabel>Baths</FormLabel>
+                <RangeSlider 
+                    defaultValue={[0, 10]} 
+                    min={0} 
+                    max={10} 
+                    step={1} 
+                    colorScheme="pink" 
+                    onChange={(e) => handleBathsChange(e)}
+                >
+                    <RangeSliderTrack bg='red.100'>
+                        <RangeSliderFilledTrack bg='tomato' />
+                    </RangeSliderTrack>
+                    <RangeSliderThumb boxSize={6} index={0} />
+                    <RangeSliderThumb boxSize={6} index={1} />
+                </RangeSlider>
+            </FormControl>
+            <FormControl>
+                <FormLabel>Price Range</FormLabel>
+                <RangeSlider 
+                    defaultValue={[0, 10000]} 
+                    min={0} 
+                    max={10000} 
+                    step={500} 
+                    colorScheme="pink"  
+                    onChange={(e) => handlePriceRangeChange(e)}
+                >
+                    <RangeSliderTrack bg='red.100'>
+                        <RangeSliderFilledTrack bg='tomato' />
+                    </RangeSliderTrack>
+                    <RangeSliderThumb boxSize={6} index={0} />
+                    <RangeSliderThumb boxSize={6} index={1} />
+                </RangeSlider>
+            </FormControl>
+            <FormControl>
+                <FormLabel>Amenities</FormLabel>
+                <CheckboxGroup onChange={(e) => handleAmenitiesChange(e)}>
+                    <Checkbox value="cats">Cats</Checkbox>
+                    <Checkbox value="cooling">Cooling</Checkbox>
+                    <Checkbox value="dogs">Dogs</Checkbox>
+                    <Checkbox value="electricity">Electricity</Checkbox>
+                    <Checkbox value="furnished">Furnished</Checkbox>
+                    <Checkbox value="gas">Gas</Checkbox>
+                    <Checkbox value="gym">Gym</Checkbox>
+                    <Checkbox value="internet">Internet</Checkbox>
+                    <Checkbox value="jacuzzi">Jacuzzi</Checkbox>
+                    <Checkbox value="laundry">Laundry</Checkbox>
+                    <Checkbox value="nearBusStops">Near bus stops</Checkbox>
+                    <Checkbox value="nearCampus">Near campus</Checkbox>
+                    <Checkbox value="onsiteLandlord">Onsite landlord</Checkbox>
+                    <Checkbox value="parking">Parking</Checkbox>
+                    <Checkbox value="pool">Pool</Checkbox>
+                    <Checkbox value="smallAnimals">Small animals</Checkbox>
+                    <Checkbox value="trash">Trash</Checkbox>
+                    <Checkbox value="water">Water</Checkbox>
+                </CheckboxGroup>
+            </FormControl>
+        </div>
+    );
+
+}
+
+ApartmentFilter.propTypes = {
+    setRatingCategory: PropTypes.func,
+    setRatingRange: PropTypes.func,
+    setBeds: PropTypes.func,
+    setBaths: PropTypes.func,
+    setPriceRange: PropTypes.func,
+    setAmenities: PropTypes.func,
+}
