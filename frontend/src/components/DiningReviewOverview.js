@@ -38,7 +38,7 @@ export default function ApartmentReviewOverview() {
         <>
             <Navbar />
             <div className="reviewoverview">
-                <h1>Apartments</h1>
+                <h1>Dining Halls</h1>
                 <div className="main">
                     <div className="filters">
                         <h3>Filters</h3>
