@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 import { Card, CardBody, Select, RangeSlider, RangeSliderFilledTrack, RangeSliderTrack, 
     RangeSliderThumb, FormControl, FormLabel, Heading } from "@chakra-ui/react";
-import { Form } from "react-router-dom";
 
 export default function ClassProfessorFilter({ setDepartment, setRatingCategory, setRatingRange }) {
     
@@ -20,7 +19,7 @@ export default function ClassProfessorFilter({ setDepartment, setRatingCategory,
     }
 
     return (
-        <Form style={{backgroundColor: "grey"}}>
+        <div>
             <Heading as="h2" size="lg" noOfLines={1}>Filters</Heading>
             <FormControl>
                 <FormLabel>Department</FormLabel>
@@ -49,7 +48,7 @@ export default function ClassProfessorFilter({ setDepartment, setRatingCategory,
                     <RangeSliderThumb boxSize={6} index={1} />
                 </RangeSlider>
             </FormControl>
-        </Form>
+        </div>
     );
 
 }
