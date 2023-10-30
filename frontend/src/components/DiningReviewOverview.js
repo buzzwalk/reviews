@@ -6,7 +6,7 @@ import PreviewCard from "./PreviewCard";
 
 const dormsRef = collection(db, "DiningHalls");
 
-export default function ApartmentReviewOverview() {
+export default function DiningHallReviewOverview() {
     const [previewCards, setPreviewCards] = useState([]);
 
     function getPreviewCards(){
@@ -20,18 +20,18 @@ export default function ApartmentReviewOverview() {
     }
 
     useEffect(() => {
-        const fetchApartments = async () => {
+        const fetchDiningHalls = async () => {
             const querySnapshot = await getDocs(dormsRef);
-            const apartmentReviews = querySnapshot.docs.map((doc) => ({
+            const diningHallReviews = querySnapshot.docs.map((doc) => ({
                 name: doc.data().name,
                 address: doc.data().address,
                 overallRating: doc.data().overallRating,
             }));
             
-            setPreviewCards(apartmentReviews);
+            setPreviewCards(diningHallReviews);
         };
 
-        fetchApartments();
+        fetchDiningHalls();
     }, []);
 
     return (
