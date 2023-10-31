@@ -1,17 +1,19 @@
 import "../style/ReviewOverview.css"
 import Navbar from "./navbar.js"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import PreviewCard from "./PreviewCard"
 import data from "../sampleProfData"
 import ApartmentFilter from "./ApartmentFilter"
-export default function ApartmentReviewOverview() {
 
-    function getPreviewCards() {
-        const dataArr = data.data;
-        return dataArr.map((e) =>
-            <PreviewCard key={e.name} name={e.name} subheading={e.college} rating={e.rating}/>
-        );
-    }
+export default function ApartmentReviewOverview() {
+    const [options, setOptions] = useState({
+        ratingCategory: "overall",
+        ratingRange: [0, 5],
+        beds: [0, 10],
+        baths: [0, 10],
+        priceRange: [0, 10000],
+        amenities: []
+    });
     
     return (
         <>
@@ -19,9 +21,18 @@ export default function ApartmentReviewOverview() {
             <div className="reviewoverview">
                 <h1>Apartments</h1>
                 <div className="main">
-                    <ApartmentFilter />
+                    <ApartmentFilter options={ options } setOptions={ setOptions } />
                     <div className="previews">
-                        {getPreviewCards()}  
+                        {   
+                            data.data.map((apartment) => 
+                                <PreviewCard 
+                                    key={e.name} 
+                                    name={e.name} 
+                                    subheading={e.college} 
+                                    rating={e.rating} 
+                                />
+                            )
+                        }  
                     </div>
                 </div>
                 

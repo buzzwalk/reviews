@@ -4,30 +4,60 @@ import PropTypes from "prop-types";
 import { Card, CardBody, Select, RangeSlider, RangeSliderFilledTrack, RangeSliderTrack, 
     RangeSliderThumb, FormControl, FormLabel, Heading, Checkbox, CheckboxGroup } from "@chakra-ui/react";
 
-export default function ApartmentFilter({ setRatingCategory, setRatingRange, setBeds, setBaths, setPriceRange, setAmenities }) {
-
+export default function ApartmentFilter({ options, setOptions }) {
+    
     function handleRatingCategoryChange(event) {
-        setRatingCategory(event.value);
+        setOptions((currOptions) => { 
+            return {
+                ...currOptions,
+                ratingCategory: event.target.value
+            };
+        });
     }
 
-    function handleRatingRangeChange(event) {
-        setDepartment(event.value);
+    function handleRatingRangeChange(values) {
+        setOptions((currOptions) => { 
+            return {
+                ...currOptions,
+                ratingRange: values
+            };
+        });
     }
 
-    function handleBedsChange(event) {
-        setBeds(event.value);
+    function handleBedsChange(values) {
+        setOptions((currOptions) => { 
+            return {
+                ...currOptions,
+                beds: values
+            };
+        });
     }
 
-    function handleBathsChange(event) {
-        setBaths(event.value);
+    function handleBathsChange(values) {
+        setOptions((currOptions) => { 
+            return {
+                ...currOptions,
+                baths: values
+            };
+        });
     }
 
-    function handlePriceRangeChange(event) {
-        setPriceRange(event.value);
+    function handlePriceRangeChange(values) {
+        setOptions((currOptions) => { 
+            return {
+                ...currOptions,
+                priceRange: values
+            };
+        });
     }
-
-    function handleAmenitiesChange(event) {
-        setAmenities(event.value)
+        
+    function handleAmenitiesChange(values) {
+        setOptions((currOptions) => { 
+            return {
+                ...currOptions,
+                amenities: values
+            };
+        });
     }
 
     return (
@@ -35,7 +65,7 @@ export default function ApartmentFilter({ setRatingCategory, setRatingRange, set
             <Heading as="h2" size="lg" noOfLines={1}>Filters</Heading>
             <FormControl>
                 <FormLabel>Rating Category</FormLabel>
-                <Select placeholder="Rating Category" onChange={(e) => handleRatingCategoryChange(e)}>
+                <Select placeholder="Rating Category" onChange={handleRatingCategoryChange}>
                     <option value="overall">Overall</option>
                     <option value="quietness">Quietness</option>
                     <option value="upkeep">Upkeep</option>
@@ -51,7 +81,7 @@ export default function ApartmentFilter({ setRatingCategory, setRatingRange, set
                     max={5} 
                     step={1} 
                     colorScheme="pink"  
-                    onChange={(e) => handleRatingRangeChange(e)}
+                    onChange={handleRatingRangeChange}
                 >
                     <RangeSliderTrack bg='red.100'>
                         <RangeSliderFilledTrack bg='tomato' />
@@ -63,12 +93,12 @@ export default function ApartmentFilter({ setRatingCategory, setRatingRange, set
             <FormControl>
                 <FormLabel>Beds</FormLabel>
                 <RangeSlider 
-                    defaultValue={[0, 5]} 
+                    defaultValue={[0, 10]} 
                     min={0} 
                     max={10} 
                     step={1} 
                     colorScheme="pink" 
-                    onChange={(e) => handleBedsChange(e)}
+                    onChange={handleBedsChange}
                 >
                     <RangeSliderTrack bg='red.100'>
                         <RangeSliderFilledTrack bg='tomato' />
@@ -85,7 +115,7 @@ export default function ApartmentFilter({ setRatingCategory, setRatingRange, set
                     max={10} 
                     step={1} 
                     colorScheme="pink" 
-                    onChange={(e) => handleBathsChange(e)}
+                    onChange={handleBathsChange}
                 >
                     <RangeSliderTrack bg='red.100'>
                         <RangeSliderFilledTrack bg='tomato' />
@@ -102,7 +132,7 @@ export default function ApartmentFilter({ setRatingCategory, setRatingRange, set
                     max={10000} 
                     step={500} 
                     colorScheme="pink"  
-                    onChange={(e) => handlePriceRangeChange(e)}
+                    onChange={handlePriceRangeChange}
                 >
                     <RangeSliderTrack bg='red.100'>
                         <RangeSliderFilledTrack bg='tomato' />
@@ -113,7 +143,7 @@ export default function ApartmentFilter({ setRatingCategory, setRatingRange, set
             </FormControl>
             <FormControl>
                 <FormLabel>Amenities</FormLabel>
-                <CheckboxGroup onChange={(e) => handleAmenitiesChange(e)}>
+                <CheckboxGroup onChange={handleAmenitiesChange}>
                     <Checkbox value="cats">Cats</Checkbox>
                     <Checkbox value="cooling">Cooling</Checkbox>
                     <Checkbox value="dogs">Dogs</Checkbox>
@@ -136,14 +166,16 @@ export default function ApartmentFilter({ setRatingCategory, setRatingRange, set
             </FormControl>
         </div>
     );
-
 }
 
 ApartmentFilter.propTypes = {
-    setRatingCategory: PropTypes.func,
-    setRatingRange: PropTypes.func,
-    setBeds: PropTypes.func,
-    setBaths: PropTypes.func,
-    setPriceRange: PropTypes.func,
-    setAmenities: PropTypes.func,
-}
+    options: PropTypes.shape({
+        ratingCategory: PropTypes.string,
+        ratingRange: PropTypes.arrayOf(PropTypes.number),
+        beds: PropTypes.arrayOf(PropTypes.number),
+        baths: PropTypes.arrayOf(PropTypes.number),
+        priceRange: PropTypes.arrayOf(PropTypes.number),
+        amenities: PropTypes.arrayOf(PropTypes.string),
+    }),
+    setOptions: PropTypes.func
+};
