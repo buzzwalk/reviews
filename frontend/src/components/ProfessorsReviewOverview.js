@@ -3,7 +3,7 @@ import Navbar from "./navbar.js"
 import { useEffect } from "react"
 import PreviewCard from "./PreviewCard"
 import data from "../sampleProfData"
-export default function ProffessorsReviewOverview() {
+export default function ProfessorsReviewOverview() {
 
     function getPreviewCards(){
         const dataArr = data.data;
@@ -15,7 +15,7 @@ export default function ProffessorsReviewOverview() {
         <>
         <Navbar />   
         <div className="reviewoverview">
-            <h1>Proffessors</h1>
+            <h1>Professors</h1>
             <div className="main">
                 
                 <div className="filters">
