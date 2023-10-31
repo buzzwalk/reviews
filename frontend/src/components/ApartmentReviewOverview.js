@@ -12,7 +12,6 @@ export default function ApartmentReviewOverview() {
     useEffect(() => {
         fetchData(dormsRef, setPreviewCards);
     }, []);
-
     return (
         <>
             <Navbar />
