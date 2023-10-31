@@ -4,7 +4,7 @@ import DiningReview from '../components/DiningReview';
 import ClassReview from '../components/ClassReview';
 import CommentComponent from '../components/CommentComponent';
 import DropdownComponent from '../components/DropdownComponent';
-import { ChakraProvider, Box, Heading, ButtonGroup, Button } from '@chakra-ui/react';
+import { Box, Heading, ButtonGroup, Button } from '@chakra-ui/react';
 
 import Header from '../components/Header'
 
@@ -47,7 +47,7 @@ const classInformation = {
 const CreateReview = () => {
   const [selectedReviewType, setSelectedReviewType] = useState('class');
   return (
-    <ChakraProvider >
+    <>
       
       <Header />
       <CommentComponent />
@@ -91,7 +91,7 @@ const CreateReview = () => {
         {selectedReviewType === 'class' && <ClassReview />}
       </Box>
       {/* <CommentComponent /> */}
-    </ChakraProvider>
+    </>
   )
 }
 

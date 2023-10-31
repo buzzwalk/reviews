@@ -13,6 +13,9 @@ import ClassesReviewOverview from './components/ClassesReviewOverview'
 import ApartmentReviewOverview from './components/ApartmentReviewOverview'
 import DiningReviewOverview from './components/DiningReviewOverview'
 
+import { ChakraProvider } from '@chakra-ui/react'
+import theme from './theme/theme'
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -45,8 +48,11 @@ const router = createBrowserRouter([
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
+
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ChakraProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ChakraProvider>
   </React.StrictMode>,
 )
