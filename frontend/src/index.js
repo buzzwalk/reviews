@@ -12,7 +12,7 @@ import ProfessorsReviewOverview from './components/ProfessorsReviewOverview'
 import ClassesReviewOverview from './components/ClassesReviewOverview'
 import ApartmentReviewOverview from './components/ApartmentReviewOverview'
 import DiningReviewOverview from './components/DiningReviewOverview'
-//yest
+//yests
 const router = createBrowserRouter([
   {
     path: '/',
