@@ -1,21 +1,21 @@
-import "../style/ReviewOverview.css"
-import Navbar from "./navbar.js"
-import { useEffect } from "react"
-import PreviewCard from "./PreviewCard"
-import data from "../sampleDiningData"
-export default function DiningReviewOverview() {
+import { useState, useEffect } from "react";
+import { collection } from "firebase/firestore";
+import db from "../firebase";
+import Navbar from "./navbar";
+import { getPreviewCards, fetchData } from "./helpers";
 
-    function getPreviewCards() {
-        const dataArr = data.data;
-        
-        return dataArr.map((e) =>
-            <PreviewCard key={e.name} name={e.name} subheading={e.address} rating={e.rating}/>
-        );
-    }
+const diningHallsRef = collection(db, "DiningHalls");
+
+export default function DiningHallReviewOverview() {
+    const [previewCards, setPreviewCards] = useState([]);
+    
+    useEffect(() => {
+        fetchData(diningHallsRef, setPreviewCards);
+    }, []);
 
     return (
         <>
-            <Navbar />   
+            <Navbar />
             <div className="reviewoverview">
                 <h1>Dining Halls</h1>
                 <div className="main">
@@ -24,10 +24,9 @@ export default function DiningReviewOverview() {
                         <p>filters here</p>
                     </div>
                     <div className="previews">
-                        {getPreviewCards()}  
+                        {getPreviewCards(previewCards)}
                     </div>
                 </div>
-                
             </div>
         </>
     );

@@ -7,11 +7,14 @@ import profData from "./sampleProfData"
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Landing from './components/homepage/Landing'
-import ReviewOverview from './components/ProffessorsReviewOverview'
-import ProffessorsReviewOverview from './components/ProffessorsReviewOverview'
+import ReviewOverview from './components/ProfessorsReviewOverview'
+import ProfessorsReviewOverview from './components/ProfessorsReviewOverview'
 import ClassesReviewOverview from './components/ClassesReviewOverview'
 import ApartmentReviewOverview from './components/ApartmentReviewOverview'
 import DiningReviewOverview from './components/DiningReviewOverview'
+
+import { ChakraProvider } from '@chakra-ui/react'
+import theme from './theme/theme'
 
 const router = createBrowserRouter([
   {
@@ -27,8 +30,8 @@ const router = createBrowserRouter([
     element: <Landing />
   },
   {
-    path: "/proffessors",
-    element: <ProffessorsReviewOverview />
+    path: "/professors",
+    element: <ProfessorsReviewOverview />
   },
   {
     path: "/classes",
@@ -45,8 +48,11 @@ const router = createBrowserRouter([
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
+
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ChakraProvider theme={theme}>
+      <RouterProvider router={router} />
+    </ChakraProvider>
   </React.StrictMode>,
 )

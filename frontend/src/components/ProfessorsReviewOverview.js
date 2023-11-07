@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import PreviewCard from "./PreviewCard"
 import data from "../sampleProfData"
 import ClassProfessorFilter from "./ClassProfessorFilter"
+
 export default function ProffessorsReviewOverview() {
     const [ department, setDepartment ] = useState();
     const [ ratingCategory, setRatingCategory ] = useState();

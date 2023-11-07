@@ -4,12 +4,13 @@ import { Box, Heading, ChakraProvider } from '@chakra-ui/react'
 import SearchBar from './components/homepage/SearchBar'
 
 import Header from './components/Header'
+
 const App = () => {
   const submitHandler = e => {
     e.preventDefault()
   }
   return (
-    <ChakraProvider>
+    <>
       <Header />
 
       <Box style={{
@@ -46,7 +47,7 @@ const App = () => {
             </Box>
 
             <Box>
-              <a href='/proffessors'>Professors</a>
+              <a href='/professors'>Professors</a>
             </Box>
 
             <Box>
@@ -59,7 +60,7 @@ const App = () => {
           </Box>
         </Box>
       </Box>
-    </ChakraProvider>
+    </>
   )
 }
 
