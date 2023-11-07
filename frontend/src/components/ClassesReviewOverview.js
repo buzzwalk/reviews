@@ -4,9 +4,12 @@ import { useEffect, useState } from "react"
 import PreviewCard from "./PreviewCard"
 import data from "../sampleClassData"
 export default function ClassesReviewOverview() {
-    const [ department, setDepartment ] = useState();
-    const [ ratingCategory, setRatingCategory ] = useState();
-    const [ ratingRange, setRatingRange ] = useState();
+    const [ options, setOptions ] = setState({
+        department: "all",
+        ratingCategory: "overall",
+        ratingRange: [0, 5],
+        averageGpa: [0, 4]
+    });
 
     function getPreviewCards() {
         const dataArr = data.data;
@@ -14,6 +17,12 @@ export default function ClassesReviewOverview() {
             <PreviewCard name={e.name} subheading={e.fullname} rating={e.rating}/>
         );
     }
+
+    /* 
+        ratingCategory -> dropdown
+        ratingRange -> slider
+        foodServed -> checkbox group
+    */
     
     return (
         <>
@@ -21,11 +30,7 @@ export default function ClassesReviewOverview() {
             <div className="reviewoverview">
                 <h1>Classes</h1>
                 <div className="main">
-                    <ClassProfessorFilter 
-                        setDepartment={setDepartment} 
-                        setRatingCategory={setRatingCategory} 
-                        setRatingRange={setRatingRange} 
-                    />
+                    <ClassProfessorFilter options={options} setOptions={setOptions} />
                     <div className="previews">
                         {getPreviewCards()}  
                     </div>
