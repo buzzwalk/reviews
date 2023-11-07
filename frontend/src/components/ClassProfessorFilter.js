@@ -57,7 +57,7 @@ export default function ClassProfessorFilter({ options, setOptions }) {
                 <FormLabel>Average GPA</FormLabel>
                 <RangeSlider defaultValue={[0, 4]} min={0} max={4} step={.1} colorScheme="pink">
                     <RangeSliderTrack bg='red.100'>
-                        <RangeSliderFilledTrack bg='tomato' />
+                        <RangeSliderFilledTrack bg='orange' />
                     </RangeSliderTrack>
                     <RangeSliderThumb boxSize={6} index={0} />
                     <RangeSliderThumb boxSize={6} index={1} />
