@@ -5,10 +5,13 @@ import PreviewCard from "./PreviewCard"
 import data from "../sampleProfData"
 import ClassProfessorFilter from "./ClassProfessorFilter"
 
-export default function ProffessorsReviewOverview() {
-    const [ department, setDepartment ] = useState();
-    const [ ratingCategory, setRatingCategory ] = useState();
-    const [ ratingRange, setRatingRange ] = useState();
+export default function ProfessorsReviewOverview() {
+
+    const [ options, setOptions ] = useState({
+        department: "all",
+        ratingCategory: "overall",
+        ratingRange: [0, 5]
+    })
 
     function getPreviewCards() {
         const dataArr = data.data;
@@ -21,19 +24,14 @@ export default function ProffessorsReviewOverview() {
         <>
             <Navbar />   
             <div className="reviewoverview">
-                <h1>Proffessors</h1>
+                <h1>Professors</h1>
                 <div className="main">
-                    <ClassProfessorFilter 
-                        setDepartment={setDepartment} 
-                        setRatingCategory={setRatingCategory} 
-                        setRatingRange={setRatingRange} 
-                    />
+                    <ClassProfessorFilter options={options} setOptions={setOptions} />
                     <div className="previews">
                         {getPreviewCards()}  
                     </div>
                 </div>
             </div>
         </>
-        
     );
 }

@@ -4,18 +4,33 @@ import PropTypes from "prop-types";
 import { Card, CardBody, Select, RangeSlider, RangeSliderFilledTrack, RangeSliderTrack, 
     RangeSliderThumb, FormControl, FormLabel, Heading } from "@chakra-ui/react";
 
-export default function ClassProfessorFilter({ setDepartment, setRatingCategory, setRatingRange }) {
+export default function ClassProfessorFilter({ options, setOptions }) {
     
     function handleDepartmentChange(event) {
-        setDepartment(event.value);
+        setOptions((currOptions) => {
+            return {
+                ...currOptions,
+                department: event.target.value,
+            }
+        });
     }
 
     function handleRatingCategoryChange(event) {
-        setRatingCategory(event.value);
+        setOptions((currOptions) => {
+            return {
+                ...currOptions,
+                ratingCategory: event.target.value,
+            }
+        });
     }
 
     function handleRatingRangeChange(event) {
-        setRatingRange(event.value)
+        setOptions((currOptions) => {
+            return {
+                ...currOptions,
+                ratingRange: event.target.value,
+            }
+        });
     }
 
     return (
@@ -24,6 +39,7 @@ export default function ClassProfessorFilter({ setDepartment, setRatingCategory,
             <FormControl>
                 <FormLabel>Department</FormLabel>
                 <Select placeholder="Department" onChange={(e) => handleDepartmentChange(e)}>
+                    <option value="all">All</option>
                     <option value="computerScience">Computer Science</option>
                     <option value="other">Need to get other departments for dropdown</option>
                 </Select>
@@ -40,7 +56,7 @@ export default function ClassProfessorFilter({ setDepartment, setRatingCategory,
             </FormControl>
             <FormControl>
                 <FormLabel>Rating Range</FormLabel>
-                <RangeSlider defaultValue={[120, 240]} min={0} max={300} step={30} colorScheme="pink">
+                <RangeSlider defaultValue={[0, 5]} min={0} max={5} step={1} colorScheme="pink">
                     <RangeSliderTrack bg='red.100'>
                         <RangeSliderFilledTrack bg='tomato' />
                     </RangeSliderTrack>
@@ -54,7 +70,10 @@ export default function ClassProfessorFilter({ setDepartment, setRatingCategory,
 }
 
 ClassProfessorFilter.propTypes = {
-    setDepartment: PropTypes.func,
-    setRatingCategory: PropTypes.func,
-    setRatingRange: PropTypes.func
+    options: PropTypes.shape({
+        department: PropTypes.string,
+        ratingCategory: PropTypes.string,
+        ratingRange: PropTypes.arrayOf(PropTypes.number)
+    }),
+    setOptions: PropTypes.func
 }
