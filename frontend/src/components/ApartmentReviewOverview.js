@@ -26,10 +26,10 @@ export default function ApartmentReviewOverview() {
                         {   
                             data.data.map((apartment) => 
                                 <PreviewCard 
-                                    key={e.name} 
-                                    name={e.name} 
-                                    subheading={e.college} 
-                                    rating={e.rating} 
+                                    key={apartment.name} 
+                                    name={apartment.name} 
+                                    subheading={apartment.college} 
+                                    rating={apartment.rating} 
                                 />
                             )
                         }  

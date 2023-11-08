@@ -3,8 +3,9 @@ import Navbar from "./navbar.js"
 import { useEffect, useState } from "react"
 import PreviewCard from "./PreviewCard"
 import data from "../sampleClassData"
+import ClassProfessorFilter from "./ClassProfessorFilter.js"
 export default function ClassesReviewOverview() {
-    const [ options, setOptions ] = setState({
+    const [ options, setOptions ] = useState({
         department: "all",
         ratingCategory: "overall",
         ratingRange: [0, 5],
@@ -17,12 +18,6 @@ export default function ClassesReviewOverview() {
             <PreviewCard name={e.name} subheading={e.fullname} rating={e.rating}/>
         );
     }
-
-    /* 
-        ratingCategory -> dropdown
-        ratingRange -> slider
-        foodServed -> checkbox group
-    */
     
     return (
         <>
