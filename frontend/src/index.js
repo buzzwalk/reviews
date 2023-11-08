@@ -12,6 +12,8 @@ import ProfessorsReviewOverview from './components/ProfessorsReviewOverview'
 import ClassesReviewOverview from './components/ClassesReviewOverview'
 import ApartmentReviewOverview from './components/ApartmentReviewOverview'
 import DiningReviewOverview from './components/DiningReviewOverview'
+import ViewDiningHallReviewInfo from './components/ViewDiningHallReviewInfo'
+import ViewDormReviewInfo from './components/ViewDormReviewInfo'
 
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from './theme/theme'
@@ -44,6 +46,14 @@ const router = createBrowserRouter([
   {
     path: "/dininghalls",
     element: <DiningReviewOverview />
+  },
+  {
+    path: "/dininghallreviews",
+    element: <ViewDiningHallReviewInfo />
+  },
+  {
+    path: "/dormreviews",
+    element: <ViewDormReviewInfo />
   }
 ])
 
