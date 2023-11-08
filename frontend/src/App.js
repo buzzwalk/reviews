@@ -31,8 +31,8 @@ const App = () => {
           <Box style={{
             width: "100%"
           }}>
-            <Heading style={{fontSize: "3em"}}>
-            GT Reviews
+            <Heading style={{fontSize: "3em", marginBottom: "0.5em"}}>
+              GT Reviews
             </Heading>
             <SearchBar handler={submitHandler} />
           </Box>

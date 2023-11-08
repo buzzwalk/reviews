@@ -44,27 +44,93 @@ const classInformation = {
   ]
 }
 
+
+const apartmentInformation = {
+  addresses: {
+    "Computer Science": {
+      "CS 1332 - Data Structures & Algorithms": [
+        "Faulker",
+        "HB"
+      ],
+      "CS 2110 - Computer Organization & Programming": [
+        "Conte",
+        "Gupta"
+      ],
+    },
+    "Computer Engineering": {
+      "ECE 2031 - Digital Design Laboratory": [
+        "Thomas Collins"
+      ]
+    }
+  },
+  ratingText: [
+    {
+      header: "Overall",
+      small: "I liked this class"
+    },
+    {
+      header: "Easiness",
+      small: "This class was easy"
+    }
+  ],
+  tags: [
+    "Tolerates Tardiness",
+    "Issues PTEs",
+    "Participation Matters",
+    "Snazzy Dresser"
+  ]
+}
+
+const diningInformation = {
+  classes: {
+    "Computer Science": {
+      "CS 1332 - Data Structures & Algorithms": [
+        "Faulker",
+        "HB"
+      ],
+      "CS 2110 - Computer Organization & Programming": [
+        "Conte",
+        "Gupta"
+      ],
+    },
+    "Computer Engineering": {
+      "ECE 2031 - Digital Design Laboratory": [
+        "Thomas Collins"
+      ]
+    }
+  },
+  ratingText: [
+    {
+      header: "Overall",
+      small: "I liked this class"
+    },
+    {
+      header: "Easiness",
+      small: "This class was easy"
+    }
+  ],
+  tags: [
+    "Tolerates Tardiness",
+    "Issues PTEs",
+    "Participation Matters",
+    "Snazzy Dresser"
+  ]
+}
+
+
+const reviewMaps = {
+  apartment: apartmentInformation,
+  dining: diningInformation,
+  class: classInformation,
+}
+
 const CreateReview = () => {
   const [selectedReviewType, setSelectedReviewType] = useState('class');
+  
   return (
     <>
-      
       <Header />
-      <CommentComponent />
-      <DropdownComponent />
-      <Box p={4} style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "80%",
-        margin: "auto",
-        gap: "1em"
-      }}>
-        <Heading style={{
-          margin: "auto"
-      }}>
-          Add review
-        </Heading>
-        <ButtonGroup style={{
+      <ButtonGroup style={{
           margin: "auto"
         }}>
           <Button
@@ -86,6 +152,22 @@ const CreateReview = () => {
             Dining
           </Button>
         </ButtonGroup>
+        
+      <CommentComponent reviewType={selectedReviewType} />
+      <DropdownComponent />
+      <Box p={4} style={{
+        display: "flex",
+        flexDirection: "column",
+        width: "80%",
+        margin: "auto",
+        gap: "1em"
+      }}>
+        <Heading style={{
+          margin: "auto"
+      }}>
+          Add review
+        </Heading>
+        
         {selectedReviewType === 'apartment' && <ApartmentReview />}
         {selectedReviewType === 'dining' && <DiningReview />}
         {selectedReviewType === 'class' && <ClassReview />}
