@@ -5,7 +5,31 @@ import { useState } from "react"
 import db from "../firebase"
 import { setDoc, doc } from "firebase/firestore"; 
 
-function CommentComponent() {
+const classTags = [
+    "Tolerates Tardiness",
+    "Issues PTEs",
+    "Participation Matters",
+    "Snazzy Dresser"
+]
+
+const apartmentTags = [
+    "Laundry",
+    "Trash",
+    "Cats",
+    "Has Jacuzzi",
+    "Furnishings"
+]
+
+const diningTags = [
+    "Variety",
+    "Fresh",
+    "Good Breakfast",
+    "Good Lunch",
+    "Good Dinner",
+    "Vegetarian"
+]
+
+function CommentComponent({ reviewType }) {
 
     const [formData, setFormData] = useState({
         comment: '',
@@ -22,27 +46,56 @@ function CommentComponent() {
     
     return (
         <>
-        <center> <h1 className = "header"> BUZZWALK COMMENTS </h1> </center>
+            {reviewType == "class" && 
+                <>
+                    {classTags.map((e, idx) => 
+                        <div key={idx}>
+                            {e}
+                        </div>
+                    )}
+                </>
+            }
 
-        <div className = "division">
-            <form>
-                <textarea rows = "4" cols = "50" placeholder = "Enter Your Comment..." onChange={(e) => setFormData({ comment: e.target.value })}>
-                </textarea>
-                <label>
-                    <button className = "submit" onClick={(e) => handleSubmit(e)}>Submit</button>
-                </label> 
-            </form>    
-        </div>
+            {reviewType == "apartment" && 
+                <>
+                    {apartmentTags.map((e, idx) => 
+                        <div key={idx}>
+                            {e}
+                        </div>
+                    )}
+                </>
+            }
 
-        <div className = "division">
-            <form>  
-                 
-            </form>
-        </div>
+            {reviewType == "dining" && 
+                <>
+                    {diningTags.map((e, idx) => 
+                        <div key={idx}>
+                            {e}
+                        </div>
+                    )}
+                </>
+            }
+            <center> <h1 className = "header"> BUZZWALK COMMENTS </h1> </center>
 
-        <div className = "division">
-            <img className = "logo" src = {logo} />
-        </div>
+            <div className = "division">
+                <form>
+                    <textarea rows = "4" cols = "50" placeholder = "Enter Your Comment..." onChange={(e) => setFormData({ comment: e.target.value })}>
+                    </textarea>
+                    <label>
+                        <button className = "submit" onClick={(e) => handleSubmit(e)}>Submit</button>
+                    </label> 
+                </form>    
+            </div>
+
+            <div className = "division">
+                <form>  
+                    
+                </form>
+            </div>
+
+            <div className = "division">
+                <img className = "logo" src = {logo} />
+            </div>
 
         </>
     )

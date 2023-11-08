@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { InputGroup, InputRightElement, Input } from "@chakra-ui/react";
+import { InputGroup, InputLeftElement, Input, Box } from "@chakra-ui/react";
 import { Search2Icon as SearchIcon } from "@chakra-ui/icons";
 
 export default function SearchBar({ handler }) {
@@ -9,19 +9,20 @@ export default function SearchBar({ handler }) {
         <form onSubmit={handler}>
             <InputGroup size="md">
                 <Input
-                    color="black" 
                     type="text" 
                     id="search" 
                     name="search" 
                     value={value} 
                     onChange={(e) => setValue(e.target.value)}
                     size="lg"
+                    style={{
+                        color: "white",
+                        backgroundColor: "#54585A"
+                    }}
                 />
-                <InputRightElement>
-                    <button type="submit">
-                        <SearchIcon color="black" />
-                    </button>
-                </InputRightElement>
+                <InputLeftElement>
+                    <SearchIcon color="white" />
+                </InputLeftElement>
             </InputGroup>
         </form>
     );
