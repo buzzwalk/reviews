@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import FilterSlider from "./FilterSlider";
 
 import { Card, CardBody, Select, RangeSlider, RangeSliderFilledTrack, RangeSliderTrack, 
-    RangeSliderThumb, FormControl, FormLabel, Heading, Checkbox, CheckboxGroup } from "@chakra-ui/react";
+    RangeSliderThumb, RangeSliderMark, FormControl, FormLabel, Heading, Checkbox, CheckboxGroup } from "@chakra-ui/react";
+
+import "../style/filter.css";
 
 export default function ApartmentFilter({ options, setOptions }) {
     
@@ -61,7 +64,7 @@ export default function ApartmentFilter({ options, setOptions }) {
     }
 
     return (
-        <div>
+        <div className="filter-wrapper">
             <Heading as="h2" size="lg" noOfLines={1}>Filters</Heading>
             <FormControl>
                 <FormLabel>Rating Category</FormLabel>
@@ -75,93 +78,67 @@ export default function ApartmentFilter({ options, setOptions }) {
             </FormControl>
             <FormControl>
                 <FormLabel>Rating Range</FormLabel>
-                <RangeSlider 
-                    defaultValue={[0, 5]} 
+                <FilterSlider 
                     min={0} 
                     max={5} 
                     step={1} 
-                    colorScheme="pink"  
-                    onChange={handleRatingRangeChange}
-                >
-                    <RangeSliderTrack bg='red.100'>
-                        <RangeSliderFilledTrack bg='tomato' />
-                    </RangeSliderTrack>
-                    <RangeSliderThumb boxSize={6} index={0} />
-                    <RangeSliderThumb boxSize={6} index={1} />
-                </RangeSlider>
+                    changeFn={handleRatingRangeChange} 
+                    property={options.ratingRange} 
+                />
             </FormControl>
             <FormControl>
                 <FormLabel>Beds</FormLabel>
-                <RangeSlider 
-                    defaultValue={[0, 10]} 
+                <FilterSlider 
                     min={0} 
                     max={10} 
                     step={1} 
-                    colorScheme="pink" 
-                    onChange={handleBedsChange}
-                >
-                    <RangeSliderTrack bg='red.100'>
-                        <RangeSliderFilledTrack bg='tomato' />
-                    </RangeSliderTrack>
-                    <RangeSliderThumb boxSize={6} index={0} />
-                    <RangeSliderThumb boxSize={6} index={1} />
-                </RangeSlider>
+                    changeFn={handleBedsChange} 
+                    property={options.beds} 
+                />
             </FormControl>
             <FormControl>
                 <FormLabel>Baths</FormLabel>
-                <RangeSlider 
-                    defaultValue={[0, 10]} 
+                <FilterSlider 
                     min={0} 
                     max={10} 
                     step={1} 
-                    colorScheme="pink" 
-                    onChange={handleBathsChange}
-                >
-                    <RangeSliderTrack bg='red.100'>
-                        <RangeSliderFilledTrack bg='tomato' />
-                    </RangeSliderTrack>
-                    <RangeSliderThumb boxSize={6} index={0} />
-                    <RangeSliderThumb boxSize={6} index={1} />
-                </RangeSlider>
+                    changeFn={handleBathsChange} 
+                    property={options.baths} 
+                />
             </FormControl>
             <FormControl>
                 <FormLabel>Price Range</FormLabel>
-                <RangeSlider 
-                    defaultValue={[0, 10000]} 
+                <FilterSlider 
                     min={0} 
                     max={10000} 
                     step={500} 
-                    colorScheme="pink"  
-                    onChange={handlePriceRangeChange}
-                >
-                    <RangeSliderTrack bg='red.100'>
-                        <RangeSliderFilledTrack bg='tomato' />
-                    </RangeSliderTrack>
-                    <RangeSliderThumb boxSize={6} index={0} />
-                    <RangeSliderThumb boxSize={6} index={1} />
-                </RangeSlider>
+                    changeFn={handlePriceRangeChange} 
+                    property={options.priceRange} 
+                />
             </FormControl>
             <FormControl>
                 <FormLabel>Amenities</FormLabel>
                 <CheckboxGroup onChange={handleAmenitiesChange}>
-                    <Checkbox value="cats">Cats</Checkbox>
-                    <Checkbox value="cooling">Cooling</Checkbox>
-                    <Checkbox value="dogs">Dogs</Checkbox>
-                    <Checkbox value="electricity">Electricity</Checkbox>
-                    <Checkbox value="furnished">Furnished</Checkbox>
-                    <Checkbox value="gas">Gas</Checkbox>
-                    <Checkbox value="gym">Gym</Checkbox>
-                    <Checkbox value="internet">Internet</Checkbox>
-                    <Checkbox value="jacuzzi">Jacuzzi</Checkbox>
-                    <Checkbox value="laundry">Laundry</Checkbox>
-                    <Checkbox value="nearBusStops">Near bus stops</Checkbox>
-                    <Checkbox value="nearCampus">Near campus</Checkbox>
-                    <Checkbox value="onsiteLandlord">Onsite landlord</Checkbox>
-                    <Checkbox value="parking">Parking</Checkbox>
-                    <Checkbox value="pool">Pool</Checkbox>
-                    <Checkbox value="smallAnimals">Small animals</Checkbox>
-                    <Checkbox value="trash">Trash</Checkbox>
-                    <Checkbox value="water">Water</Checkbox>
+                    <div className="checkbox-grid">
+                        <Checkbox value="cats">Cats</Checkbox>
+                        <Checkbox value="cooling">Cooling</Checkbox>
+                        <Checkbox value="dogs">Dogs</Checkbox>
+                        <Checkbox value="electricity">Electricity</Checkbox>
+                        <Checkbox value="furnished">Furnished</Checkbox>
+                        <Checkbox value="gas">Gas</Checkbox>
+                        <Checkbox value="gym">Gym</Checkbox>
+                        <Checkbox value="internet">Internet</Checkbox>
+                        <Checkbox value="jacuzzi">Jacuzzi</Checkbox>
+                        <Checkbox value="laundry">Laundry</Checkbox>
+                        <Checkbox value="nearBusStops">Near bus stops</Checkbox>
+                        <Checkbox value="nearCampus">Near campus</Checkbox>
+                        <Checkbox value="onsiteLandlord">Onsite landlord</Checkbox>
+                        <Checkbox value="parking">Parking</Checkbox>
+                        <Checkbox value="pool">Pool</Checkbox>
+                        <Checkbox value="smallAnimals">Small animals</Checkbox>
+                        <Checkbox value="trash">Trash</Checkbox>
+                        <Checkbox value="water">Water</Checkbox>
+                    </div>
                 </CheckboxGroup>
             </FormControl>
         </div>

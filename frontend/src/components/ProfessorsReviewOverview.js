@@ -10,7 +10,8 @@ export default function ProfessorsReviewOverview() {
     const [ options, setOptions ] = useState({
         department: "all",
         ratingCategory: "overall",
-        ratingRange: [0, 5]
+        ratingRange: [0, 5],
+        averageGpa: [0, 4]
     })
 
     function getPreviewCards() {

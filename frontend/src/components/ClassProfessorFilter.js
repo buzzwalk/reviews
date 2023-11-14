@@ -1,8 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import FilterSlider from "./FilterSlider";
 
 import { Card, CardBody, Select, RangeSlider, RangeSliderFilledTrack, RangeSliderTrack, 
     RangeSliderThumb, FormControl, FormLabel, Heading } from "@chakra-ui/react";
+
+import "../style/filter.css";
 
 export default function ClassProfessorFilter({ options, setOptions }) {
     
@@ -24,26 +27,26 @@ export default function ClassProfessorFilter({ options, setOptions }) {
         });
     }
 
-    function handleRatingRangeChange(event) {
+    function handleRatingRangeChange(values) {
         setOptions((currOptions) => {
             return {
                 ...currOptions,
-                ratingRange: event.target.value,
+                ratingRange: values,
             }
         });
     }
 
-        function handleAverageGpaChange(event) {
+        function handleAverageGpaChange(values) {
         setOptions((currOptions) => {
             return {
                 ...currOptions,
-                averageGpa: event.target.value,
+                averageGpa: values,
             }
         });
     }
 
     return (
-        <div>
+        <div className="filter-wrapper">
             <Heading as="h2" size="lg" noOfLines={1}>Filters</Heading>
             <FormControl>
                 <FormLabel>Department</FormLabel>
@@ -55,13 +58,13 @@ export default function ClassProfessorFilter({ options, setOptions }) {
             </FormControl>
             <FormControl>
                 <FormLabel>Average GPA</FormLabel>
-                <RangeSlider defaultValue={[0, 4]} min={0} max={4} step={.1} colorScheme="pink">
-                    <RangeSliderTrack bg='red.100'>
-                        <RangeSliderFilledTrack bg='orange' />
-                    </RangeSliderTrack>
-                    <RangeSliderThumb boxSize={6} index={0} />
-                    <RangeSliderThumb boxSize={6} index={1} />
-                </RangeSlider>
+                <FilterSlider 
+                    min={0} 
+                    max={4} 
+                    step={.1} 
+                    changeFn={handleAverageGpaChange} 
+                    property={options.averageGpa} 
+                />
             </FormControl>
             <FormControl>
                 <FormLabel>Rating Category</FormLabel>
@@ -75,13 +78,13 @@ export default function ClassProfessorFilter({ options, setOptions }) {
             </FormControl>
             <FormControl>
                 <FormLabel>Rating Range</FormLabel>
-                <RangeSlider defaultValue={[0, 5]} min={0} max={5} step={1} colorScheme="pink">
-                    <RangeSliderTrack bg='red.100'>
-                        <RangeSliderFilledTrack bg='tomato' />
-                    </RangeSliderTrack>
-                    <RangeSliderThumb boxSize={6} index={0} />
-                    <RangeSliderThumb boxSize={6} index={1} />
-                </RangeSlider>
+                <FilterSlider 
+                    min={0} 
+                    max={5} 
+                    step={1} 
+                    changeFn={handleRatingRangeChange} 
+                    property={options.ratingRange} 
+                />
             </FormControl>
         </div>
     );
