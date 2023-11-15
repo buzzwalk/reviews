@@ -45,13 +45,12 @@ export default function ViewDiningHallReviewInfo({ diningHall }) {
         <>
             <Navbar />
             <div className="reviewoverview">
-                <h1>Reviews</h1>
                 <h1>{diningHallData.name}</h1>
-                <h1>{diningHallData.address}</h1>
+                {/* <h1>{diningHallData.address}</h1>
                 <h1>{diningHallData.numberChairs}</h1>
                 <h1>{diningHallData.numberReviews}</h1>
                 <h1>{diningHallData.overallRating}</h1>
-                <h1>{diningHallData.squareFootage}</h1>
+                <h1>{diningHallData.squareFootage}</h1> */}
                 <div className="main">
                     <div className="filters">
                         <h3>Filters</h3>

@@ -35,15 +35,14 @@ export default function ViewDormReviewInfo({ dorm }) {
         <>
             <Navbar />
             <div className="reviewoverview">
-                <h1>Reviews</h1>
                 <h1>{dormData.name}</h1>
-                <h1>{dormData.address}</h1>
+                {/* <h1>{dormData.address}</h1>
                 <h1>{dormData.bathrooms}</h1>
                 <h1>{dormData.elevator}</h1>
                 <h1>{dormData.laundry}</h1>
                 <h1>{dormData.numReviews}</h1>
                 <h1>{dormData.overallRating}</h1>
-                <h1>{dormData.squareFootage}</h1>
+                <h1>{dormData.squareFootage}</h1> */}
                 <div className="main">
                     <div className="filters">
                         <h3>Filters</h3>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import ApartmentReview from '../components/ApartmentReview';
-import DiningReview from '../components/DiningReview';
-import ClassReview from '../components/ClassReview';
+// import ApartmentReview from '../components/ApartmentReview';
+// import DiningReview from '../components/DiningReview';
+// import ClassReview from '../components/ClassReview';
 import CommentComponent from '../components/CommentComponent';
 import DropdownComponent from '../components/DropdownComponent';
 import { Box, Heading, ButtonGroup, Button } from '@chakra-ui/react';
@@ -168,9 +168,9 @@ const CreateReview = () => {
           Add review
         </Heading>
         
-        {selectedReviewType === 'apartment' && <ApartmentReview />}
+        {/* {selectedReviewType === 'apartment' && <ApartmentReview />}
         {selectedReviewType === 'dining' && <DiningReview />}
-        {selectedReviewType === 'class' && <ClassReview />}
+        {selectedReviewType === 'class' && <ClassReview />} */}
       </Box>
       {/* <CommentComponent /> */}
     </>
