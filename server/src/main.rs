@@ -1,14 +1,15 @@
-use axum::{routing::get, routing::post, Router};
+use axum::{routing::post, Router};
 
+mod firebase;
 mod routes;
 mod scraper;
 
 use routes::{get_course_gpa, get_professor_gpa, get_professor_or_course};
-use scraper::scrape_course_catalog;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-    scrape_course_catalog().await?;
+    // let scraped_courses = scrape_course_catalog().await?;
+    firebase::push_classes_to_firebase().await?;
     let app = Router::new()
         // Wrappers around Course Critique (critique.gatech.edu) API.
         .route("/critique/course", post(get_course_gpa))

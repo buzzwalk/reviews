@@ -1,5 +1,5 @@
-use axum::{http::StatusCode, response::Json};
-use serde_json::{json, Map, Number, Value};
+use axum::response::Json;
+use serde_json::{Map, Number, Value};
 use thirtyfour::prelude::*;
 
 pub async fn scrape_course_catalog() -> WebDriverResult<Json<Value>> {
@@ -18,13 +18,12 @@ pub async fn scrape_course_catalog() -> WebDriverResult<Json<Value>> {
     }
 
     for page_link in page_links {
-        // let page_link = page.attr("href").await?;
         if let Some(link) = page_link {
             driver.goto(link).await?;
             let course_descs = driver.find(By::ClassName("sc_sccoursedescs")).await;
             let course_descs = match course_descs {
                 Ok(e) => e,
-                Err(_) => continue, 
+                Err(_) => continue,
             };
             let department_courses = course_descs
                 .query(By::ClassName("courseblock"))
@@ -38,8 +37,7 @@ pub async fn scrape_course_catalog() -> WebDriverResult<Json<Value>> {
                     .await?;
 
                 let title_text = title.text().await?;
-                let mut title_fields = title_text.split('.').collect::<Vec<&str>>();
-                title_fields.pop();
+                let mut title_fields = title_text.split(". ").collect::<Vec<&str>>();
                 // println!("{:?}", title_fields);
 
                 course_map.insert(
@@ -48,13 +46,16 @@ pub async fn scrape_course_catalog() -> WebDriverResult<Json<Value>> {
                 );
                 course_map.insert(
                     String::from("course_title"),
-                    Value::String(title_fields[1..(title_fields.len() - 1)].join("")[1..].to_string()),
+                    Value::String(
+                        title_fields[1..(title_fields.len() - 1)]
+                            .join("")
+                            .to_string(),
+                    ),
                 );
-                // println!("{}", title_fields.pop().unwrap());
                 course_map.insert(
                     String::from("course_ch"),
                     Value::Number(Number::from(
-                        u8::from_str_radix(title_fields.pop().unwrap().get(1..2).unwrap(), 10)
+                        u8::from_str_radix(title_fields.pop().unwrap().get(0..1).unwrap(), 10)
                             .unwrap(),
                     )),
                 );
@@ -68,11 +69,9 @@ pub async fn scrape_course_catalog() -> WebDriverResult<Json<Value>> {
                     Value::String(desc.text().await?),
                 );
 
-                println!("{:?}", course_map);
+                // println!("{:?}", course_map);
                 course_data_vec.push(Value::Object(course_map));
             }
-            driver.back().await?;
-            // break;
         }
     }
 
