@@ -1,34 +1,42 @@
 import "../style/ReviewOverview.css"
 import Navbar from "./navbar.js"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import PreviewCard from "./PreviewCard"
 import data from "../sampleClassData"
+import ClassProfessorFilter from "./ClassProfessorFilter.js"
 export default function ClassesReviewOverview() {
+    const [ options, setOptions ] = useState({
+        department: "all",
+        ratingCategory: "overall",
+        ratingRange: [0, 5],
+        averageGpa: [0, 4]
+    });
 
-    function getPreviewCards(){
+    function getPreviewCards() {
         const dataArr = data.data;
         return dataArr.map((e) =>
-        <PreviewCard name={e.name} subheading={e.fullname} rating={e.rating}/>
-        )
+            <PreviewCard name={e.name} subheading={e.fullname} rating={e.rating}/>
+        );
     }
-    return(
+
+    /* 
+        ratingCategory -> dropdown
+        ratingRange -> slider
+        foodServed -> checkbox group
+    */
+    
+    return (
         <>
-        <Navbar />   
-        <div className="reviewoverview">
-            <h1>Classes</h1>
-            <div className="main">
-                
-                <div className="filters">
-                    <h3>Filters</h3>
-                    <p>filters here</p>
-                </div>
-                <div className="previews">
-                    {getPreviewCards()}  
-                </div>
+            <Navbar />   
+            <div className="reviewoverview">
+                <h1>Classes</h1>
+                <div className="main">
+                    <ClassProfessorFilter options={options} setOptions={setOptions} />
+                    <div className="previews">
+                        {getPreviewCards()}  
+                    </div>
+                </div> 
             </div>
-            
-        </div>
         </>
-        
-    )
+    );
 }

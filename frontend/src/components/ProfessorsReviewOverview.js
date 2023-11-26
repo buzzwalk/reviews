@@ -1,34 +1,37 @@
 import "../style/ReviewOverview.css"
 import Navbar from "./navbar.js"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import PreviewCard from "./PreviewCard"
 import data from "../sampleProfData"
+import ClassProfessorFilter from "./ClassProfessorFilter"
+
 export default function ProfessorsReviewOverview() {
 
-    function getPreviewCards(){
+    const [ options, setOptions ] = useState({
+        department: "all",
+        ratingCategory: "overall",
+        ratingRange: [0, 5]
+    })
+
+    function getPreviewCards() {
         const dataArr = data.data;
         return dataArr.map((e) =>
-        <PreviewCard name={e.name} subheading={e.college} rating={e.rating}/>
-        )
+            <PreviewCard key={e.name} name={e.name} subheading={e.college} rating={e.rating}/>
+        );
+
     }
-    return(
+    return (
         <>
-        <Navbar />   
-        <div className="reviewoverview">
-            <h1>Professors</h1>
-            <div className="main">
-                
-                <div className="filters">
-                    <h3>Filters</h3>
-                    <p>filters here</p>
-                </div>
-                <div className="previews">
-                    {getPreviewCards()}  
+            <Navbar />   
+            <div className="reviewoverview">
+                <h1>Professors</h1>
+                <div className="main">
+                    <ClassProfessorFilter options={options} setOptions={setOptions} />
+                    <div className="previews">
+                        {getPreviewCards()}  
+                    </div>
                 </div>
             </div>
-            
-        </div>
         </>
-        
-    )
+    );
 }
