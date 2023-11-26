@@ -1,41 +1,36 @@
-import "../style/ReviewOverview.css"
-import Navbar from "./navbar.js"
+import "../../style/ReviewOverview.css"
+import Navbar from "../navbar.js"
 import { useEffect, useState } from "react"
-import PreviewCard from "./PreviewCard"
-import data from "../sampleClassData"
-import ClassProfessorFilter from "./filters/ClassProfessorFilter.js"
-export default function ClassesReviewOverview() {
+import PreviewCard from "../PreviewCard.js"
+import data from "../../sampleProfData.js"
+import ClassProfessorFilter from "../filters/ClassProfessorFilter.js"
+
+export default function ProfessorsReviewOverview() {
+
     const [ options, setOptions ] = useState({
         department: "all",
         ratingCategory: "overall",
-        ratingRange: [0, 5],
-        averageGpa: [0, 4]
-    });
+        ratingRange: [0, 5]
+    })
 
     function getPreviewCards() {
         const dataArr = data.data;
         return dataArr.map((e) =>
-            <PreviewCard name={e.name} subheading={e.fullname} rating={e.rating}/>
+            <PreviewCard key={e.name} name={e.name} subheading={e.college} rating={e.rating}/>
         );
-    }
 
-    /* 
-        ratingCategory -> dropdown
-        ratingRange -> slider
-        foodServed -> checkbox group
-    */
-    
+    }
     return (
         <>
             <Navbar />   
             <div className="reviewoverview">
-                <h1>Classes</h1>
+                <h1>Professors</h1>
                 <div className="main">
                     <ClassProfessorFilter options={options} setOptions={setOptions} />
                     <div className="previews">
                         {getPreviewCards()}  
                     </div>
-                </div> 
+                </div>
             </div>
         </>
     );

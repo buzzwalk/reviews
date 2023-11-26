@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { collection, doc, getDoc } from "firebase/firestore";
-import db from "../firebase";
-import Navbar from "./navbar";
-import { fetchDormReviews, getPreviewCardsInfo } from "./helpers";
+import db from "../../firebase";
+import Navbar from "../navbar";
+import { fetchDormReviews, getPreviewCardsInfo } from "../helpers";
 import { useLocation } from 'react-router-dom';
 
 export default function ViewDormReviewInfo({ dorm }) {

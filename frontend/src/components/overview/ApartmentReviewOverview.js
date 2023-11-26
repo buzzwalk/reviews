@@ -1,12 +1,12 @@
-import "../style/ReviewOverview.css"
+import "../../style/ReviewOverview.css"
 import { useState, useEffect } from "react";
-import PreviewCard from "./PreviewCard"
-import data from "../sampleProfData"
-import ApartmentFilter from "./filters/ApartmentFilter"
+import PreviewCard from "../PreviewCard"
+import data from "../../sampleProfData"
+import ApartmentFilter from "../filters/ApartmentFilter"
 import { collection } from "firebase/firestore";
-import db from "../firebase";
-import Navbar from "./navbar";
-import { getPreviewCards, fetchData, fetchOverview} from "./helpers";
+import db from "../../firebase";
+import Navbar from "../navbar";
+import { getPreviewCards, fetchData, fetchOverview} from "../helpers";
 import { useNavigate } from "react-router-dom";
 
 

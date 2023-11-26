@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { collection } from "firebase/firestore";
-import db from "../firebase";
-import Navbar from "./navbar";
-import { getPreviewCards, fetchOverview } from "./helpers";
+import db from "../../firebase";
+import Navbar from "../navbar";
+import { getPreviewCards, fetchOverview } from "../helpers";
 import { useNavigate } from "react-router-dom";
 
 const diningHallsRef = collection(db, "DiningHalls");
