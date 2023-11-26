@@ -24,7 +24,7 @@ export default function ApartmentReviewOverview() {
                     <ApartmentFilter options={ options } setOptions={ setOptions } />
                     <div className="previews">
                         {   
-                            data.data.map((apartment) => 
+                            data.data.map((e) => 
                                 <PreviewCard 
                                     key={e.name} 
                                     name={e.name} 
