@@ -3,7 +3,7 @@ import Navbar from "./navbar.js"
 import { useEffect, useState } from "react"
 import PreviewCard from "./PreviewCard"
 import data from "../sampleClassData"
-import ClassProfessorFilter from "./ClassProfessorFilter.js"
+import ClassProfessorFilter from "./filters/ClassProfessorFilter.js"
 export default function ClassesReviewOverview() {
     const [ options, setOptions ] = useState({
         department: "all",

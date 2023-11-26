@@ -2,7 +2,7 @@ import "../style/ReviewOverview.css"
 import { useState, useEffect } from "react";
 import PreviewCard from "./PreviewCard"
 import data from "../sampleProfData"
-import ApartmentFilter from "./ApartmentFilter"
+import ApartmentFilter from "./filters/ApartmentFilter"
 import { collection } from "firebase/firestore";
 import db from "../firebase";
 import Navbar from "./navbar";

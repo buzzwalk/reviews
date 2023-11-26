@@ -3,7 +3,7 @@ import Navbar from "./navbar.js"
 import { useEffect, useState } from "react"
 import PreviewCard from "./PreviewCard"
 import data from "../sampleProfData"
-import ClassProfessorFilter from "./ClassProfessorFilter"
+import ClassProfessorFilter from "./filters/ClassProfessorFilter"
 
 export default function ProfessorsReviewOverview() {
 
