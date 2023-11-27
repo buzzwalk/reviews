@@ -10,15 +10,15 @@ export default function Navbar() {
             <StarIcon color="#959595"></StarIcon> {/*placeholder */}
             <InputGroup width={"40%"} >
                 <InputLeftElement>
-                    <SearchIcon color="gray.300"></SearchIcon>
+                    <SearchIcon color="gray.300" ></SearchIcon>
                 </InputLeftElement>
                 <Input outline={"solid 1px #54585A"} background="#333333" borderColor="#333333" type="text" ></Input>
                 <InputRightElement width={"fit-content"}>
-                    <Select background="#222222" textColor="#959595" variant="filled" height={"30px"} marginRight={"10px"}>
-                        <option>DINING</option>
-                        <option>HOUSING</option>
-                        <option>PROFS</option>
-                        <option>CLASSES</option>
+                    <Select  background="#222222" color="#959595" variant="filled" height={"30px"} marginRight={"10px"}>
+                        <option style={{background: "#333333"}}>DINING</option>
+                        <option style={{background: "#333333"}}>HOUSING</option>
+                        <option style={{background: "#333333"}}>PROFS</option>
+                        <option style={{background: "#333333"}}>CLASSES</option>
                     </Select>
                 </InputRightElement>
             </InputGroup>

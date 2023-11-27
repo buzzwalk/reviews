@@ -7,22 +7,13 @@ export default function SearchBar({ handler }) {
 
     return (
         <form onSubmit={handler}>
-            <InputGroup size="md">
-                <Input
-                    type="text" 
-                    id="search" 
-                    name="search" 
-                    value={value} 
-                    onChange={(e) => setValue(e.target.value)}
-                    size="lg"
-                    style={{
-                        color: "white",
-                        backgroundColor: "#54585A"
-                    }}
-                />
+            <InputGroup>
                 <InputLeftElement>
-                    <SearchIcon color="white" />
+                    <SearchIcon color="gray.300"></SearchIcon>
                 </InputLeftElement>
+                <Input
+                 onChange={(e)=> setValue(e.target.value)}
+                background="#333333" borderColor="#333333" type="text" ></Input>
             </InputGroup>
         </form>
     );

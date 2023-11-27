@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Box, Heading, ChakraProvider } from '@chakra-ui/react'
+import { Box, Heading, ChakraProvider, Stack, HStack, Button, Divider } from '@chakra-ui/react'
 import SearchBar from './components/homepage/SearchBar'
 
 import Header from './components/Header'
@@ -19,44 +19,51 @@ const App = () => {
         display: "flex",
         flexDirection: "column",
       }}>
-        <Box style={{
+        <Box maxHeight="25vh" style={{
           width: "50%",
           height: "50%",
           margin: "auto",
           textAlign: "center",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-around"
+          
         }}>
           <Box style={{
             width: "100%"
           }}>
-            <Heading color={"#B9B08F"} fontWeight={100} style={{fontSize: "3em", marginBottom: "0.5em"}}>
+            <Heading  color={"#B9B08F"} fontWeight={100} style={{fontSize: "5em", marginBottom: "0.1em"}}>
               GT Reviews
             </Heading>
-            <SearchBar handler={submitHandler} />
+            <SearchBar  handler={submitHandler} />
           </Box>
-
-          <Box style={{
+          <Divider color="#B9B08F" marginBottom={"25px"} marginTop="25px"></Divider>
+          <Box marginTop = "10px" style={{
             display: "flex",
             flexDirection: "row",
             justifyContent: "space-around",
+            alignSelf: "center"
           }}>
-            <Box>
-              <a href='/classes'>Classes</a>
-            </Box>
-
-            <Box>
-              <a href='/professors'>Professors</a>
-            </Box>
-
-            <Box>
-              <a href='/apartments'>Apartments</a>
-            </Box>
-
-            <Box>
-              <a href='/dininghalls'>Dining Halls</a>
-            </Box>
+              <a href='/classes'>
+                <Button >
+                  Classes
+                </Button>
+              </a>
+              <a href='/professors'>
+                <Button>
+                  Professors
+                </Button>
+              </a>
+              <a href='/apartments'>
+                <Button>
+                  Apartments
+                </Button>
+              </a>
+              <a href='/dininghalls'>
+                <Button>
+                  Dining Halls
+                </Button>
+              </a>
+            
           </Box>
         </Box>
       </Box>

@@ -99,11 +99,11 @@ export default function AddReview() {
                                 <HStack alignItems={"center"} spacing={5}>
                                     <Text width={100}>Letter Grade</Text>
                                     <Select background="#333333" borderColor="#333333" width={70} textAlign="center">
-                                        <option value="A">A</option>
-                                        <option value="B">B</option>
-                                        <option value="C">C</option>
-                                        <option value="D">D</option>
-                                        <option value="F">F</option>
+                                        <option style={{background: "#333333"}} value="A">A</option>
+                                        <option style={{background: "#333333"}} value="B">B</option>
+                                        <option style={{background: "#333333"}} value="C">C</option>
+                                        <option style={{background: "#333333"}} value="D">D</option>
+                                        <option style={{background: "#333333"}} value="F">F</option>
                                     </Select>
                                 </HStack>
                             </HStack>
