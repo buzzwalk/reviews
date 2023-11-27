@@ -5,11 +5,13 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.1.1",
     "@chakra-ui/react": "^2.8.1",
+    "@choc-ui/chakra-autocomplete": "^5.2.9",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "chakra-react-select": "^4.7.6",
     "firebase": "^10.5.0",
     "framer-motion": "^10.16.4",
     "prop-types": "^15.8.1",
