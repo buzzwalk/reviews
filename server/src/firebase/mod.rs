@@ -9,8 +9,6 @@ use serde_json::{json, Value};
 // CREATE DOCUMENT
 // POST "https://firestore.googleapis.com/v1/projects/test-gt-reviews/databases/(default)/documents/Classes?documentId="NEW_CLASS""
 
-const FIREBASE_URL: &str = "https://firestore.googleapis.com/v1/projects/test-gt-reviews/databases/(default)/documents/Classes";
-
 #[derive(Debug, Serialize, Deserialize)]
 struct Class {
     name: String,
@@ -20,23 +18,8 @@ struct Class {
 }
 
 pub async fn push_classes_to_firebase() -> Result<(), Box<dyn std::error::Error>> {
+    let firebase_url = std::env::var("FIREBASE_URL").unwrap();
     let client = reqwest::Client::new();
-    client
-        .post(format!(
-            "{}?documentId={}",
-            FIREBASE_URL, "NEWCLASSFROMRUST"
-        ))
-        .json(&json!(
-            {
-                "fields": {
-                    "test_field": {
-                        "stringValue": "asdfasdf"
-                    }
-                }
-            }
-        ))
-        .send()
-        .await?;
     let scraped_courses = scrape_course_catalog().await?;
     if let Json(Value::Array(course_list)) = scraped_courses {
         for course in course_list {
@@ -46,7 +29,7 @@ pub async fn push_classes_to_firebase() -> Result<(), Box<dyn std::error::Error>
                 let desc = course.get("course_desc").unwrap().as_str().unwrap();
                 let ch = course.get("course_ch").unwrap().as_f64().unwrap();
                 client
-                    .post(format!("{}?documentId={}", FIREBASE_URL, name))
+                    .post(format!("{}/documents/Classes?documentId={}", firebase_url, name))
                     .json(&json!(
                         {
                             "fields": {
