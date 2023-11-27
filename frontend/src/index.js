@@ -16,6 +16,7 @@ import ViewDormReviewInfo from './components/reviews/ViewDormReviewInfo'
 
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from './theme/theme'
+import AddReview from './components/AddReview'
 
 const router = createBrowserRouter([
   {
@@ -24,7 +25,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/review',
-    element: <CreateReview />,
+    element: <AddReview />,
   },
   {
     path: "/landing",
@@ -63,5 +64,5 @@ root.render(
     <ChakraProvider theme={theme}>
       <RouterProvider router={router} />
     </ChakraProvider>
-  </React.StrictMode>,
+  </React.StrictMode>
 )

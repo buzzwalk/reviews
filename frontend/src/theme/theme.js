@@ -2,17 +2,24 @@ import { extendTheme } from '@chakra-ui/react'
 import { mode } from '@chakra-ui/theme-tools'
 
 const theme = extendTheme({
+  colors: {
+    brand: {
+      50:"#E8D79A",
+      100:"#E8D79A",
+      500: "#E8D79A"
+    }
+  },
   styles: {
     global: props => ({
       body: {
-        color: "#E8D79A",
+        
         bg: "#222222"
       }
     }),
   },
   fonts: {
-    heading: `'Raleway', sans-serif`,
-    body: `'Raleway', sans-serif`
+    heading: `'newsreader', sans-serif`,
+    body: `'Inter', sans-serif`
   },
   components: {
     Input: {
@@ -24,7 +31,8 @@ const theme = extendTheme({
   config: {
     initialColorMode: 'dark',
     useSystemColorMode: false
-  }
+  },
+  
 })
 
 export default theme
