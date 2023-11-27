@@ -28,8 +28,6 @@ export default function Navbar() {
         })
     }, [search, reviewable])
 
- 
-
     console.log(suggested)
     return(
         <Flex style={{position:"relative", zIndex:"10"}} justifyContent="space-between" alignItems="center"  bg="#333333" marginLeft="20px" marginRight="20px" marginTop={"15px"} height="50px" borderRadius="20px" paddingLeft={"15px"} paddingRight={"15px"}>
@@ -56,10 +54,9 @@ export default function Navbar() {
                         <AutoCompleteList style={{position: "relative", zIndex:"10", background: "#333333"}}>
                             {suggested != null && suggested.map((hit, cid) => (
                             <AutoCompleteItem 
-                                value={hit.objectID}
-                                textTransform="capitalize"
-                            >
-                                {hit.objectID}
+                                value={hit.name != null ? hit.name : hit.objectID }
+                                textTransform="capitalize">
+                                {hit.name != null ? hit.name : hit.objectID }
                             </AutoCompleteItem>
                             ))}
                         </AutoCompleteList>
@@ -67,9 +64,9 @@ export default function Navbar() {
                     <InputRightElement width={"fit-content"}>
                             <Select onChange={(e)=>(setReviewable(e.target.value))} width="fit-content" background="#222222" color="#959595" variant="filled" height={"30px"} marginRight={"9px"}>
                                 <option value="classes" style={{background: "#333333"}}>CLASSES</option>
-                                <option value="DiningHalls" style={{background: "#333333"}}>DINING</option>
-                                <option value="Dorms" style={{background: "#333333"}}>HOUSING</option>
-                                <option value="Professors" style={{background: "#333333"}}>PROFS</option>
+                                <option value="dining" style={{background: "#333333"}}>DINING</option>
+                                <option value="dorms" style={{background: "#333333"}}>HOUSING</option>
+                                <option value="professors" style={{background: "#333333"}}>PROFS</option>
                             </Select>
                         </InputRightElement>
                     
