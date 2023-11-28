@@ -47,7 +47,7 @@ export default function Navbar() {
     
     return(
         <Flex style={{position:"relative", zIndex:"10"}} justifyContent="space-between" alignItems="center"  bg="#333333" marginLeft="20px" marginRight="20px" marginTop={"15px"} height="50px" borderRadius="20px" paddingLeft={"15px"} paddingRight={"15px"}>
-            <a href="/reviews"><Image width="40px" src={gtlogo}></Image></a>
+            <a href="/"><Image width="40px" src={gtlogo}></Image></a>
             
 
             <HStack width="50%" maxWidth={"500px"}>
