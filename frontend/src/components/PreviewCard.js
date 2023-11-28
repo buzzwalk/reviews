@@ -19,7 +19,7 @@ export default function PreviewCard(props) {
                     </div>
                     <div className="ScoreWrapper">
                         <img src={star}/>
-                        <p>{props.rating}</p>
+                        <p>{(Math.round(props.rating * 10) /10).toFixed(1)}</p>
                     </div>
                 
             </Box>

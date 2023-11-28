@@ -1,5 +1,5 @@
 import { Button, ButtonGroup, HStack, Select, Stack, option, Checkbox, Input, TabList, Tab, Tabs, Text, TabPanel, TabPanels, Divider, Heading, InputGroup, InputRightElement, Flex, Box, VStack} from '@chakra-ui/react'
-import PropTypes from "prop-types";
+import PropTypes, { number } from "prop-types";
 import theme from '../theme/theme';
 import { useEffect, useState } from 'react';
 import { SearchIcon } from '@chakra-ui/icons';
@@ -13,7 +13,7 @@ import {
   } from "@choc-ui/chakra-autocomplete";
 import db from '../firebase';
 import algoliasearch from 'algoliasearch/lite';
-import { Timestamp, addDoc, collection } from 'firebase/firestore';
+import { Timestamp, addDoc, collection, doc, updateDoc, runTransaction, setDoc } from 'firebase/firestore';
 const searchClient = algoliasearch('N39JIC33WP', 'de58da0111cf638279244fc3374b674a');
 
 export default function AddReview() {
@@ -86,7 +86,34 @@ function Dining(){
             timestamp: Timestamp.fromDate(new Date()),
             votescore: 0,
         })
-        location.reload();
+        const currDocRef = doc(db, "DiningHalls", diningSearch);
+        try {
+            await runTransaction(db, async(transaction) => {
+                const currDoc = await transaction.get(currDocRef)
+                if(currDoc.exists) {
+                    var overallRating = currDoc.data().overallRating;
+                    var numberReviews = currDoc.data().numberReviews;
+
+                    if(overallRating == null) {
+                        await setDoc(currDocRef, {overallRating: 0}, {merge: true}  )
+                        overallRating = 0;
+                    } 
+                    if(numberReviews == null) {
+                        await setDoc(currDocRef, {numberReviews: 0}, {merge: true}  )
+                        console.log("null numrevs")
+                        numberReviews = 0;
+                    }
+                    const newRating = ((overallRating * numberReviews) + rating) / (numberReviews+1)
+                    numberReviews = numberReviews + 1;
+                    transaction.update(currDocRef, { overallRating: newRating, numberReviews: numberReviews });
+                } else {
+                    throw "Doc DNE"
+                }
+            })
+        } catch (e) {
+            console.log(e)
+        }
+        
     }
 
     return (
@@ -147,8 +174,35 @@ function Housing(){
             votescore: 0,
             
         })
-        location.reload();
         
+        const currDocRef = doc(db, "Dorms", housingSearch);
+        try {
+            await runTransaction(db, async(transaction) => {
+                const currDoc = await transaction.get(currDocRef)
+                if(currDoc.exists) {
+                    var overallRating = currDoc.data().overallRating;
+                    var numberReviews = currDoc.data().numberReviews;
+
+                    if(overallRating == null) {
+                        await setDoc(currDocRef, {overallRating: 0}, {merge: true}  )
+                        overallRating = 0;
+                    } 
+                    if(numberReviews == null) {
+                        await setDoc(currDocRef, {numberReviews: 0}, {merge: true}  )
+                        console.log("null numrevs")
+                        numberReviews = 0;
+                    }
+                    const newRating = ((overallRating * numberReviews) + rating) / (numberReviews+1)
+                    numberReviews = numberReviews + 1;
+                    transaction.update(currDocRef, { overallRating: newRating, numberReviews: numberReviews });
+                } else {
+                    throw "Doc DNE"
+                }
+            })
+        } catch (e) {
+            console.log(e)
+        }
+        location.reload();
     }
     return(
         <Stack spacing={5}>
@@ -223,7 +277,37 @@ function ProfClass(){
         //     votescore: 0,
         //     class: classSearch,
         // })
-        location.reload();
+
+        const classDocRef = doc(db, "Classes", classSearch);
+        try {
+            await runTransaction(db, async(transaction) => {
+                const classDoc = await transaction.get(classDocRef)
+                if(classDoc.exists) {
+                    var overallRating = classDoc.data().overallRating;
+                    var numberReviews = classDoc.data().numberReviews ;
+                    console.log("this rating: " + overallRating)
+                    if(overallRating == null) {
+
+                        await setDoc(classDocRef, {overallRating: 0}, {merge: true}  )
+                        overallRating = 0;
+                    } 
+                    if(numberReviews == null) {
+                        await setDoc(classDocRef, {numberReviews: 0}, {merge: true}  )
+                        numberReviews = 0;
+                    }
+
+                    numberReviews = numberReviews == null ? 0 : numberReviews;
+                    const newRating = ((overallRating * numberReviews) + rating) / (numberReviews+1)
+                    numberReviews = numberReviews + 1;
+                    transaction.update(classDocRef, { overallRating: newRating, numberReviews: numberReviews });
+                } else {
+                    throw "Doc DNE"
+                }
+            })
+        } catch (e) {
+            console.log(e)
+        }
+        
     }
     return(
         <Stack spacing={5}>    

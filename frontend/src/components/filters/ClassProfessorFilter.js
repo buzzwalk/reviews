@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Card, CardBody, Select, RangeSlider, RangeSliderFilledTrack, RangeSliderTrack, 
-    RangeSliderThumb, FormControl, FormLabel, Heading } from "@chakra-ui/react";
+    RangeSliderThumb, FormControl, FormLabel, Heading, Box } from "@chakra-ui/react";
 
 export default function ClassProfessorFilter({ options, setOptions }) {
     
@@ -43,7 +43,15 @@ export default function ClassProfessorFilter({ options, setOptions }) {
     }
 
     return (
-        <div>
+        <Box style={{border: "1px solid #959595",
+                            width: "250px",
+                            height: "80vh",
+                            display:"flex",
+                            flexDirection: "column",
+                            borderRadius: "10px",
+                            flexShrink: "0",
+                            padding: "10px",}}>
+                                <Heading fontWeight={400} fontFamily={"'Inter', sans-serif"}>Filters</Heading>
             <Heading as="h2" size="lg" noOfLines={1}>Filters</Heading>
             <FormControl>
                 <FormLabel>Department</FormLabel>
@@ -83,7 +91,7 @@ export default function ClassProfessorFilter({ options, setOptions }) {
                     <RangeSliderThumb boxSize={6} index={1} />
                 </RangeSlider>
             </FormControl>
-        </div>
+        </Box>
     );
 
 }
