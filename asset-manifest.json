@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/gtreviews/static/css/main.866c938f.css",
-    "main.js": "/gtreviews/static/js/main.aa6300e9.js",
-    "static/media/Gt-seal.png": "/gtreviews/static/media/Gt-seal.ca1da8458c839a2e83ba.png",
-    "index.html": "/gtreviews/index.html",
-    "main.866c938f.css.map": "/gtreviews/static/css/main.866c938f.css.map",
-    "main.aa6300e9.js.map": "/gtreviews/static/js/main.aa6300e9.js.map"
+    "main.css": "/reviews/static/css/main.866c938f.css",
+    "main.js": "/reviews/static/js/main.10bedff0.js",
+    "static/media/Gt-seal.png": "/reviews/static/media/Gt-seal.ca1da8458c839a2e83ba.png",
+    "index.html": "/reviews/index.html",
+    "main.866c938f.css.map": "/reviews/static/css/main.866c938f.css.map",
+    "main.10bedff0.js.map": "/reviews/static/js/main.10bedff0.js.map"
   },
   "entrypoints": [
     "static/css/main.866c938f.css",
-    "static/js/main.aa6300e9.js"
+    "static/js/main.10bedff0.js"
   ]
 }
