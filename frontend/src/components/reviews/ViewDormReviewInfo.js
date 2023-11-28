@@ -5,11 +5,15 @@ import Navbar from "../navbar";
 import { fetchDormReviews, getPreviewCardsInfo } from "../helpers";
 import { useLocation } from 'react-router-dom';
 
+import {Spinner, Text, Flex, Box, Heading} from "@chakra-ui/react"
+
 export default function ViewDormReviewInfo({ dorm }) {
     const [previewCardsInfo, setPreviewCardsInfo] = useState([]);
     const location = useLocation();
     const [dormData, setDormData] = useState([]);
     const dormLoc = location.state.dorm;
+
+    const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
         const fetchDormData = async () => {
@@ -28,30 +32,73 @@ export default function ViewDormReviewInfo({ dorm }) {
         fetchDormData();
 
         const dormsRef = collection(db, "Dorms", dormLoc, "Reviews");
-        fetchDormReviews(dormsRef, setPreviewCardsInfo)
+        fetchDormReviews(dormsRef, setPreviewCardsInfo).then(() => {
+            setLoaded(true)
+        })
     }, [dorm]);
 
+    console.log(dormData)
     return (
         <>
             <Navbar />
             <div className="reviewoverview" style={{padding: "2em"}}>
-                <h1>{dormData.name}</h1>
-                {/* <h1>{dormData.address}</h1>
-                <h1>{dormData.bathrooms}</h1>
-                <h1>{dormData.elevator}</h1>
-                <h1>{dormData.laundry}</h1>
-                <h1>{dormData.numReviews}</h1>
-                <h1>{dormData.overallRating}</h1>
-                <h1>{dormData.squareFootage}</h1> */}
-                <div className="main">
-                    <div className="filters">
-                        <h3>Filters</h3>
-                        <p>filters here</p>
-                    </div>
-                    <div className="previews">
-                        {getPreviewCardsInfo(previewCardsInfo)}
-                    </div>
-                </div>
+                
+                {!loaded && <div style={{
+                    width: "100%",
+                    textAlign: "center"
+                }}>
+                    <Spinner/>
+                </div>}
+
+                {loaded && (
+                <Flex
+                    flexDirection="row"
+                    style={{
+                    }}
+                >
+                    <Box style={{
+                        border: "1px solid #54585A",
+                        backgroundColor: "#333333",
+                        borderRadius: "10px",
+                        padding: "2em",
+                        height: "80vh",
+                        width: "35%"
+                    }}>
+                        <Heading size="3xl" as="h1">{dormData.name}</Heading>
+                        
+                        
+                        <Text style={{
+                            marginTop: "2em",
+                            color: "#959595"
+                        }}>{dormData.address}</Text>
+
+                        <Text style={{
+                            marginTop: "1em",
+                            color: "#959595"
+                        }}>Bathrooms: {dormData.bathrooms}</Text>
+
+                        <Text style={{
+                            marginTop: "1em",
+                            color: "#959595"
+                        }}>Elevators: {dormData.elevator === "true" ? "Yes" : "No"}</Text>
+
+                        <Text style={{
+                            marginTop: "1em",
+                            color: "#959595"
+                        }}>Square footage: {dormData.squareFootage}</Text>
+                    </Box>
+                    <Box style={{paddingLeft: "2em"}}>
+                        {previewCardsInfo.length == 0 && <Text>
+                            No reviews yet
+                        </Text>}
+                        {previewCardsInfo.length != 0 &&
+                        <div className="previews" style={{marginLeft: "-7px"}}>
+                            {getPreviewCardsInfo(previewCardsInfo)}
+                        </div>
+                        }
+                    </Box>
+                </Flex>
+                )}
             </div>
         </>
     );

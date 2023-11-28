@@ -53,8 +53,8 @@ export default function DiningHallReviewOverview() {
         <>
             <Navbar />
             <Box className="reviewoverview" style={{padding: "2em"}}>
-                <h1>Dining Halls</h1>
-                <div className="main">
+                <h1 className="overview-header">Dining Halls</h1>
+                <div className="main" style={{marginTop: "2em"}}>
                     <DiningFilter options={ options } setOptions={ setOptions } />
                     <div className="previews">
                         {getPreviewCards(previewCards, handleDiningHallSelect)}

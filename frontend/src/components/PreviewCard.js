@@ -12,7 +12,8 @@ export default function PreviewCard(props) {
             height: "250px",
             display:"flex",
             justifyContent: "space-between",
-            margin:"7px",}}
+            margin:"7px",
+        ...props.style}}
             onClick={props.onClick}
             className="PreviewCard">
                 

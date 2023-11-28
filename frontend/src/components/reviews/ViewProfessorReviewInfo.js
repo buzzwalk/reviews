@@ -9,7 +9,8 @@ import {
     Box,
     Text,
     Flex,
-    Spinner
+    Spinner,
+    Heading
 } from "@chakra-ui/react"
 
 export default function ViewProfessorReviewInfo({ prof }) { 
@@ -49,17 +50,13 @@ export default function ViewProfessorReviewInfo({ prof }) {
     const [averageRating, setAverageRating] = useState(5);
     
     useEffect(() => {
-        if (previewCardsInfo.length == 0) {
-            return;
-        }
-
         let total = 0
         for (const review of previewCardsInfo) {
             total += review.rating
         }
         total /= previewCardsInfo.length
 
-        setAverageRating(total)
+        setAverageRating(Math.round(total*100)/100)
     }, [previewCardsInfo])
 
 
@@ -84,14 +81,15 @@ export default function ViewProfessorReviewInfo({ prof }) {
                         border: "1px solid #54585A",
                         backgroundColor: "#333333",
                         borderRadius: "10px",
-                        padding: "1em 5em",
+                        padding: "2em",
                         height: "80vh",
-                        width: "50%"
+                        width: "35%"
                     }}>
-                        <h1>{profData.id}</h1>
+                        <Heading size="3xl" as="h1">{profData.id}</Heading>
                         <Text style={{
-                            marginTop: "2em"
-                        }}>Average rating: {averageRating}</Text>
+                            marginTop: "2em",
+                            color: "#959595"
+                        }}>Average rating: {averageRating ? averageRating : "n/a"}</Text>
                     </Box>
                     <Box style={{paddingLeft: "2em"}}>
                         {previewCardsInfo.length == 0 && <Text>

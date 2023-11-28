@@ -21,6 +21,7 @@ export function getPreviewCardsInfo(previewCardsInfo) {
             name={card.reviewMessage}
             subheading={card.timestamp.toDate().toLocaleString()}
             rating={card.rating}
+            style={{width: "100%"}}
         />
     ))
 }

@@ -5,7 +5,7 @@ import Navbar from "../navbar";
 import { fetchDiningHallReviews, getPreviewCardsInfo } from "../helpers";
 import { useLocation } from 'react-router-dom';
 
-import { Spinner } from "@chakra-ui/react"
+import { Spinner, Flex, Box, Text, Heading } from "@chakra-ui/react"
 
 export default function ViewDiningHallReviewInfo({ diningHall }) {
     const [previewCardsInfo, setPreviewCardsInfo] = useState([]);
@@ -50,6 +50,20 @@ export default function ViewDiningHallReviewInfo({ diningHall }) {
         })
     }, [diningHall]);
 
+    const [averageRating, setAverageRating] = useState(5);
+    
+    useEffect(() => {
+        let total = 0
+        for (const review of previewCardsInfo) {
+            total += review.rating
+        }
+        total /= previewCardsInfo.length
+
+        setAverageRating(Math.round(total*100)/100)
+    }, [previewCardsInfo])
+
+    console.log(diningHallData)
+
     return (
         <>
             <Navbar />
@@ -63,19 +77,46 @@ export default function ViewDiningHallReviewInfo({ diningHall }) {
                 </div>}
 
                 {loaded && (
-                    <>
-                        <h1>{diningHallData.name}</h1>
-                        {/* <h1>{diningHallData.address}</h1>
-                        <h1>{diningHallData.numberChairs}</h1>
-                        <h1>{diningHallData.numberReviews}</h1>
-                        <h1>{diningHallData.overallRating}</h1>
-                        <h1>{diningHallData.squareFootage}</h1> */}
-                        <div className="main">
-                            <div className="previews">
-                                {getPreviewCardsInfo(previewCardsInfo)}
-                            </div>
+                <Flex
+                    flexDirection="row"
+                    style={{
+                    }}
+                >
+                    <Box style={{
+                        border: "1px solid #54585A",
+                        backgroundColor: "#333333",
+                        borderRadius: "10px",
+                        padding: "2em",
+                        height: "80vh",
+                        width: "35%"
+                    }}>
+                        <Heading size="3xl" as="h1">{diningHallData.name}</Heading>
+                        <Text style={{
+                            marginTop: "2em",
+                            color: "#959595"
+                        }}>Average rating: {averageRating}</Text>
+
+                        <Text style={{
+                            marginTop: "1em",
+                            color: "#959595"
+                        }}>Number of chairs: {diningHallData.numberChairs}</Text>
+
+                        <Text style={{
+                            marginTop: "1em",
+                            color: "#959595"
+                        }}>Square footage: {diningHallData.squareFootage}</Text>
+                    </Box>
+                    <Box style={{paddingLeft: "2em"}}>
+                        {previewCardsInfo.length == 0 && <Text>
+                            No reviews yet
+                        </Text>}
+                        {previewCardsInfo.length != 0 &&
+                        <div className="previews" style={{marginLeft: "-7px"}}>
+                            {getPreviewCardsInfo(previewCardsInfo)}
                         </div>
-                    </>
+                        }
+                    </Box>
+                </Flex>
                 )}
             </div>
         </>

@@ -44,7 +44,7 @@ export default function ClassReviewOverview() {
         <>
             <Navbar />
             <div className="reviewoverview" style={{padding: "2em"}}>
-                <h1 >Classes</h1>
+                <h1 className="overview-header">Classes</h1>
                 <div className="main" style={{
                     marginTop: "2em"
                 }}>

@@ -64,8 +64,8 @@ export default function ApartmentReviewOverview() {
         <>
             <Navbar />   
             <Box className="reviewoverview" style={{padding: "2em"}}>
-                <h1>Housing</h1>
-                <div className="main" style={{marginTop: "1em"}}>
+                <h1 className="overview-header">Housing</h1>
+                <div className="main" style={{marginTop: "2em"}}>
                     <ApartmentFilter options={ options } setOptions={ setOptions } />
                     <div className="previews">
                         {getPreviewCards(previewCards, handleDormSelect)}

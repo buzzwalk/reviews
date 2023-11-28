@@ -36,7 +36,7 @@ export default function ProfessorsReviewOverview() {
         <>
             <Navbar />
             <div className="reviewoverview" style={{padding: "2em"}}>
-                <h1 >Professors</h1>
+                <h1 className="overview-header">Professors</h1>
                 <div className="main"style={{
                     marginTop: "2em"
                 }}>
