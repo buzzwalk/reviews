@@ -29,7 +29,7 @@ export default function ProfessorsReviewOverview() {
         );
     }
     const handleDiningHallSelect = (prof) => {
-        navigate('/profreviews', { state: { prof }});
+        navigate('/reviews/profreviews', { state: { prof }});
     };
 
     return (

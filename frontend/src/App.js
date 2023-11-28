@@ -68,22 +68,22 @@ const App = () => {
             justifyContent: "space-around",
             alignSelf: "center"
           }}>
-              <a href='/classes'>
+              <a href='/reviews/classes'>
                 <Button >
                   Classes
                 </Button>
               </a>
-              <a href='/professors'>
+              <a href='/reviews/professors'>
                 <Button>
                   Professors
                 </Button>
               </a>
-              <a href='/apartments'>
+              <a href='/reviews/apartments'>
                 <Button>
                   Housing
                 </Button>
               </a>
-              <a href='/dininghalls'>
+              <a href='/reviews/dininghalls'>
                 <Button>
                   Dining Halls
                 </Button>

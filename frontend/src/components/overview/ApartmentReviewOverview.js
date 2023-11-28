@@ -55,7 +55,7 @@ export default function ApartmentReviewOverview() {
     }, [options]);
 
     const handleDormSelect = (dorm) => {
-        navigate('/dormreviews', { state: { dorm }});
+        navigate('/reviews/dormreviews', { state: { dorm }});
     };
 
     
