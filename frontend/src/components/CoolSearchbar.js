@@ -36,7 +36,7 @@ export default function CoolSearchBar() {
             navigate('/profreviews', { state: {prof: location}})
         }
         
-        window.location.reload()
+        navigate(0)
     }
     
     return(
@@ -49,7 +49,7 @@ export default function CoolSearchBar() {
                         value={hit.objectID}
                         
                         onClick={(e)=>{
-                            setSearch(e.target.outerText)
+                            
                             console.log(hit.objectID)
                             handleSubmit(hit.objectID)  
                         }}

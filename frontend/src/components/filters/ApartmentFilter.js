@@ -2,95 +2,66 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Card, CardBody, Select, RangeSlider, RangeSliderFilledTrack, RangeSliderTrack, 
-    RangeSliderThumb, FormControl, FormLabel, Heading, Checkbox, CheckboxGroup } from "@chakra-ui/react";
+    RangeSliderThumb, FormControl, FormLabel, Heading, Checkbox, CheckboxGroup, Box } from "@chakra-ui/react";
 
 export default function ApartmentFilter({ options, setOptions }) {
     
-    function handleRatingCategoryChange(event) {
-        setOptions((currOptions) => { 
-            return {
-                ...currOptions,
-                ratingCategory: event.target.value
-            };
-        });
+    function handleChange(event) {
+        const {name, value} = event.target
+        setOptions(prev => {
+            return{
+                ...prev,
+                [name]: value
+            }
+        })
+        console.log(name)
     }
-
-    function handleRatingRangeChange(values) {
-        setOptions((currOptions) => { 
-            return {
-                ...currOptions,
-                ratingRange: values
-            };
-        });
-    }
-
-    function handleBedsChange(values) {
-        setOptions((currOptions) => { 
-            return {
-                ...currOptions,
-                beds: values
-            };
-        });
-    }
-
-    function handleBathsChange(values) {
-        setOptions((currOptions) => { 
-            return {
-                ...currOptions,
-                baths: values
-            };
-        });
-    }
-
-    function handlePriceRangeChange(values) {
-        setOptions((currOptions) => { 
-            return {
-                ...currOptions,
-                priceRange: values
-            };
-        });
-    }
-        
-    function handleAmenitiesChange(values) {
-        setOptions((currOptions) => { 
-            return {
-                ...currOptions,
-                amenities: values
-            };
-        });
-    }
-
+    console.log(options)
     return (
-        <div>
-            <Heading as="h2" size="lg" noOfLines={1}>Filters</Heading>
-            <FormControl>
-                <FormLabel>Rating Category</FormLabel>
-                <Select placeholder="Rating Category" onChange={handleRatingCategoryChange}>
-                    <option value="overall">Overall</option>
-                    <option value="quietness">Quietness</option>
-                    <option value="upkeep">Upkeep</option>
-                    <option value="landlord">Landlord</option>
-                    <option value="spaciousness">Spaciousness</option>
+        <Box style={{border: "1px solid #959595",
+                            width: "250px",
+                            height: "80vh",
+                            display:"flex",
+                            flexDirection: "column",
+                            borderRadius: "10px",
+                            flexShrink: "0",
+                            padding: "10px",}}>
+                                <Heading fontWeight={400} fontFamily={"'Inter', sans-serif"}>Filters</Heading>
+                                
+            <FormControl >
+                <FormLabel>Sort by</FormLabel>
+                <Select name="filter"  onChange={(e)=>handleChange(e)}>
+                    <option value="name">Alphabetically</option>
+                    <option value="overallRating">Best Rated</option>
+                    <option value="overallRatingdesc">Worst Rated</option>
                 </Select>
-            </FormControl>
-            <FormControl>
+            </FormControl >
+            {options.filter != "name" && <FormControl name="ratingRange"  marginLeft={"10px"} marginRight={"10px"} width={"200px"}>
                 <FormLabel>Rating Range</FormLabel>
-                <RangeSlider 
-                    defaultValue={[0, 5]} 
-                    min={0} 
+                <RangeSlider  colorScheme='brand'
+                    defaultValue={[1, 5]} 
+                    min={1} 
                     max={5} 
                     step={1} 
-                    colorScheme="pink"  
-                    onChange={handleRatingRangeChange}
+                    
+                    name="ratingRange"
+                    onChangeEnd={(val)=>{
+                        setOptions(prev => {
+                            return{
+                                ...prev,
+                                ratingRange: val
+                            }
+                        })
+                    }}
                 >
-                    <RangeSliderTrack bg='red.100'>
-                        <RangeSliderFilledTrack bg='tomato' />
+                    <RangeSliderTrack bg={"#333333"}>
+                        <RangeSliderFilledTrack bg={"#E8D79A"} />
                     </RangeSliderTrack>
                     <RangeSliderThumb boxSize={6} index={0} />
                     <RangeSliderThumb boxSize={6} index={1} />
                 </RangeSlider>
-            </FormControl>
-            <FormControl>
+            </FormControl>}
+            <FormControl marginLeft={"10px"} marginRight={"10px"} width={"200px"}>
                 <FormLabel>Beds</FormLabel>
                 <RangeSlider 
                     defaultValue={[0, 10]} 
@@ -98,16 +69,23 @@ export default function ApartmentFilter({ options, setOptions }) {
                     max={10} 
                     step={1} 
                     colorScheme="pink" 
-                    onChange={handleBedsChange}
+                    onChangeEnd={(val)=>{
+                        setOptions(prev => {
+                            return{
+                                ...prev,
+                                beds: val
+                            }
+                        })
+                    }}
                 >
-                    <RangeSliderTrack bg='red.100'>
-                        <RangeSliderFilledTrack bg='tomato' />
+                    <RangeSliderTrack bg={"#333333"}>
+                        <RangeSliderFilledTrack bg={"#E8D79A"} />
                     </RangeSliderTrack>
                     <RangeSliderThumb boxSize={6} index={0} />
                     <RangeSliderThumb boxSize={6} index={1} />
                 </RangeSlider>
             </FormControl>
-            <FormControl>
+            <FormControl marginLeft={"10px"} marginRight={"10px"} width={"200px"}>
                 <FormLabel>Baths</FormLabel>
                 <RangeSlider 
                     defaultValue={[0, 10]} 
@@ -115,16 +93,23 @@ export default function ApartmentFilter({ options, setOptions }) {
                     max={10} 
                     step={1} 
                     colorScheme="pink" 
-                    onChange={handleBathsChange}
+                    onChangeEnd={(val)=>{
+                        setOptions(prev => {
+                            return{
+                                ...prev,
+                                baths: val
+                            }
+                        })
+                    }}
                 >
-                    <RangeSliderTrack bg='red.100'>
-                        <RangeSliderFilledTrack bg='tomato' />
+                    <RangeSliderTrack bg={"#333333"}>
+                        <RangeSliderFilledTrack bg={"#E8D79A"} />
                     </RangeSliderTrack>
                     <RangeSliderThumb boxSize={6} index={0} />
                     <RangeSliderThumb boxSize={6} index={1} />
                 </RangeSlider>
             </FormControl>
-            <FormControl>
+            <FormControl marginLeft={"10px"} marginRight={"10px"} width={"200px"}>
                 <FormLabel>Price Range</FormLabel>
                 <RangeSlider 
                     defaultValue={[0, 10000]} 
@@ -132,18 +117,25 @@ export default function ApartmentFilter({ options, setOptions }) {
                     max={10000} 
                     step={500} 
                     colorScheme="pink"  
-                    onChange={handlePriceRangeChange}
+                    onChangeEnd={(val)=>{
+                        setOptions(prev => {
+                            return{
+                                ...prev,
+                                priceRange: val
+                            }
+                        })
+                    }}
                 >
-                    <RangeSliderTrack bg='red.100'>
-                        <RangeSliderFilledTrack bg='tomato' />
+                    <RangeSliderTrack bg={"#333333"}>
+                        <RangeSliderFilledTrack bg={"#E8D79A"}/>
                     </RangeSliderTrack>
                     <RangeSliderThumb boxSize={6} index={0} />
                     <RangeSliderThumb boxSize={6} index={1} />
                 </RangeSlider>
             </FormControl>
-            <FormControl>
+            {/* <FormControl>
                 <FormLabel>Amenities</FormLabel>
-                <CheckboxGroup onChange={handleAmenitiesChange}>
+                <CheckboxGroup onChange={(e)=>handleChange(e)}>
                     <Checkbox value="cats">Cats</Checkbox>
                     <Checkbox value="cooling">Cooling</Checkbox>
                     <Checkbox value="dogs">Dogs</Checkbox>
@@ -163,8 +155,11 @@ export default function ApartmentFilter({ options, setOptions }) {
                     <Checkbox value="trash">Trash</Checkbox>
                     <Checkbox value="water">Water</Checkbox>
                 </CheckboxGroup>
-            </FormControl>
-        </div>
+            </FormControl> */}
+                            
+        </Box>
+            
+       
     );
 }
 

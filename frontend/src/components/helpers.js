@@ -1,5 +1,5 @@
 import PreviewCard from "./PreviewCard";
-import { getDocs } from "firebase/firestore";
+import { getDocs, limit } from "firebase/firestore";
 
 export function getPreviewCards(previewCards, handleSelect) {
     console.log(previewCards)
@@ -7,8 +7,9 @@ export function getPreviewCards(previewCards, handleSelect) {
         <div key={index} onClick={() => handleSelect(card.name)}>
             <PreviewCard
                 name={card.name}
-                subheading={card.address}
+                subheading={card.address == null ? card.desc : card.address}
                 rating={card.overallRating}
+                
             />
         </div>
     ))
@@ -26,9 +27,9 @@ export function getPreviewCardsInfo(previewCardsInfo) {
 }
 
 export const fetchOverview = async (docRef, setPreviewCards) => {
-    const querySnapshot = await getDocs(docRef);
+    const querySnapshot = await getDocs(docRef, limit(20));
     const reviews = querySnapshot.docs.map((doc) => ({
-        name: doc.data().name,
+        name: doc.data().name == null ? doc.id : doc.data().name,
         address: doc.data().address,
         overallRating: doc.data().overallRating,
     }));

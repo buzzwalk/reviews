@@ -1,8 +1,9 @@
-import { Box, Flex, HStack, Input, InputGroup, InputRightElement, InputLeftElement, Select, VStack, FormControl, position } from "@chakra-ui/react"
+import { Box, Flex, HStack, Input, InputGroup, InputRightElement, InputLeftElement, Select, VStack, FormControl, position, Image } from "@chakra-ui/react"
 import "../style/navbar.css"
 import { SearchIcon, StarIcon } from "@chakra-ui/icons"
 import { VscAccount } from "react-icons/vsc";
 import { CiBookmark } from "react-icons/ci";
+import gtlogo from "../images/gtlogo.png"
 import {
     AutoComplete,
     AutoCompleteInput,
@@ -46,7 +47,8 @@ export default function Navbar() {
     
     return(
         <Flex style={{position:"relative", zIndex:"10"}} justifyContent="space-between" alignItems="center"  bg="#333333" marginLeft="20px" marginRight="20px" marginTop={"15px"} height="50px" borderRadius="20px" paddingLeft={"15px"} paddingRight={"15px"}>
-            <StarIcon color="#959595"></StarIcon> {/*placeholder */}
+            <a href="/"><Image width="40px" src={gtlogo}></Image></a>
+            
 
             <HStack width="50%" maxWidth={"500px"}>
                 <CoolSearchBar />

@@ -17,11 +17,12 @@ body {
     flex-direction: column;
     border-radius: 10px;
     flex-shrink: 0;
+    padding: 1vw;
 }
 .filters p {
     font-family: 'Inter', sans-serif;
     color:white;
-    margin-left:1vw;
+    
 }
 .filters h3{
     font-family: 'Inter', sans-serif;
@@ -36,7 +37,8 @@ h1{
     color: #B9B08F;
     font-size: 4rem;
     margin: 0;
-    margin-bottom: 2.35vh;
+    margin-bottom: -20px;
+    margin-top: 10px;
 }
 .previews {
     margin-top: -7px;
@@ -44,3 +46,9 @@ h1{
     display:flex;
     flex-wrap: wrap;
 }
+
+.previewFix {
+    margin-top: 7px;
+    margin-left: -15px;
+}
+
