@@ -31,9 +31,9 @@ export default function ApartmentFilter({ options, setOptions }) {
             <FormControl >
                 <FormLabel>Sort by</FormLabel>
                 <Select name="filter"  onChange={(e)=>handleChange(e)}>
-                    <option value="name">Alphabetically</option>
-                    <option value="overallRating">Best Rated</option>
-                    <option value="overallRatingdesc">Worst Rated</option>
+                    <option style={{ background: "#333333"}} value="name">Alphabetically</option>
+                    <option style={{ background: "#333333"}} value="overallRating">Best Rated</option>
+                    <option style={{ background: "#333333"}} value="overallRatingdesc">Worst Rated</option>
                 </Select>
             </FormControl >
             {options.filter != "name" && <FormControl name="ratingRange"  marginLeft={"10px"} marginRight={"10px"} width={"200px"}>
