@@ -66,11 +66,6 @@ export default function ClassProfessorFilter({ options, setOptions }) {
             <FormControl>
                 <FormLabel>Rating Category</FormLabel>
                 <Select placeholder="Rating Category" onChange={(e) => handleRatingCategoryChange(e)}>
-                    <option value="overall">Overall</option>
-                    <option value="easiness">Easiness</option>
-                    <option value="clarity">Clarity</option>
-                    <option value="workload">Workload</option>
-                    <option value="helpfulness">Helpfulness</option>
                 </Select>
             </FormControl>
             <FormControl>

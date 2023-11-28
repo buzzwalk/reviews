@@ -39,7 +39,7 @@ export default function ViewProfessorReviewInfo({ prof }) {
     return (
         <>
             <Navbar />
-            <div className="reviewoverview">
+            <div className="reviewoverview" style={{padding: "2em"}}>
                 <h1>{profData.id}</h1>
                 {/* <h1>{dormData.address}</h1>
                 <h1>{dormData.bathrooms}</h1>

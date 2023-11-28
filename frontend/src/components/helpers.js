@@ -9,7 +9,6 @@ export function getPreviewCards(previewCards, handleSelect) {
                 name={card.name}
                 subheading={card.address == null ? card.desc : card.address}
                 rating={card.overallRating}
-                
             />
         </div>
     ))

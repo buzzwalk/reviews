@@ -5,6 +5,11 @@ import PreviewCard from "../PreviewCard.js"
 import data from "../../sampleProfData.js"
 import ClassProfessorFilter from "../filters/ClassProfessorFilter.js"
 
+import {
+    Box,
+    Flex
+} from "@chakra-ui/react"
+
 export default function ProfessorsReviewOverview() {
 
     const [ options, setOptions ] = useState({
@@ -15,23 +20,37 @@ export default function ProfessorsReviewOverview() {
 
     function getPreviewCards() {
         const dataArr = data.data;
-        return dataArr.map((e) =>
+        return dataArr.map((e) =>(
+        <div>
             <PreviewCard key={e.name} name={e.name} subheading={e.college} rating={e.rating}/>
+        </div>
+        )
         );
-
     }
     return (
         <>
             <Navbar />   
-            <div className="reviewoverview">
+            <Box className="reviewoverview" padding="2em">
                 <h1>Professors</h1>
-                <div className="main">
-                    <ClassProfessorFilter options={options} setOptions={setOptions} />
-                    <div className="previews">
-                        {getPreviewCards()}  
-                    </div>
+                <div className="main" style={{marginTop: "2em"}}>
+                    <Flex style={{
+                        flexDirection: "row",
+                        flex: 1,
+                        flexGap: "5em",
+                        justifyContent: "space-between",
+                    }}>
+                        <div style={{
+                            width: "50%",
+                            paddingRight: "3em"
+                        }}>
+                            <ClassProfessorFilter options={options} setOptions={setOptions} />
+                        </div>
+                        <div className="previews">
+                            {getPreviewCards()}
+                        </div>
+                    </Flex>
                 </div>
-            </div>
+            </Box>
         </>
     );
 }
