@@ -28,24 +28,11 @@ export default function Navbar() {
         })
     }, [search, reviewable])
 
-    console.log(suggested)
+    
     return(
         <Flex style={{position:"relative", zIndex:"10"}} justifyContent="space-between" alignItems="center"  bg="#333333" marginLeft="20px" marginRight="20px" marginTop={"15px"} height="50px" borderRadius="20px" paddingLeft={"15px"} paddingRight={"15px"}>
             <StarIcon color="#959595"></StarIcon> {/*placeholder */}
-            {/* <InputGroup width={"40%"} >
-                <InputLeftElement>
-                    <SearchIcon color="gray.300" ></SearchIcon>
-                </InputLeftElement>
-                <Input onChange={(e)=>setSearch(e.target.value)} outline={"solid 1px #54585A"} background="#333333" borderColor="#333333" type="text" ></Input>
-                <InputRightElement width={"fit-content"}>
-                    <Select onChange={(e)=>(setReviewable(e.target.value))} background="#222222" color="#959595" variant="filled" height={"30px"} marginRight={"10px"}>
-                        <option value="DiningHalls" style={{background: "#333333"}}>DINING</option>
-                        <option value="Dorms" style={{background: "#333333"}}>HOUSING</option>
-                        <option value="Professors" style={{background: "#333333"}}>PROFS</option>
-                        <option value="classes" style={{background: "#333333"}}>CLASSES</option>
-                    </Select>
-                </InputRightElement>
-            </InputGroup> */}
+
             <HStack width="50%" maxWidth={"500px"}>
                 <InputGroup width="100%">
                     
@@ -54,7 +41,7 @@ export default function Navbar() {
                         <AutoCompleteList style={{position: "relative", zIndex:"10", background: "#333333"}}>
                             {suggested != null && suggested.map((hit, cid) => (
                             <AutoCompleteItem 
-                                value={hit.name != null ? hit.name : hit.objectID }
+                                value={hit.objectID}
                                 textTransform="capitalize">
                                 {hit.name != null ? hit.name : hit.objectID }
                             </AutoCompleteItem>
@@ -69,8 +56,6 @@ export default function Navbar() {
                                 <option value="professors" style={{background: "#333333"}}>PROFS</option>
                             </Select>
                         </InputRightElement>
-                    
-                    
                 </InputGroup>
             </HStack>
             <HStack>
