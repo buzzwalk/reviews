@@ -17,6 +17,8 @@ import ViewDormReviewInfo from './components/reviews/ViewDormReviewInfo'
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from './theme/theme'
 import AddReview from './components/AddReview'
+import ViewClassesReviewInfo from './components/reviews/ViewClassesReviewInfo'
+import ViewProfessorReviewInfo from './components/reviews/ViewProfessorReviewInfo'
 
 const router = createBrowserRouter([
   {
@@ -54,6 +56,14 @@ const router = createBrowserRouter([
   {
     path: "/dormreviews",
     element: <ViewDormReviewInfo />
+  }, 
+  {
+    path: "/classreviews",
+    element: <ViewClassesReviewInfo />
+  }, 
+  {
+    path: "/profreviews",
+    element: <ViewProfessorReviewInfo />
   }
 ])
 

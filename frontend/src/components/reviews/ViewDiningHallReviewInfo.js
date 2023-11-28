@@ -18,7 +18,10 @@ export default function ViewDiningHallReviewInfo({ diningHall }) {
             return "Nav"
         } else if (diningHallLoc == "West Village") {
             return "Willage"
-        } 
+        } else {
+            console.log(diningHallLoc)
+            return diningHallLoc
+        }
     }
 
     useEffect(() => {

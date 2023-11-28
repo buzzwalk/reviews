@@ -2,6 +2,7 @@ import PreviewCard from "./PreviewCard";
 import { getDocs } from "firebase/firestore";
 
 export function getPreviewCards(previewCards, handleSelect) {
+    console.log(previewCards)
     return previewCards.map((card, index) => (
         <div key={index} onClick={() => handleSelect(card.name)}>
             <PreviewCard

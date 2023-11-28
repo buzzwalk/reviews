@@ -11,8 +11,9 @@ import {
     AutoCompleteItem,
     AutoCompleteList,
   } from "@choc-ui/chakra-autocomplete";
-
+import db from '../firebase';
 import algoliasearch from 'algoliasearch/lite';
+import { Timestamp, addDoc, collection } from 'firebase/firestore';
 const searchClient = algoliasearch('N39JIC33WP', 'de58da0111cf638279244fc3374b674a');
 
 export default function AddReview() {
@@ -75,6 +76,19 @@ function Dining(){
         })
     }, [diningSearch])
 
+    async function handleSubmit(e){
+        e.preventDefault();
+        console.log(diningSearch)
+        const docRef = await addDoc(collection(db, "DiningHalls", diningSearch, "Reviews"), {
+            title: title,
+            reviewMessage: text,
+            rating: rating,
+            timestamp: Timestamp.fromDate(new Date()),
+            votescore: 0,
+        })
+        location.reload();
+    }
+
     return (
         <Stack spacing={5}>
             <Stack>
@@ -90,9 +104,7 @@ function Dining(){
                         {diningSuggested != null && diningSuggested.map((hit, cid) => (
                             <AutoCompleteItem 
                                 value={hit.objectID}
-                                onSelect={()=>{
-                                    
-                                }}
+                                onClick={(e)=>{setDiningSearch(e.target.outerText)}}
                                 textTransform="capitalize">
                                 {hit.objectID }
                             </AutoCompleteItem>
@@ -102,6 +114,8 @@ function Dining(){
             </Stack>
             
             <ReviewEditor rating={rating} setRating={setRating} setTitle={setTitle} setText={setText}></ReviewEditor>
+            <Button onClick={(e)=>handleSubmit(e)} marginLeft={0} width={150} textColor="#BBBBBB" background="#333333" >Submit</Button>
+
         </Stack>
     )
 }
@@ -113,6 +127,8 @@ function Housing(){
     const [text, setText] = useState('');
     const [title, setTitle] = useState('');
     
+    
+    console.log(housingSearch)
      useEffect(() => {
         let index = 0;
         searchClient.initIndex("dorms").search(housingSearch).then(({hits}) =>{
@@ -120,24 +136,36 @@ function Housing(){
         })
     }, [housingSearch])
 
+    async function handleSubmit(e){
+        e.preventDefault();
+        console.log(housingSearch)
+        const docRef = await addDoc(collection(db, "Dorms", housingSearch, "Reviews"), {
+            title: title,
+            reviewMessage: text,
+            rating: rating,
+            timestamp: Timestamp.fromDate(new Date()),
+            votescore: 0,
+            
+        })
+        location.reload();
+        
+    }
     return(
         <Stack spacing={5}>
             <Stack>
                 <Text >Search for the Housing Building below</Text>
-                <AutoComplete width={"60vw"}>
+                <AutoComplete>
                     <InputGroup width={"60vw"}>
                         <AutoCompleteInput width={"60vw"} background="#333333" variant="filled" onChange={(e)=>setHousingSearch(e.target.value)}/>
                         <InputRightElement>
                         <SearchIcon color="gray.300"></SearchIcon>
                         </InputRightElement>
                     </InputGroup>
-                    <AutoCompleteList  style={{position: "relative", zIndex:"10", background: "#333333" }}>
+                    <AutoCompleteList style={{position: "relative", zIndex:"10", background: "#333333" }}>
                         {housingSuggested != null && housingSuggested.map((hit, cid) => (
                             <AutoCompleteItem 
                                 value={hit.objectID}
-                                onSelect={()=>{
-                                    
-                                }}
+                                onClick={(e)=>{setHousingSearch(e.target.outerText)}}
                                 textTransform="capitalize">
                                 {hit.objectID }
                             </AutoCompleteItem>
@@ -147,6 +175,7 @@ function Housing(){
             </Stack>
             
             <ReviewEditor rating={rating} setRating={setRating} setTitle={setTitle} setText={setText}></ReviewEditor>
+            <Button onClick={(e)=>handleSubmit(e)} marginLeft={0} width={150} textColor="#BBBBBB" background="#333333" >Submit</Button>
         </Stack>
     )
 }
@@ -161,7 +190,7 @@ function ProfClass(){
     const [rating, setRating] = useState(0);
     const [text, setText] = useState('');
     const [title, setTitle] = useState('');
-    
+    const [grade, setGrade] = useState('A');
      useEffect(() => {
         let index = 0;
         searchClient.initIndex("classes").search(classSearch).then(({hits}) =>{
@@ -174,7 +203,28 @@ function ProfClass(){
             setProfSuggested(hits)
         })
     }, [profSearch])
-
+    
+    async function handleSubmit(e){
+        e.preventDefault();
+        const docRef = await addDoc(collection(db, "Classes", classSearch, "Reviews"), {
+            title: title,
+            reviewMessage: text,
+            rating: rating,
+            timestamp: Timestamp.fromDate(new Date()),
+            votescore: 0,
+            grade: grade,
+            // prof: profSearch,
+        })
+        // const docRef2 = await addDoc(collection(db, "Professors", profSearch, "Reviews"), {
+        //     title: title,
+        //     reviewMessage: text,
+        //     rating: rating,
+        //     timestamp: Timestamp.fromDate(new Date()),
+        //     votescore: 0,
+        //     class: classSearch,
+        // })
+        location.reload();
+    }
     return(
         <Stack spacing={5}>    
             <Stack>
@@ -190,9 +240,7 @@ function ProfClass(){
                         {classSuggested != null && classSuggested.map((hit, cid) => (
                             <AutoCompleteItem 
                                 value={hit.objectID}
-                                onSelect={()=>{
-                                    
-                                }}
+                                onClick={(e)=>{setClassSearch(e.target.outerText)}}
                                 textTransform="capitalize">
                                 {hit.objectID }
                             </AutoCompleteItem>
@@ -214,9 +262,7 @@ function ProfClass(){
                         {profSuggested != null && profSuggested.map((hit, cid) => (
                             <AutoCompleteItem 
                                 value={hit.objectID}
-                                onSelect={()=>{
-                                    
-                                }}
+                                onClick={(e)=>{setProfSearch(e.target.outerText)}}
                                 textTransform="capitalize">
                                 {hit.objectID }
                             </AutoCompleteItem>
@@ -232,7 +278,7 @@ function ProfClass(){
                 </HStack>
                 <HStack alignItems={"center"} spacing={5}>
                     <Text width={100}>Letter Grade</Text>
-                    <Select background="#333333" borderColor="#333333" width={70} textAlign="center">
+                    <Select onChange={(e)=>setGrade(e.target.value)} background="#333333" borderColor="#333333" width={70} textAlign="center">
                         <option style={{background: "#333333"}} value="A">A</option>
                         <option style={{background: "#333333"}} value="B">B</option>
                         <option style={{background: "#333333"}} value="C">C</option>
@@ -242,6 +288,7 @@ function ProfClass(){
                 </HStack>
             </HStack>
             <ReviewEditor rating={rating} setRating={setRating} setTitle={setTitle} setText={setText}></ReviewEditor>
+            <Button onClick={(e)=>handleSubmit(e)} marginLeft={0} width={150} textColor="#BBBBBB" background="#333333" >Submit</Button>
         </Stack>
     )
 }
