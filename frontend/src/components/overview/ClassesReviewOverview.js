@@ -37,7 +37,7 @@ export default function ClassReviewOverview() {
     }, [numLoad]);
 
     const handleDiningHallSelect = (classes) => {
-        navigate('/reviews/classreviews', { state: { classes }});
+        navigate('/classreviews', { state: { classes }});
     };
 
     return (
