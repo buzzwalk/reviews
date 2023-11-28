@@ -26,43 +26,43 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: '/review',
+    path: '/reviews/review',
     element: <AddReview />,
   },
   {
-    path: "/landing",
+    path: "/reviews/landing",
     element: <Landing />
   },
   {
-    path: "/professors",
+    path: "/reviews/professors",
     element: <ProfessorsReviewOverview />
   },
   {
-    path: "/classes",
+    path: "/reviews/classes",
     element: <ClassesReviewOverview />
   },
   {
-    path: "/apartments",
+    path: "/reviews/apartments",
     element: <ApartmentReviewOverview />
   },
   {
-    path: "/dininghalls",
+    path: "/reviews/dininghalls",
     element: <DiningReviewOverview />
   },
   {
-    path: "/dininghallreviews",
+    path: "/reviews/dininghallreviews",
     element: <ViewDiningHallReviewInfo />
   },
   {
-    path: "/dormreviews",
+    path: "/reviews/dormreviews",
     element: <ViewDormReviewInfo />
   }, 
   {
-    path: "/classreviews",
+    path: "/reviews/classreviews",
     element: <ViewClassesReviewInfo />
   }, 
   {
-    path: "/profreviews",
+    path: "/reviews/profreviews",
     element: <ViewProfessorReviewInfo />
   }
 ])

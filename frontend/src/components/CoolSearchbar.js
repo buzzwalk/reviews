@@ -51,13 +51,13 @@ export default function CoolSearchBar() {
 
     function handleSubmit(location){
         if(reviewable === "dining") {
-            navigate('/dininghallreviews', { state: {diningHall: location} });
+            navigate('/reviews/dininghallreviews', { state: {diningHall: location} });
         } else if (reviewable === "dorms") {
-            navigate('/dormreviews', { state: { dorm: location }});
+            navigate('/reviews/dormreviews', { state: { dorm: location }});
         } else if (reviewable === "classes") {
-            navigate('/classreviews', { state: {classes: location}})
+            navigate('/reviews/classreviews', { state: {classes: location}})
         } else if (reviewable === "professors") {
-            navigate('/profreviews', { state: {prof: location}})
+            navigate('/reviews/profreviews', { state: {prof: location}})
         }
         
         navigate(0)
