@@ -46,7 +46,7 @@ export default function DiningHallReviewOverview() {
     }
 
     const handleDiningHallSelect = (diningHall) => {
-        navigate('/reviews/dininghallreviews', { state: { diningHall }});
+        navigate('/dininghallreviews', { state: { diningHall }});
     };
 
     return (
