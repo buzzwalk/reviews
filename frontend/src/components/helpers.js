@@ -38,6 +38,7 @@ export const fetchOverview = async (docRef, setPreviewCards) => {
         name: doc.data().name == null ? doc.id : doc.data().name,
         address: doc.data().address,
         overallRating: doc.data().overallRating,
+        title: doc.data().title
     }));
     
     setPreviewCards(reviews);
@@ -62,7 +63,8 @@ export const fetchDormReviews = async (docRef, setPreviewCardsInfo) => {
         rating: doc.data().rating,
         reviewMessage: doc.data().reviewMessage,
         timestamp: doc.data().timestamp,
-        voteScore: doc.data().votescore
+        voteScore: doc.data().votescore,
+        title: doc.data().title
     }));
     
     setPreviewCardsInfo(reviews);

@@ -58,7 +58,7 @@ export default function ApartmentReviewOverview() {
         navigate('/dormreviews', { state: { dorm }});
     };
 
-    
+    console.log(previewCards)
     
     return (
         <>
