@@ -1,19 +1,47 @@
 import { useState, useEffect } from "react";
-import { collection } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import db from "../../firebase";
 import Navbar from "../navbar";
 import { getPreviewCards, fetchOverview } from "../helpers";
 import { useNavigate } from "react-router-dom";
+import DiningFilter from "../filters/DiningFilter";
 
 const diningHallsRef = collection(db, "DiningHalls");
 
 export default function DiningHallReviewOverview() {
     const [previewCards, setPreviewCards] = useState([]);
     const navigate = useNavigate();
-    
+    const [options, setOptions] = useState({
+        filter: "name",
+        ratingRange: [1, 5],
+    });
+
     useEffect(() => {
-        fetchOverview(diningHallsRef, setPreviewCards);
-    }, []);
+        queryDorms();
+    }, [options]);
+
+    async function queryDorms() {
+        var q;
+        if (options.filter == "overallRating") {
+            console.log("hereasdgggggg")
+            q = query(diningHallsRef, orderBy("overallRating", "desc"));
+        } else if (options.filter == "overallRatingdesc") {
+            q = query(diningHallsRef, orderBy("overallRating"));
+        } else {
+            console.log("hereasd")
+            q = query(diningHallsRef, orderBy("name"));
+        }
+        
+        const querySnapshot = await getDocs(q)
+        console.log(q)
+        const reviews = querySnapshot.docs.map((doc) => ({
+            name: doc.data().name == null ? doc.id : doc.data().name,
+            address: doc.data().address,
+            overallRating: doc.data().overallRating,
+            desc: doc.data().desc
+        }));
+        setPreviewCards(reviews)
+    }
 
     const handleDiningHallSelect = (diningHall) => {
         navigate('/dininghallreviews', { state: { diningHall }});
@@ -25,10 +53,7 @@ export default function DiningHallReviewOverview() {
             <div className="reviewoverview">
                 <h1>Dining Halls</h1>
                 <div className="main">
-                    <div className="filters">
-                        <h3>Filters</h3>
-                        <p>filters here</p>
-                    </div>
+                    <DiningFilter options={ options } setOptions={ setOptions } />
                     <div className="previews">
                         {getPreviewCards(previewCards, handleDiningHallSelect)}
                     </div>

@@ -2,6 +2,7 @@ import "../style/PreviewCard.css"
 import star from "../images/Star.png"
 import { Box } from "@chakra-ui/react"
 export default function PreviewCard(props) {
+    let rating = props.rating != null ? (Math.round(props.rating * 10) /10).toFixed(1) : "NA";
     return (
         // <a href={"/" + props.name.replace(/\s/g, '')}>
             <Box style={{border: "1px solid #54585A",
@@ -21,7 +22,7 @@ export default function PreviewCard(props) {
                     </div>
                     <div className="ScoreWrapper">
                         <img src={star}/>
-                        <p>{(Math.round(props.rating * 10) /10).toFixed(1)}</p>
+                        <p>{rating}</p>
                     </div>
             </Box>
         // </a>
