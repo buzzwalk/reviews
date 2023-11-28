@@ -12,6 +12,7 @@ import {
 } from "@choc-ui/chakra-autocomplete";
 import algoliasearch from 'algoliasearch/lite';
 import CoolSearchBar from './components/CoolSearchbar';
+import { Link } from 'react-router-dom';
 const searchClient = algoliasearch('N39JIC33WP', 'de58da0111cf638279244fc3374b674a');
 
 const App = () => {
@@ -68,26 +69,26 @@ const App = () => {
             justifyContent: "space-around",
             alignSelf: "center"
           }}>
-              <a href='/classes'>
+              <Link to='/classes'>
                 <Button >
                   Classes
                 </Button>
-              </a>
-              <a href='/professors'>
+              </Link>
+              <Link to='/professors'>
                 <Button>
                   Professors
                 </Button>
-              </a>
-              <a href='/apartments'>
+              </Link>
+              <Link to='/apartments'>
                 <Button>
                   Housing
                 </Button>
-              </a>
-              <a href='/dininghalls'>
+              </Link>
+              <Link to='/dininghalls'>
                 <Button>
                   Dining Halls
                 </Button>
-              </a>
+              </Link>
             
           </Box>
         </Box>
