@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/gtreviews/static/css/main.8ce4e4d8.css",
+    "main.js": "/gtreviews/static/js/main.aac41eb7.js",
+    "static/media/Gt-seal.png": "/gtreviews/static/media/Gt-seal.ca1da8458c839a2e83ba.png",
+    "index.html": "/gtreviews/index.html",
+    "main.8ce4e4d8.css.map": "/gtreviews/static/css/main.8ce4e4d8.css.map",
+    "main.aac41eb7.js.map": "/gtreviews/static/js/main.aac41eb7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8ce4e4d8.css",
+    "static/js/main.aac41eb7.js"
+  ]
+}
