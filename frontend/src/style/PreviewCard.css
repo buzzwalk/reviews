@@ -26,3 +26,9 @@
     height: 25px;
     margin-right: 10px;
 }
+
+.PreviewCard .text {
+    margin-top: 0.75em;
+    color: white;
+    width: 100%;
+}

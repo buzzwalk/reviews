@@ -15,13 +15,19 @@ export function getPreviewCards(previewCards, handleSelect) {
 }
 
 export function getPreviewCardsInfo(previewCardsInfo) {
+    console.log(previewCardsInfo)
     return previewCardsInfo.map((card, index) => (
         <PreviewCard
             key={index}
-            name={card.reviewMessage}
+            name={card.title}
             subheading={card.timestamp.toDate().toLocaleString()}
+            text={card.reviewMessage}
             rating={card.rating}
-            style={{width: "100%"}}
+            style={{
+                width: "100%",
+                height: null,
+                maxHeight: "250px",
+            }}
         />
     ))
 }
@@ -43,7 +49,8 @@ export const fetchDiningHallReviews = async (docRef, setPreviewCardsInfo) => {
         rating: doc.data().rating,
         reviewMessage: doc.data().reviewMessage,
         timestamp: doc.data().timestamp,
-        voteScore: doc.data().voteScore
+        voteScore: doc.data().voteScore,
+        title: doc.data().title
     }));
     
     setPreviewCardsInfo(reviews);
@@ -55,7 +62,7 @@ export const fetchDormReviews = async (docRef, setPreviewCardsInfo) => {
         rating: doc.data().rating,
         reviewMessage: doc.data().reviewMessage,
         timestamp: doc.data().timestamp,
-        voteScore: doc.data().voteScore
+        voteScore: doc.data().votescore
     }));
     
     setPreviewCardsInfo(reviews);

@@ -10,16 +10,17 @@ export default function PreviewCard(props) {
             borderRadius: "10px",
             width: "450px",
             height: "250px",
+            paddingBottom: "2em",
             display:"flex",
             justifyContent: "space-between",
             margin:"7px",
         ...props.style}}
             onClick={props.onClick}
             className="PreviewCard">
-                
                     <div className="TextWrapper">
                         <h2>{props.name}</h2>
                         <h3>{props.subheading}</h3>
+                        <h3 className="text">{props.text}</h3>
                     </div>
                     <div className="ScoreWrapper">
                         <img src={star}/>

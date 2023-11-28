@@ -60,6 +60,7 @@ export default function ClassReviewOverview() {
                                 <Heading fontWeight={400} fontFamily={"'Inter', sans-serif"}>Filters</Heading>
                             <SearchBox placeholder="Search for Classes" submitIconComponent={"null"} resetIconComponent={"null"}></SearchBox>
                         </Box> */}
+
                         <Flex direction="column">
                             <SearchBox placeholder="Search for Classes" submitIconComponent={"null"} resetIconComponent={"null"}></SearchBox>
                             <Flex direction={"column"} alignItems={"left"} width="fit-content" >
