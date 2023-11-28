@@ -64,10 +64,12 @@ export default function AddReview() {
 
 function Dining(){
     const [diningSearch, setDiningSearch] = useState('');
+    const [diningQuery, setDiningQuery] = useState('');
     const [diningSuggested, setDiningSuggested] = useState(null)
     const [rating, setRating] = useState(0);
     const [text, setText] = useState('');
     const [title, setTitle] = useState('');
+    const [submitting, setSubmitting] = useState(false)
     
     useEffect(() => {
         let index = 0;
@@ -75,18 +77,21 @@ function Dining(){
             setDiningSuggested(hits)
         })
     }, [diningSearch])
-
+    console.log(diningQuery)
     async function handleSubmit(e){
         e.preventDefault();
-        console.log(diningSearch)
-        const docRef = await addDoc(collection(db, "DiningHalls", diningSearch, "Reviews"), {
+        if(diningQuery === '' || rating === 0 || title === '' || text === '') {
+            return;
+        }
+        
+        const docRef = await addDoc(collection(db, "DiningHalls", diningQuery, "Reviews"), {
             title: title,
             reviewMessage: text,
             rating: rating,
             timestamp: Timestamp.fromDate(new Date()),
             votescore: 0,
         })
-        const currDocRef = doc(db, "DiningHalls", diningSearch);
+        const currDocRef = doc(db, "DiningHalls", diningQuery);
         try {
             await runTransaction(db, async(transaction) => {
                 const currDoc = await transaction.get(currDocRef)
@@ -113,7 +118,7 @@ function Dining(){
         } catch (e) {
             console.log(e)
         }
-        
+        location.reload();
     }
 
     return (
@@ -131,7 +136,7 @@ function Dining(){
                         {diningSuggested != null && diningSuggested.map((hit, cid) => (
                             <AutoCompleteItem 
                                 value={hit.objectID}
-                                onClick={(e)=>{setDiningSearch(e.target.outerText)}}
+                                onClick={(e)=>{setDiningQuery(e.target.outerText)}}
                                 textTransform="capitalize">
                                 {hit.objectID }
                             </AutoCompleteItem>
@@ -141,7 +146,7 @@ function Dining(){
             </Stack>
             
             <ReviewEditor rating={rating} setRating={setRating} setTitle={setTitle} setText={setText}></ReviewEditor>
-            <Button onClick={(e)=>handleSubmit(e)} marginLeft={0} width={150} textColor="#BBBBBB" background="#333333" >Submit</Button>
+            <Button onClick={(e)=>{handleSubmit(e); setSubmitting(true)}} isLoading={submitting} marginLeft={0} width={150} textColor="#BBBBBB" background="#333333" >Submit</Button>
 
         </Stack>
     )
@@ -150,10 +155,11 @@ function Dining(){
 function Housing(){
     const [housingSearch, setHousingSearch] = useState('');
     const [housingSuggested, setHousingSuggested] = useState(null)
+    const [housingQuery, setHousingQuery] = useState('');
     const [rating, setRating] = useState(0);
     const [text, setText] = useState('');
     const [title, setTitle] = useState('');
-    
+    const [submitting, setSubmitting] = useState(false)
     
     console.log(housingSearch)
      useEffect(() => {
@@ -165,8 +171,10 @@ function Housing(){
 
     async function handleSubmit(e){
         e.preventDefault();
-        console.log(housingSearch)
-        const docRef = await addDoc(collection(db, "Dorms", housingSearch, "Reviews"), {
+        if(housingQuery === '' || rating === 0 || title === '' || text === '') {
+            return;
+        }
+        const docRef = await addDoc(collection(db, "Dorms", housingQuery, "Reviews"), {
             title: title,
             reviewMessage: text,
             rating: rating,
@@ -175,7 +183,7 @@ function Housing(){
             
         })
         
-        const currDocRef = doc(db, "Dorms", housingSearch);
+        const currDocRef = doc(db, "Dorms", housingQuery);
         try {
             await runTransaction(db, async(transaction) => {
                 const currDoc = await transaction.get(currDocRef)
@@ -219,7 +227,7 @@ function Housing(){
                         {housingSuggested != null && housingSuggested.map((hit, cid) => (
                             <AutoCompleteItem 
                                 value={hit.objectID}
-                                onClick={(e)=>{setHousingSearch(e.target.outerText)}}
+                                onClick={(e)=>{setHousingQuery(e.target.outerText)}}
                                 textTransform="capitalize">
                                 {hit.objectID }
                             </AutoCompleteItem>
@@ -229,7 +237,7 @@ function Housing(){
             </Stack>
             
             <ReviewEditor rating={rating} setRating={setRating} setTitle={setTitle} setText={setText}></ReviewEditor>
-            <Button onClick={(e)=>handleSubmit(e)} marginLeft={0} width={150} textColor="#BBBBBB" background="#333333" >Submit</Button>
+            <Button onClick={(e)=>{handleSubmit(e); setSubmitting(true)}} isLoading={submitting} marginLeft={0} width={150} textColor="#BBBBBB" background="#333333" >Submit</Button>
         </Stack>
     )
 }
@@ -237,14 +245,18 @@ function Housing(){
 function ProfClass(){
     const [classSearch, setClassSearch] = useState('');
     const [classSuggested, setClassSuggested] = useState(null)
+    const [classQuery, setClassQuery] = useState('')
 
     const [profSearch, setProfSearch] = useState('')
     const [profSuggested, setProfSuggested] = useState(null)
+    const [profQuery, setProfQuery] = useState('')
 
     const [rating, setRating] = useState(0);
     const [text, setText] = useState('');
     const [title, setTitle] = useState('');
     const [grade, setGrade] = useState('A');
+
+    const [submitting, setSubmitting] = useState(false)
      useEffect(() => {
         let index = 0;
         searchClient.initIndex("classes").search(classSearch).then(({hits}) =>{
@@ -260,54 +272,92 @@ function ProfClass(){
     
     async function handleSubmit(e){
         e.preventDefault();
-        const docRef = await addDoc(collection(db, "Classes", classSearch, "Reviews"), {
-            title: title,
-            reviewMessage: text,
-            rating: rating,
-            timestamp: Timestamp.fromDate(new Date()),
-            votescore: 0,
-            grade: grade,
-            // prof: profSearch,
-        })
-        // const docRef2 = await addDoc(collection(db, "Professors", profSearch, "Reviews"), {
-        //     title: title,
-        //     reviewMessage: text,
-        //     rating: rating,
-        //     timestamp: Timestamp.fromDate(new Date()),
-        //     votescore: 0,
-        //     class: classSearch,
-        // })
-
-        const classDocRef = doc(db, "Classes", classSearch);
-        try {
-            await runTransaction(db, async(transaction) => {
-                const classDoc = await transaction.get(classDocRef)
-                if(classDoc.exists) {
-                    var overallRating = classDoc.data().overallRating;
-                    var numberReviews = classDoc.data().numberReviews ;
-                    console.log("this rating: " + overallRating)
-                    if(overallRating == null) {
-
-                        await setDoc(classDocRef, {overallRating: 0}, {merge: true}  )
-                        overallRating = 0;
-                    } 
-                    if(numberReviews == null) {
-                        await setDoc(classDocRef, {numberReviews: 0}, {merge: true}  )
-                        numberReviews = 0;
-                    }
-
-                    numberReviews = numberReviews == null ? 0 : numberReviews;
-                    const newRating = ((overallRating * numberReviews) + rating) / (numberReviews+1)
-                    numberReviews = numberReviews + 1;
-                    transaction.update(classDocRef, { overallRating: newRating, numberReviews: numberReviews });
-                } else {
-                    throw "Doc DNE"
-                }
+        if((classQuery === '' && profQuery === '') || rating === 0 || title === '' || text === '') {
+            return;
+        }
+        if(classQuery != '') {
+            const docRef = await addDoc(collection(db, "Classes", classQuery, "Reviews"), {
+                title: title,
+                reviewMessage: text,
+                rating: rating,
+                timestamp: Timestamp.fromDate(new Date()),
+                votescore: 0,
+                grade: grade,
+                // prof: profSearch,
             })
-        } catch (e) {
-            console.log(e)
+            
+            const classDocRef = doc(db, "Classes", classQuery);
+            try {
+                await runTransaction(db, async(transaction) => {
+                    const classDoc = await transaction.get(classDocRef)
+                    if(classDoc.exists) {
+                        var overallRating = classDoc.data().overallRating;
+                        var numberReviews = classDoc.data().numberReviews ;
+                        console.log("this rating: " + overallRating)
+                        if(overallRating == null) {
+    
+                            await setDoc(classDocRef, {overallRating: 0}, {merge: true}  )
+                            overallRating = 0;
+                        } 
+                        if(numberReviews == null) {
+                            await setDoc(classDocRef, {numberReviews: 0}, {merge: true}  )
+                            numberReviews = 0;
+                        }
+    
+                        numberReviews = numberReviews == null ? 0 : numberReviews;
+                        const newRating = ((overallRating * numberReviews) + rating) / (numberReviews+1)
+                        numberReviews = numberReviews + 1;
+                        transaction.update(classDocRef, { overallRating: newRating, numberReviews: numberReviews });
+                    } else {
+                        throw "Doc DNE"
+                    }
+                })
+            } catch (e) {
+                console.log(e)
+            }
         }
         
+        if(profQuery != '') {
+            const docRef2 = await addDoc(collection(db, "Professors", profQuery, "Reviews"), {
+                title: title,
+                reviewMessage: text,
+                rating: rating,
+                timestamp: Timestamp.fromDate(new Date()),
+                votescore: 0,
+                class: classSearch,
+            })
+            const profDocRef = doc(db, "Professors", profQuery);
+            try {
+                await runTransaction(db, async(transaction) => {
+                    const profDoc = await transaction.get(profDocRef)
+                    if(profDoc.exists) {
+                        var overallRating = profDoc.data().overallRating;
+                        var numberReviews = profDoc.data().numberReviews ;
+                        console.log("this rating: " + overallRating)
+                        if(overallRating == null) {
+
+                            await setDoc(profDocRef, {overallRating: 0}, {merge: true}  )
+                            overallRating = 0;
+                        } 
+                        if(numberReviews == null) {
+                            await setDoc(profDocRef, {numberReviews: 0}, {merge: true}  )
+                            numberReviews = 0;
+                        }
+
+                        numberReviews = numberReviews == null ? 0 : numberReviews;
+                        const newRating = ((overallRating * numberReviews) + rating) / (numberReviews+1)
+                        numberReviews = numberReviews + 1;
+                        transaction.update(profDocRef, { overallRating: newRating, numberReviews: numberReviews });
+                    } else {
+                        throw "Doc DNE"
+                    }
+                })
+            } catch (e) {
+                console.log(e)
+            }
+        }
+        
+        location.reload();
     }
     return(
         <Stack spacing={5}>    
@@ -324,7 +374,10 @@ function ProfClass(){
                         {classSuggested != null && classSuggested.map((hit, cid) => (
                             <AutoCompleteItem 
                                 value={hit.objectID}
-                                onClick={(e)=>{setClassSearch(e.target.outerText)}}
+                                onClick={(e)=>{
+                                    setClassQuery(e.target.outerText)
+                                    
+                                } }
                                 textTransform="capitalize">
                                 {hit.objectID }
                             </AutoCompleteItem>
@@ -346,7 +399,7 @@ function ProfClass(){
                         {profSuggested != null && profSuggested.map((hit, cid) => (
                             <AutoCompleteItem 
                                 value={hit.objectID}
-                                onClick={(e)=>{setProfSearch(e.target.outerText)}}
+                                onClick={(e)=>{setProfQuery(e.target.outerText)}}
                                 textTransform="capitalize">
                                 {hit.objectID }
                             </AutoCompleteItem>
@@ -372,7 +425,7 @@ function ProfClass(){
                 </HStack>
             </HStack>
             <ReviewEditor rating={rating} setRating={setRating} setTitle={setTitle} setText={setText}></ReviewEditor>
-            <Button onClick={(e)=>handleSubmit(e)} marginLeft={0} width={150} textColor="#BBBBBB" background="#333333" >Submit</Button>
+            <Button onClick={(e)=>{handleSubmit(e); setSubmitting(true)}} isLoading={submitting} marginLeft={0} width={150} textColor="#BBBBBB" background="#333333" >Submit</Button>
         </Stack>
     )
 }
