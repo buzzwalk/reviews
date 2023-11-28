@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import data from "../../sampleProfData.js"
 import ClassProfessorFilter from "../filters/ClassProfessorFilter.js"
 
-import { Box, Flex, Heading } from "@chakra-ui/react"
+import { Box, Flex, Heading, Spinner } from "@chakra-ui/react"
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, SearchBox, Hits } from 'react-instantsearch';
 import PreviewCard from "../PreviewCard";
@@ -35,7 +35,7 @@ export default function ProfessorsReviewOverview() {
     return (
         <>
             <Navbar />
-            <div className="reviewoverview" style={{marginLeft: "10px"}}>
+            <div className="reviewoverview" style={{padding: "2em"}}>
                 <h1 >Professors</h1>
                 <div className="main"style={{
                     marginTop: "2em"

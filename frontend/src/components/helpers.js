@@ -2,7 +2,6 @@ import PreviewCard from "./PreviewCard";
 import { getDocs, limit } from "firebase/firestore";
 
 export function getPreviewCards(previewCards, handleSelect) {
-    console.log(previewCards)
     return previewCards.map((card, index) => (
         <div key={index}>
             <PreviewCard

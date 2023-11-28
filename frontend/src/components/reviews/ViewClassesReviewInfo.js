@@ -5,13 +5,15 @@ import Navbar from "../navbar";
 import { fetchDormReviews, getPreviewCardsInfo } from "../helpers";
 import { useLocation } from 'react-router-dom';
 
-import { Box } from "@chakra-ui/react"
+import { Box, Spinner } from "@chakra-ui/react"
 
 export default function ViewClassesReviewInfo({ classes }) { //singular classes but "class" is reserved word
     const [previewCardsInfo, setPreviewCardsInfo] = useState([]);
     const location = useLocation();
     const [classData, setClassData] = useState([]);
     const classLoc = location.state.classes;
+
+    const [loaded, setLoaded] = useState(false)
     
     useEffect(() => {
         
@@ -33,7 +35,9 @@ export default function ViewClassesReviewInfo({ classes }) { //singular classes 
         fetchClassData();
 
         const classRef = collection(db, "Classes", classLoc, "Reviews");
-        fetchDormReviews(classRef, setPreviewCardsInfo)
+        fetchDormReviews(classRef, setPreviewCardsInfo).then(() => {
+            setLoaded(true)
+        })
 
         console.log(previewCardsInfo)
 
@@ -44,30 +48,34 @@ export default function ViewClassesReviewInfo({ classes }) { //singular classes 
         <>
             <Navbar />
             <Box className="reviewoverview" style={{padding: "2em"}}>
-                <h1>{classData.id}</h1>
-                {/* <h1>{dormData.address}</h1>
-                <h1>{dormData.bathrooms}</h1>
-                <h1>{dormData.elevator}</h1>
-                <h1>{dormData.laundry}</h1>
-                <h1>{dormData.numReviews}</h1>
-                <h1>{dormData.overallRating}</h1>
-                <h1>{dormData.squareFootage}</h1> */}
-                <div className="main">
-                    <div className="filters">
-                        <h3>Filters</h3>
-                        <p>filters here</p>
-                    </div>
-                    {previewCardsInfo.length != 0 && <div className="previews">
-                        {getPreviewCardsInfo(previewCardsInfo)}
+                {!loaded && <div style={{
+                    width: "100%",
+                    textAlign: "center"
+                }}>
+                    <Spinner/>
+                </div>}
+                {loaded && (
+                    <>
+                    <h1>{classData.id}</h1>
+                    <div className="main">
+                        <div className="filters">
+                            <h3>Filters</h3>
+                            <p>filters here</p>
                         </div>
-                    }
-
-                    {previewCardsInfo.length == 0 && 
-                        <Box padding="2">
-                            No reviews yet.
-                        </Box>
-                    }
-                </div>
+                        {previewCardsInfo.length != 0 && <div className="previews">
+                            {getPreviewCardsInfo(previewCardsInfo)}
+                            </div>
+                        }
+    
+                        {previewCardsInfo.length == 0 && 
+                            <Box padding="2">
+                                No reviews yet.
+                            </Box>
+                        }
+                    </div>
+                    </>
+                )
+                }
             </Box>
         </>
     );
