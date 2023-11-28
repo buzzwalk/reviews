@@ -5,7 +5,7 @@ import { InstantSearch, connectSearchBox, Hits } from 'react-instantsearch-dom';
 import algoliasearch from 'algoliasearch/lite';
 
 const algoliaClient = algoliasearch('KL9ZND53TD', 'a242fe2358be4a9ea6a99c4454421d5e');
-const indexName = 'Dorms';
+const indexName = 'DiningHalls'
 
 const SearchBox = connectSearchBox(({ currentRefinement, refine }) => (
   <Input
@@ -28,13 +28,12 @@ export default function SearchBar({ handler }) {
   useEffect(() => {
     const search = async () => {
       try {
-        // Your search logic remains the same
         const response = await algoliaClient.search(results);
         if (response.hits && Array.isArray(response.hits)) {
           setResults(response.hits);
         } else {
           console.error('Algolia response does not contain an array of hits:', response);
-          setResults([]); // Set empty array as a fallback
+          setResults([]);
         }
       } catch (error) {
         console.error('Error fetching search results:', error);
@@ -50,7 +49,6 @@ export default function SearchBar({ handler }) {
         <InputGroup size="md">
           <SearchBox />
           <InputLeftElement>
-            <SearchIcon color="white" />
           </InputLeftElement>
         </InputGroup>
       </form>
