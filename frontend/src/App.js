@@ -80,7 +80,7 @@ const App = () => {
               </a>
               <a href='/apartments'>
                 <Button>
-                  Apartments
+                  Housing
                 </Button>
               </a>
               <a href='/dininghalls'>

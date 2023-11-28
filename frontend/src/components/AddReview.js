@@ -11,7 +11,8 @@ import {
     AutoCompleteItem,
     AutoCompleteList,
   } from "@choc-ui/chakra-autocomplete";
-import db from '../firebase';
+
+import {db, provider}  from '../firebase';
 import algoliasearch from 'algoliasearch/lite';
 import { Timestamp, addDoc, collection, doc, updateDoc, runTransaction, setDoc } from 'firebase/firestore';
 const searchClient = algoliasearch('N39JIC33WP', 'de58da0111cf638279244fc3374b674a');
@@ -70,7 +71,7 @@ function Dining(){
     const [text, setText] = useState('');
     const [title, setTitle] = useState('');
     const [submitting, setSubmitting] = useState(false)
-    
+
     useEffect(() => {
         let index = 0;
         searchClient.initIndex("dining").search(diningSearch).then(({hits}) =>{
@@ -81,6 +82,7 @@ function Dining(){
     async function handleSubmit(e){
         e.preventDefault();
         if(diningQuery === '' || rating === 0 || title === '' || text === '') {
+            setSubmitting(false);
             return;
         }
         
@@ -146,7 +148,7 @@ function Dining(){
             </Stack>
             
             <ReviewEditor rating={rating} setRating={setRating} setTitle={setTitle} setText={setText}></ReviewEditor>
-            <Button onClick={(e)=>{handleSubmit(e); setSubmitting(true)}} isLoading={submitting} marginLeft={0} width={150} textColor="#BBBBBB" background="#333333" >Submit</Button>
+            <Button onClick={(e)=>{setSubmitting(true); handleSubmit(e) }} isLoading={submitting} marginLeft={0} width={150} textColor="#BBBBBB" background="#333333" >Submit</Button>
 
         </Stack>
     )
@@ -172,6 +174,7 @@ function Housing(){
     async function handleSubmit(e){
         e.preventDefault();
         if(housingQuery === '' || rating === 0 || title === '' || text === '') {
+            setSubmitting(false);
             return;
         }
         const docRef = await addDoc(collection(db, "Dorms", housingQuery, "Reviews"), {
@@ -180,7 +183,6 @@ function Housing(){
             rating: rating,
             timestamp: Timestamp.fromDate(new Date()),
             votescore: 0,
-            
         })
         
         const currDocRef = doc(db, "Dorms", housingQuery);
@@ -237,7 +239,7 @@ function Housing(){
             </Stack>
             
             <ReviewEditor rating={rating} setRating={setRating} setTitle={setTitle} setText={setText}></ReviewEditor>
-            <Button onClick={(e)=>{handleSubmit(e); setSubmitting(true)}} isLoading={submitting} marginLeft={0} width={150} textColor="#BBBBBB" background="#333333" >Submit</Button>
+            <Button onClick={(e)=>{setSubmitting(true); handleSubmit(e); }} isLoading={submitting} marginLeft={0} width={150} textColor="#BBBBBB" background="#333333" >Submit</Button>
         </Stack>
     )
 }
@@ -255,7 +257,38 @@ function ProfClass(){
     const [text, setText] = useState('');
     const [title, setTitle] = useState('');
     const [grade, setGrade] = useState('A');
+    const [semester, setSemester] = useState('');
 
+    const semesters = [
+        "FALL 2023",
+        "SUMMER 2023",
+        "SPRING 2023",
+        "FALL 2022",
+        "SUMMER 2022",
+        "SPRING 2022",
+        "FALL 2021",
+        "SUMMER 2021",
+        "SPRING 2021",
+        "FALL 2020",
+        "SUMMER 2020",
+        "SPRING 2020",
+        "FALL 2019",
+        "SUMMER 2019",
+        "SPRING 2019",
+        "FALL 2018",
+        "SUMMER 2018",
+        "SPRING 2018",
+        "FALL 2017",
+        "SUMMER 2017",
+        "SPRING 2017",
+        "FALL 2016",
+        "SUMMER 2016",
+        "SPRING 2016",
+        "FALL 2015",
+        "SUMMER 2015",
+        "SPRING 2015",
+
+    ]
     const [submitting, setSubmitting] = useState(false)
      useEffect(() => {
         let index = 0;
@@ -273,6 +306,7 @@ function ProfClass(){
     async function handleSubmit(e){
         e.preventDefault();
         if((classQuery === '' && profQuery === '') || rating === 0 || title === '' || text === '') {
+            setSubmitting(false);
             return;
         }
         if(classQuery != '') {
@@ -283,7 +317,8 @@ function ProfClass(){
                 timestamp: Timestamp.fromDate(new Date()),
                 votescore: 0,
                 grade: grade,
-                // prof: profSearch,
+                semester: semester,
+                prof: profQuery == '' ? null : profQuery,
             })
             
             const classDocRef = doc(db, "Classes", classQuery);
@@ -324,7 +359,7 @@ function ProfClass(){
                 rating: rating,
                 timestamp: Timestamp.fromDate(new Date()),
                 votescore: 0,
-                class: classSearch,
+                class: classQuery == '' ? null : classQuery,
             })
             const profDocRef = doc(db, "Professors", profQuery);
             try {
@@ -390,7 +425,7 @@ function ProfClass(){
                 <Text>Search for the Instructor Below</Text>
                 <AutoComplete width={"60vw"}>
                     <InputGroup width={"60vw"}>
-                        <AutoCompleteInput width={"60vw"} background="#333333" variant="filled" onChange={(e)=>setProfSearch(e.target.value)}/>
+                        <AutoCompleteInput width={"60vw"} background="#333333" variant="filled" onChange={(e)=>setProfSearch((e.target.value))}/>
                         <InputRightElement>
                         <SearchIcon color="gray.300"></SearchIcon>
                         </InputRightElement>
@@ -411,7 +446,25 @@ function ProfClass(){
             <HStack spacing={50}>
                 <HStack alignItems={"center"} spacing={5}>
                     <Text width={125}>Semester Taken</Text>
-                    <Input background="#333333" borderColor="#333333" width= {100} type="Text"></Input>
+                    {/* <Input background="#333333" borderColor="#333333" width= {100} type="Text"></Input> */}
+                    <InputGroup width={170} style={{borderRadius: "10px", position: "relative", zIndex:"1", background: "#333333"}}>
+                        <AutoComplete  background="#333333" borderColor="#333333"  openOnFocus>
+                            <AutoCompleteInput variant="filled" style={{background: "#333333"}}/>
+                                <AutoCompleteList  style={{ background: "#333333"}}>
+                                    {semesters.map((semester, cid) => (
+                                    <AutoCompleteItem 
+                                        key={`option-${cid}`}
+                                        value={semester}
+                                        textTransform="capitalize"
+                                        onClick={(e)=>setSemester(e.target.outerText)}
+                                    >
+                                        {semester}
+                                    </AutoCompleteItem>
+                                    ))}
+                            </AutoCompleteList>
+                        </AutoComplete>
+                    </InputGroup>
+                    
                 </HStack>
                 <HStack alignItems={"center"} spacing={5}>
                     <Text width={100}>Letter Grade</Text>
@@ -425,7 +478,7 @@ function ProfClass(){
                 </HStack>
             </HStack>
             <ReviewEditor rating={rating} setRating={setRating} setTitle={setTitle} setText={setText}></ReviewEditor>
-            <Button onClick={(e)=>{handleSubmit(e); setSubmitting(true)}} isLoading={submitting} marginLeft={0} width={150} textColor="#BBBBBB" background="#333333" >Submit</Button>
+            <Button onClick={(e)=>{setSubmitting(true); handleSubmit(e); }} isLoading={submitting} marginLeft={0} width={150} textColor="#BBBBBB" background="#333333" >Submit</Button>
         </Stack>
     )
 }

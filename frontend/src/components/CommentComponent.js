@@ -2,7 +2,7 @@ import React from 'react'
 import "./Textbox.css"
 import logo from "../images/Gt-seal.png"
 import { useState } from "react"
-import db from "../firebase"
+import {db} from "../firebase"
 import { setDoc, doc } from "firebase/firestore"; 
 
 const classTags = [

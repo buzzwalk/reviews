@@ -4,7 +4,7 @@ import PreviewCard from "../PreviewCard"
 import data from "../../sampleProfData"
 import ApartmentFilter from "../filters/ApartmentFilter"
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
-import db from "../../firebase";
+import {db} from "../../firebase";
 import Navbar from "../navbar";
 import { getPreviewCards, fetchData, fetchOverview} from "../helpers";
 import { useNavigate } from "react-router-dom";
