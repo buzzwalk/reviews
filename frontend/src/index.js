@@ -22,7 +22,7 @@ import ViewProfessorReviewInfo from './components/reviews/ViewProfessorReviewInf
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/reviews',
     element: <App />,
   },
   {
