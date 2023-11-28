@@ -11,7 +11,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // load env vars
     dotenv::dotenv().ok();
     // let scraped_courses = scrape_course_catalog().await?;
-    firebase::push_classes_to_firebase().await?;
+    firebase::push_classes_and_professors_to_firebase().await?;
     let app = Router::new()
         // Wrappers around Course Critique (critique.gatech.edu) API.
         .route("/critique/course", post(get_course_gpa))

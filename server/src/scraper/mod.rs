@@ -2,6 +2,31 @@ use axum::response::Json;
 use serde_json::{Map, Number, Value};
 use thirtyfour::prelude::*;
 
+pub async fn scrape_professor_names() -> WebDriverResult<Json<Value>> {
+    let mut professor_names_vec: Vec<Value> = vec![];
+
+    let caps = DesiredCapabilities::firefox();
+    let driver = WebDriver::new("http://localhost:4444", caps).await?;
+
+    // driver.goto("https://lite.gatech.edu/lite_script/dashboards/grade_distribution.html").await?;
+    driver.goto("https://tableau.gatech.edu/t/GT/views/GradeDistributionDashboard_16075598538440/GradeDistributionPublic?iframeSizedToWindow=true&%3Aembed=y&%3Aembed=y&%3Adisplay_count=no&%3AshowAppBanner=false&%3Atoolbar=top&%3Aorigin=viz_share_link&%3AshowVizHome=no&%3AshowVizHome=n&%3Arender=false&%3Atabs=n&%3AapiID=host0#navType=1&navSrc=Parse").await?;
+    println!("{}", driver.source().await?);
+    std::thread::sleep(std::time::Duration::from_secs(5));
+
+    println!("{}", driver.source().await?);
+    let professors_dropdown = driver.find_all(By::ClassName("tabComboBoxNameContainer")).await?;
+    professors_dropdown[6].click().await?;
+    let professor_names = driver.find_all(By::ClassName("FIText")).await?;
+    for prof in professor_names { 
+        let prof_name = prof.text().await?;
+        if prof_name != "(All)" {
+            professor_names_vec.push(Value::String(prof.text().await?));
+        }
+    }
+    println!("{:?}", professor_names_vec);
+    Ok(Json(Value::Array(professor_names_vec)))
+}
+
 pub async fn scrape_course_catalog() -> WebDriverResult<Json<Value>> {
     let mut course_data_vec: Vec<Value> = vec![];
     let caps = DesiredCapabilities::firefox();

@@ -1,6 +1,5 @@
-use crate::scraper::scrape_course_catalog;
+use crate::scraper::{scrape_course_catalog, scrape_professor_names};
 use axum::Json;
-use serde::{Deserialize, Serialize};
 use serde_json::{json, Value};
 
 // GET DOCUMENT
@@ -9,15 +8,8 @@ use serde_json::{json, Value};
 // CREATE DOCUMENT
 // POST "https://firestore.googleapis.com/v1/projects/test-gt-reviews/databases/(default)/documents/Classes?documentId="NEW_CLASS""
 
-#[derive(Debug, Serialize, Deserialize)]
-struct Class {
-    name: String,
-    title: String,
-    desc: String,
-    ch: f64,
-}
 
-pub async fn push_classes_to_firebase() -> Result<(), Box<dyn std::error::Error>> {
+pub async fn push_classes_and_professors_to_firebase() -> Result<(), Box<dyn std::error::Error>> {
     let firebase_url = std::env::var("FIREBASE_URL").unwrap();
     let client = reqwest::Client::new();
     let scraped_courses = scrape_course_catalog().await?;
@@ -41,6 +33,26 @@ pub async fn push_classes_to_firebase() -> Result<(), Box<dyn std::error::Error>
                                 },
                                 "ch": {
                                     "doubleValue": ch,
+                                },
+                            }
+                        }
+                    ))
+                    .send()
+                    .await?;
+            }
+        }
+    }
+    let scraped_professors = scrape_professor_names().await?;
+    if let Json(Value::Array(professors_list)) = scraped_professors {
+        for professor in professors_list {
+            if let Value::String(professor_name) = professor {
+                client
+                    .post(format!("{}/documents/Professors?documentId={}", firebase_url, professor_name))
+                    .json(&json!(
+                        {
+                            "fields": {
+                                "name": {
+                                    "stringValue": professor_name,
                                 },
                             }
                         }
