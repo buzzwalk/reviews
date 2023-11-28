@@ -4,12 +4,12 @@ import { getDocs, limit } from "firebase/firestore";
 export function getPreviewCards(previewCards, handleSelect) {
     console.log(previewCards)
     return previewCards.map((card, index) => (
-        <div key={index} onClick={() => handleSelect(card.name)}>
+        <div key={index}>
             <PreviewCard
                 name={card.name}
                 subheading={card.address == null ? card.desc : card.address}
                 rating={card.overallRating}
-                
+                onClick={() => handleSelect(card.name)}
             />
         </div>
     ))
