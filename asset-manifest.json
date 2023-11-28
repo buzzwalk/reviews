@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/gtreviews/static/css/main.866c938f.css",
-    "main.js": "/gtreviews/static/js/main.eba6fa34.js",
+    "main.js": "/gtreviews/static/js/main.aa6300e9.js",
     "static/media/Gt-seal.png": "/gtreviews/static/media/Gt-seal.ca1da8458c839a2e83ba.png",
     "index.html": "/gtreviews/index.html",
     "main.866c938f.css.map": "/gtreviews/static/css/main.866c938f.css.map",
-    "main.eba6fa34.js.map": "/gtreviews/static/js/main.eba6fa34.js.map"
+    "main.aa6300e9.js.map": "/gtreviews/static/js/main.aa6300e9.js.map"
   },
   "entrypoints": [
     "static/css/main.866c938f.css",
-    "static/js/main.eba6fa34.js"
+    "static/js/main.aa6300e9.js"
   ]
 }
