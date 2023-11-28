@@ -34,7 +34,7 @@ export default function ViewDormReviewInfo({ dorm }) {
     return (
         <>
             <Navbar />
-            <div className="reviewoverview">
+            <div className="reviewoverview" style={{padding: "2em"}}>
                 <h1>{dormData.name}</h1>
                 {/* <h1>{dormData.address}</h1>
                 <h1>{dormData.bathrooms}</h1>

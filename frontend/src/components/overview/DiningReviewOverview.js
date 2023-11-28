@@ -6,6 +6,8 @@ import { getPreviewCards, fetchOverview } from "../helpers";
 import { useNavigate } from "react-router-dom";
 import DiningFilter from "../filters/DiningFilter";
 
+import {Box} from "@chakra-ui/react"
+
 const diningHallsRef = collection(db, "DiningHalls");
 
 export default function DiningHallReviewOverview() {
@@ -50,7 +52,7 @@ export default function DiningHallReviewOverview() {
     return (
         <>
             <Navbar />
-            <div className="reviewoverview">
+            <Box className="reviewoverview" style={{padding: "2em"}}>
                 <h1>Dining Halls</h1>
                 <div className="main">
                     <DiningFilter options={ options } setOptions={ setOptions } />
@@ -58,7 +60,7 @@ export default function DiningHallReviewOverview() {
                         {getPreviewCards(previewCards, handleDiningHallSelect)}
                     </div>
                 </div>
-            </div>
+            </Box>
         </>
     );
 }
