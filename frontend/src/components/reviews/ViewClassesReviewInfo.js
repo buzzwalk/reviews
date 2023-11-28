@@ -35,6 +35,8 @@ export default function ViewClassesReviewInfo({ classes }) { //singular classes 
         const classRef = collection(db, "Classes", classLoc, "Reviews");
         fetchDormReviews(classRef, setPreviewCardsInfo)
 
+        console.log(previewCardsInfo)
+
         console.log(classData.id)
     }, [classes]);
 

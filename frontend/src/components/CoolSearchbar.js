@@ -8,7 +8,31 @@ import {
 import { useEffect, useState } from "react";
 import algoliasearch from 'algoliasearch/lite';
 import { useNavigate } from "react-router-dom";
+
+import {
+Menu,
+MenuButton,
+MenuList,
+MenuItem,
+MenuItemOption,
+MenuGroup,
+MenuOptionGroup,
+MenuDivider,
+Button,
+} from '@chakra-ui/react'
+
+import {
+    ChevronDownIcon
+} from '@chakra-ui/icons'
+
 const searchClient = algoliasearch('N39JIC33WP', 'de58da0111cf638279244fc3374b674a');
+
+const reviewableMaps = {
+    "classes": "Classes",
+    "dining": "Dining",
+    "dorms": "Housing",
+    "professors": "Professors"
+}
 
 export default function CoolSearchBar() {
     
@@ -61,12 +85,19 @@ export default function CoolSearchBar() {
             </AutoComplete>
             
             <InputRightElement width={"fit-content"}>
-                    <Select onChange={(e)=>(setReviewable(e.target.value))} width="fit-content" background="#222222" color="#959595" variant="filled" height={"30px"} marginRight={"9px"}>
-                        <option value="classes" style={{background: "#333333"}}>CLASSES</option>
-                        <option value="dining" style={{background: "#333333"}}>DINING</option>
-                        <option value="dorms" style={{background: "#333333"}}>HOUSING</option>
-                        <option value="professors" style={{background: "#333333"}}>PROFS</option>
-                    </Select>
+                <Menu width="10em">
+                    <MenuButton
+                    width="10em"
+                    as={Button} rightIcon={<ChevronDownIcon />}>
+                        {reviewableMaps[reviewable]}
+                    </MenuButton>
+                    <MenuList bg="#353535" width="1">
+                        <MenuItem bg="#353535" _hover={{bg: "#4a4a4a"}} onClick={()=>(setReviewable("classes"))}>Classes</MenuItem>
+                        <MenuItem bg="#353535" _hover={{bg: "#4a4a4a"}} onClick={()=>(setReviewable("dining"))}>Dining</MenuItem>
+                        <MenuItem bg="#353535" _hover={{bg: "#4a4a4a"}} onClick={()=>(setReviewable("dorms"))}>Housing</MenuItem>
+                        <MenuItem bg="#353535" _hover={{bg: "#4a4a4a"}} onClick={()=>(setReviewable("professors"))}>Professors</MenuItem>
+                    </MenuList>
+                </Menu>
                 </InputRightElement>
         </InputGroup>
 

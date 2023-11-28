@@ -11,7 +11,9 @@ export default function PreviewCard(props) {
             height: "250px",
             display:"flex",
             justifyContent: "space-between",
-            margin:"7px",}} className="PreviewCard">
+            margin:"7px",}}
+            onClick={props.onClick}
+            className="PreviewCard">
                 
                     <div className="TextWrapper">
                         <h2>{props.name}</h2>
@@ -19,9 +21,8 @@ export default function PreviewCard(props) {
                     </div>
                     <div className="ScoreWrapper">
                         <img src={star}/>
-                        <p>{props.rating}</p>
+                        <p>{(Math.round(props.rating * 10) /10).toFixed(1)}</p>
                     </div>
-                
             </Box>
         // </a>
     )
