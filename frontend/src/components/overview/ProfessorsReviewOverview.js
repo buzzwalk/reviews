@@ -37,9 +37,11 @@ export default function ProfessorsReviewOverview() {
             <Navbar />
             <div className="reviewoverview" style={{marginLeft: "10px"}}>
                 <h1 >Professors</h1>
-                <div className="main">
+                <div className="main"style={{
+                    marginTop: "2em"
+                }}>
                     <InstantSearch searchClient={searchClient} indexName="professors" >
-                        <Box style={{border: "1px solid #959595",
+                        {/* <Box style={{border: "1px solid #959595",
                             width: "250px",
                             height: "80vh",
                             display:"flex",
@@ -48,18 +50,21 @@ export default function ProfessorsReviewOverview() {
                             flexShrink: "0",
                             padding: "10px",}}>
                                 <Heading fontWeight={400} fontFamily={"'Inter', sans-serif"}>Filters</Heading>
-                            <SearchBox placeholder="Search for Classes" submitIconComponent={"null"} resetIconComponent={"null"}></SearchBox>
+                            <SearchBox placeholder="Search for Professors" submitIconComponent={"null"} resetIconComponent={"null"}></SearchBox>
                             
-                        </Box>
-                        <Flex direction={"column"} alignItems={"left"} width="fit-content" >
-                            <div className="previews" >
-                            
-                                <Hits classNames={{
-                                    root: "previewFix",
-                                    list: "previews"
-                                }} hitComponent={Hit} />
-                            </div>
-                            {/* <Button onClick={()=>setNumLoad((prev)=> {return prev + 12})} marginTop="5px" marginBottom={"20px"}  width={"10vw"}>Load more</Button> */}
+                        </Box> */}
+                        <Flex direction="column">
+                            <SearchBox placeholder="Search for Professors" submitIconComponent={"null"} resetIconComponent={"null"}></SearchBox>
+                                <Flex direction={"column"} alignItems={"left"} width="fit-content" >
+                                <div className="previews" style={{marginLeft: -7, marginTop: "2em"}}>
+                                
+                                    <Hits classNames={{
+                                        root: "previewFix",
+                                        list: "previews"
+                                    }} hitComponent={Hit} />
+                                </div>
+                                {/* <Button onClick={()=>setNumLoad((prev)=> {return prev + 12})} marginTop="5px" marginBottom={"20px"}  width={"10vw"}>Load more</Button> */}
+                            </Flex>
                         </Flex>
                     </InstantSearch>
                     
