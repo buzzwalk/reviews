@@ -73,13 +73,13 @@ export default function ViewClassesReviewInfo({ classes }) { //singular classes 
                     style={{
                     }}
                 >
-                    <Box style={{
+                    <Box minWidth={"300px"} maxWidth={"500px"} style={{
                         border: "1px solid #54585A",
                         backgroundColor: "#333333",
                         borderRadius: "10px",
                         padding: "2em",
                         height: "80vh",
-                        width: "35%"
+                        width: "50%",
                     }}>
                         <Heading size="3xl" as="h1">{classData.id}</Heading>
                         <Text style={{
