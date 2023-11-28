@@ -1,6 +1,6 @@
 import { Box, Flex, HStack, Input, InputGroup, InputRightElement, InputLeftElement, Select, VStack, FormControl, position, Image } from "@chakra-ui/react"
 import "../style/navbar.css"
-import { SearchIcon, StarIcon } from "@chakra-ui/icons"
+import { AddIcon, SearchIcon, StarIcon } from "@chakra-ui/icons"
 import { VscAccount } from "react-icons/vsc";
 import { CiBookmark } from "react-icons/ci";
 import gtlogo from "../images/gtlogo.png"
@@ -12,7 +12,7 @@ import {
   } from "@choc-ui/chakra-autocomplete";
 import { useEffect, useState } from "react";
 import algoliasearch from 'algoliasearch/lite';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CoolSearchBar from "./CoolSearchbar";
 const searchClient = algoliasearch('N39JIC33WP', 'de58da0111cf638279244fc3374b674a');
 
@@ -54,7 +54,9 @@ export default function Navbar() {
                 <CoolSearchBar />
             </HStack>
             <HStack>
-                <CiBookmark size={"30px"}></CiBookmark>
+                <Link to="/review" size={"30px"}>
+                    <AddIcon ></AddIcon>
+                </Link>
                 <VscAccount size={"26px"}/>
             
             </HStack>
