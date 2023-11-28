@@ -5,7 +5,7 @@ import App from './App'
 import CreateReview from './routes/CreateReview'
 import profData from "./sampleProfData"
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { BrowserRouter, createBrowserRouter, HashRouter, RouterProvider, Routes , Route} from 'react-router-dom'
 import Landing from './components/homepage/Landing'
 import ProfessorsReviewOverview from './components/overview/ProfessorsReviewOverview'
 import ClassesReviewOverview from './components/overview/ClassesReviewOverview'
@@ -72,7 +72,22 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
-      <RouterProvider router={router} />
+      
+      <HashRouter >
+        <Routes >
+          <Route path="/" element={ <App></App>} />
+          <Route path="/review" element={<AddReview></AddReview>} />
+          <Route path="/landing" element={<Landing></Landing> } />
+          <Route path="/professors" element={<ProfessorsReviewOverview /> } />
+          <Route path="/classes" element={ <ClassesReviewOverview />} />
+          <Route path="/apartments" element={ <ApartmentReviewOverview />} />
+          <Route path="/dininghalls" element={ <DiningReviewOverview />} />
+          <Route path="/dininghallreviews" element={ <ViewDiningHallReviewInfo />} />
+          <Route path="/dormreviews" element={  <ViewDormReviewInfo />} />
+          <Route path="/classreviews" element={<ViewClassesReviewInfo />} />
+          <Route path="/profreviews" element={<ViewProfessorReviewInfo />} />
+        </Routes>
+      </HashRouter>
     </ChakraProvider>
   </React.StrictMode>
 )
