@@ -14,7 +14,7 @@ export default function ViewClassesReviewInfo({ classes }) { //singular classes 
     const classLoc = location.state.classes;
 
     const [loaded, setLoaded] = useState(false)
-    
+    const [desc, setDesc] = useState('');
     useEffect(() => {
         
         const fetchClassData = async () => {
@@ -24,7 +24,7 @@ export default function ViewClassesReviewInfo({ classes }) { //singular classes 
                 const docSnap = await getDoc(currClassRef);
                 if (docSnap.exists()) {
                     setClassData(docSnap);
-                
+                    setDesc(docSnap.data().desc)
                 } else {
                     console.log("No such document!");
                 }
@@ -55,7 +55,7 @@ export default function ViewClassesReviewInfo({ classes }) { //singular classes 
 
         setAverageRating(Math.round(total*100)/100)
     }, [previewCardsInfo])
-
+    
     return (
         <>
             <Navbar />
@@ -85,7 +85,12 @@ export default function ViewClassesReviewInfo({ classes }) { //singular classes 
                         <Text style={{
                             marginTop: "2em",
                             color: "#959595"
+                        }}>{desc}</Text>
+                        <Text style={{
+                            marginTop: "2em",
+                            color: "#959595"
                         }}>Average rating: {averageRating ? averageRating : "n/a"}</Text>
+                        
                     </Box>
                     <Box style={{paddingLeft: "2em"}}>
                         {previewCardsInfo.length == 0 && <Text>
