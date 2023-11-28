@@ -5,6 +5,8 @@ import Navbar from "../navbar";
 import { fetchDormReviews, getPreviewCardsInfo } from "../helpers";
 import { useLocation } from 'react-router-dom';
 
+import { Box } from "@chakra-ui/react"
+
 export default function ViewClassesReviewInfo({ classes }) { //singular classes but "class" is reserved word
     const [previewCardsInfo, setPreviewCardsInfo] = useState([]);
     const location = useLocation();
@@ -41,7 +43,7 @@ export default function ViewClassesReviewInfo({ classes }) { //singular classes 
     return (
         <>
             <Navbar />
-            <div className="reviewoverview">
+            <Box className="reviewoverview" style={{padding: "2em"}}>
                 <h1>{classData.id}</h1>
                 {/* <h1>{dormData.address}</h1>
                 <h1>{dormData.bathrooms}</h1>
@@ -55,11 +57,18 @@ export default function ViewClassesReviewInfo({ classes }) { //singular classes 
                         <h3>Filters</h3>
                         <p>filters here</p>
                     </div>
-                    <div className="previews">
+                    {previewCardsInfo.length != 0 && <div className="previews">
                         {getPreviewCardsInfo(previewCardsInfo)}
-                    </div>
+                        </div>
+                    }
+
+                    {previewCardsInfo.length == 0 && 
+                        <Box padding="2">
+                            No reviews yet.
+                        </Box>
+                    }
                 </div>
-            </div>
+            </Box>
         </>
     );
 }

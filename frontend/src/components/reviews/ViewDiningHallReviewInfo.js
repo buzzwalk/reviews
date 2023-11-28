@@ -5,6 +5,7 @@ import Navbar from "../navbar";
 import { fetchDiningHallReviews, getPreviewCardsInfo } from "../helpers";
 import { useLocation } from 'react-router-dom';
 
+
 export default function ViewDiningHallReviewInfo({ diningHall }) {
     const [previewCardsInfo, setPreviewCardsInfo] = useState([]);
     const location = useLocation();
@@ -47,7 +48,7 @@ export default function ViewDiningHallReviewInfo({ diningHall }) {
     return (
         <>
             <Navbar />
-            <div className="reviewoverview">
+            <div className="reviewoverview" style={{padding: "2em"}}>
                 <h1>{diningHallData.name}</h1>
                 {/* <h1>{diningHallData.address}</h1>
                 <h1>{diningHallData.numberChairs}</h1>

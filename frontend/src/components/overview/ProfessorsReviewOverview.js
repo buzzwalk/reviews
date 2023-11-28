@@ -3,12 +3,14 @@ import Navbar from "../navbar.js"
 import { useEffect, useState } from "react"
 import data from "../../sampleProfData.js"
 import ClassProfessorFilter from "../filters/ClassProfessorFilter.js"
+
 import { Box, Flex, Heading } from "@chakra-ui/react"
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, SearchBox, Hits } from 'react-instantsearch';
 import PreviewCard from "../PreviewCard";
 import { useNavigate } from "react-router-dom"
 const searchClient = algoliasearch('N39JIC33WP', 'de58da0111cf638279244fc3374b674a');
+
 export default function ProfessorsReviewOverview() {
     const navigate = useNavigate();
     const [ options, setOptions ] = useState({
@@ -19,10 +21,12 @@ export default function ProfessorsReviewOverview() {
 
     function getPreviewCards() {
         const dataArr = data.data;
-        return dataArr.map((e) =>
+        return dataArr.map((e) =>(
+        <div>
             <PreviewCard key={e.name} name={e.name} subheading={e.college} rating={e.rating}/>
+        </div>
+        )
         );
-
     }
     const handleDiningHallSelect = (prof) => {
         navigate('/profreviews', { state: { prof }});

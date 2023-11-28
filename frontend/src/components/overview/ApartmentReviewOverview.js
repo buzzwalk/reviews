@@ -9,6 +9,10 @@ import Navbar from "../navbar";
 import { getPreviewCards, fetchData, fetchOverview} from "../helpers";
 import { useNavigate } from "react-router-dom";
 
+import {
+    Box
+} from "@chakra-ui/react"
+
 
 const dormsRef = collection(db, "Dorms");
 
@@ -59,16 +63,16 @@ export default function ApartmentReviewOverview() {
     return (
         <>
             <Navbar />   
-            <div className="reviewoverview">
+            <Box className="reviewoverview" style={{padding: "2em"}}>
                 <h1>Housing</h1>
-                <div className="main">
+                <div className="main" style={{marginTop: "1em"}}>
                     <ApartmentFilter options={ options } setOptions={ setOptions } />
                     <div className="previews">
                         {getPreviewCards(previewCards, handleDormSelect)}
                     </div>
                 </div>
                 
-            </div>
+            </Box>
         </>
         
     );

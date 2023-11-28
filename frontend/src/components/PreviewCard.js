@@ -7,7 +7,7 @@ export default function PreviewCard(props) {
             <Box style={{border: "1px solid #54585A",
             backgroundColor: "#333333",
             borderRadius: "10px",
-            width:" 450px",
+            width: "450px",
             height: "250px",
             display:"flex",
             justifyContent: "space-between",
